@@ -1,0 +1,89 @@
+# Build stage for MIL Core
+FROM ubuntu:20.04
+LABEL maintainer="smk@komodoplatform.com"
+
+# Enter your pubkey here
+ENV PUBKEY="02b3c168ed4acd96594288cee3114c77de51b6afe1ab6a866887a13a96ee80f33c"
+
+# Install necessary packages to build MIL from source
+ARG DEBIAN_FRONTEND=noninteractive 
+RUN apt update && apt install \
+    libevent-dev \
+    libboost-system-dev \
+    libboost-filesystem-dev \
+    libboost-chrono-dev \
+    libboost-program-options-dev \
+    libboost-test-dev \
+    libboost-thread-dev \
+    build-essential \
+    pkg-config \
+    libc6-dev \
+    m4 \
+    g++-multilib \
+    autoconf \
+    libtool \
+    ncurses-dev \
+    python3-zmq \
+    zlib1g-dev \
+    wget \
+    curl \
+    bsdmainutils \
+    automake \
+    cmake \
+    clang \
+    libsodium-dev \
+    libcurl4-gnutls-dev \
+    libssl-dev \
+    git \
+    unzip \
+    python2 \
+    jq \
+    htop -y
+
+ENV BERKELEYDB_VERSION=db-4.8.30.NC
+ENV BERKELEYDB_PREFIX=/opt/${BERKELEYDB_VERSION}
+
+RUN wget https://download.oracle.com/berkeley-db/${BERKELEYDB_VERSION}.tar.gz
+RUN tar -xzf *.tar.gz
+RUN sed s/__atomic_compare_exchange/__atomic_compare_exchange_db/g -i ${BERKELEYDB_VERSION}/dbinc/atomic.h
+RUN mkdir -p ${BERKELEYDB_PREFIX}
+
+WORKDIR /${BERKELEYDB_VERSION}/build_unix
+
+RUN ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${BERKELEYDB_PREFIX}
+RUN make -j4
+RUN make install
+RUN rm -rf ${BERKELEYDB_PREFIX}/docs
+
+# Set an environment variable for the commit hash for MIL
+ENV MIL_COMMIT=578bed7
+
+WORKDIR /
+# Clone the MIL source code from GitHub
+RUN git clone https://github.com/emc2foundation/mil && ls
+
+WORKDIR /mil
+# Checkout the latest release version of MIL
+RUN git checkout $MIL_COMMIT
+
+# Build MIL from source
+COPY build_mil.sh /mil/build_mil.sh
+RUN /mil/build_mil.sh
+
+# Set an environment variable for the data directory
+ENV DATADIR=/root/.mil
+
+# Create a volume mount for the data directory on the host
+VOLUME $DATADIR
+
+RUN ln -sf /mil/src/mil-cli /usr/local/bin/mil-cli
+RUN ln -sf /mil/src/mild /usr/local/bin/mild
+RUN PATH=/mil/src:/usr/local/bin/:$PATH
+
+COPY mil-entrypoint.sh /mil-entrypoint.sh
+COPY run_mil.sh /run_mil.sh
+
+ENTRYPOINT [ "/mil-entrypoint.sh" ]
+
+# Start the MIL daemon with the data directory mounted
+CMD ["/run_mil.sh"]

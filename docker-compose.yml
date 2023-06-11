@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  mil:
+    build:
+      context: ./mil
+      dockerfile: Dockerfile.mil
+    restart: always
+    ports:
+      - "41888:41888"
+      - "41887:41887"
+    volumes:
+      - /home/smk762/.mil:/mil-data
