@@ -9,7 +9,7 @@ RUN apt-get update -y
 
 # Install Required Dependencies
 ARG DEBIAN_FRONTEND=noninteractive
-RUN sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git zlib1g-dev wget bsdmainutils automake curl
+RUN apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git zlib1g-dev wget bsdmainutils automake curl -y
 
 # Build
 COPY build.sh /build.sh
