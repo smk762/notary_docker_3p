@@ -16,7 +16,7 @@ make install
 rm -rf ${BERKELEYDB_PREFIX}/docs
 
 git clone https://github.com/emc2foundation/mil
-cd mil && git checkout ${COMMITHASH}
+cd mil && git checkout ${COMMIT_HASH}
 
 make -C ${PWD}/depends v=1 NO_PROTON=1 NO_QT=1 HOST=$(depends/config.guess) -j$(nproc --all)
 ./autogen.sh

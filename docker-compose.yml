@@ -11,7 +11,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=94e6bc0
+      - COMMIT_HASH=94e6bc0
     build:
       context: ./aya
       dockerfile: Dockerfile
@@ -32,7 +32,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=6e7560a
+      - COMMIT_HASH=6e7560a
     build:
       context: ./chips
       dockerfile: Dockerfile
@@ -54,7 +54,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=c329ae6
+      - COMMIT_HASH=c329ae6
     build:
       context: ./emc2
       dockerfile: Dockerfile
@@ -75,7 +75,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=master
+      - COMMIT_HASH=master
     build:
       context: ./kmd
       dockerfile: Dockerfile
@@ -97,7 +97,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=a92d834
+      - COMMIT_HASH=a92d834
     build:
       context: ./mcl
       dockerfile: Dockerfile
@@ -119,7 +119,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=578bed7
+      - COMMIT_HASH=578bed7
     build:
       context: ./mil
       dockerfile: Dockerfile
@@ -140,7 +140,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=d2e98de
+      - COMMIT_HASH=d2e98de
     build:
       context: ./tokel
       dockerfile: Dockerfile
@@ -162,7 +162,7 @@ services:
     env_file:
       - .env
     environment:
-      - COMMITHASH=3f0f435
+      - COMMIT_HASH=3f0f435
     build:
       context: ./vrsc
       dockerfile: Dockerfile
