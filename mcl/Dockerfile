@@ -2,12 +2,6 @@
 FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 
-# Enter your pubkey here
-ENV PUBKEY="02b3c168ed4acd96594288cee3114c77de51b6afe1ab6a866887a13a96ee80f33c"
-
-# Set an environment variable for the commit hash
-ENV COMMITHASH=a92d834
-
 RUN groupadd -r notarygroup
 RUN useradd -r -g notarygroup komodian
 WORKDIR /home/komodian
