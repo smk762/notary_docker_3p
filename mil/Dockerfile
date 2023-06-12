@@ -19,9 +19,9 @@ COPY build.sh /build.sh
 RUN /build.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /mil/src/mil-cli /usr/local/bin/mil-cli
-RUN ln -sf /mil/src/mild /usr/local/bin/mild
-RUN PATH=/mil/src:/usr/local/bin/:$PATH
+RUN ln -sf /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli
+RUN ln -sf /home/komodian/mil/src/mild /usr/local/bin/mild
+RUN PATH=/home/komodian/mil/src:/usr/local/bin/:$PATH
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh

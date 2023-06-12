@@ -28,7 +28,7 @@ RUN /build.sh
 # Setup symbolic links to binaries
 RUN ln -sf /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
 RUN ln -sf /home/komodian/komodo/src/komodod /usr/local/bin/komodod
-RUN PATH=/home/komodian/komodo/src:/usr/local/bin/:$PATH
+RUN PATH=/home/komodian/home/komodian/komodo/src:/usr/local/bin/:$PATH
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh

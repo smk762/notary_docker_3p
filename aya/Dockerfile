@@ -19,9 +19,9 @@ COPY build.sh /build.sh
 RUN /build.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
-RUN ln -sf /AYAv2/src/aryacoind /usr/local/bin/aryacoind
-RUN PATH=/AYAv2/src:/usr/local/bin/:$PATH
+RUN ln -sf /home/komodian/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
+RUN ln -sf /home/komodian/AYAv2/src/aryacoind /usr/local/bin/aryacoind
+RUN PATH=/home/komodian/AYAv2/src:/usr/local/bin/:$PATH
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
