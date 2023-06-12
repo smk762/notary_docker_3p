@@ -37,3 +37,27 @@ Restart docker
 sudo systemctl restart docker
 ```
 
+## What might go wrong?
+
+If you already have data in the daemon data folders (e.g. from a previous season) then you might encounter some issues like below.
+```
+mil_1    | : You need to rebuild the database using -reindex-chainstate to change addressindex.
+mil_1    | Please restart with -reindex or -reindex-chainstate to recover.
+```
+
+To overcome this, you can either delete the data folders and restart the containers, or enter the container to launch the daemons with `reindex` manually.
+
+```
+# Enter the container
+docker-compose run <service> bash
+
+# Launch the daemon with reindex
+mild -reindex
+
+# Monitor the daemon logs
+tail -f ~/.mil/debug.log
+
+# Exit the container
+exit
+```
+
