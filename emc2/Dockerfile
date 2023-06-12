@@ -5,7 +5,7 @@ LABEL maintainer="smk@komodoplatform.com"
 ENV PUBKEY="02b3c168ed4acd96594288cee3114c77de51b6afe1ab6a866887a13a96ee80f33c"
 
 # Set an environment variable for the commit hash
-ENV COMMITHASH=578bed7
+ENV COMMITHASH=c329ae6
 
 # Setup up user and working directory
 RUN groupadd -r notarygroup

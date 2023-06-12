@@ -1,5 +1,5 @@
 #!/bin/bash
-einsteiniumd -pubkey=${PUBKEY}
+einsteiniumd -pubkey=${PUBKEY} &
 sleep 20
 ls -la ~/.einsteinium
 tail -f ~/.einsteinium/debug.log
