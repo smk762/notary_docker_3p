@@ -3,7 +3,7 @@ version: '3.8'
 x-zcash-params-volume:
   &zcash-params
   type: bind
-  source: /home/smk762/.zcash-params
+  source: /home/USERNAME/.zcash-params
   target: /home/komodian/.zcash-params
 
 services:
@@ -22,10 +22,9 @@ services:
       - "26001:26001"
       - "9333:9332"
     volumes:
-      - /home/smk762/.aryacoin:/home/komodian/.aryacoin
+      - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -46,11 +45,10 @@ services:
       - "57777:57777"
       - "57776:57776"
     volumes:
-      - /home/smk762/.chips:/home/komodian/.chips
+      - /home/USERNAME/.chips:/home/komodian/.chips
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -71,10 +69,9 @@ services:
       - "41878:41878"
       - "41879:41879"
     volumes:
-      - /home/smk762/.einsteinium:/home/komodian/.einsteinium
+      - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -95,11 +92,10 @@ services:
       - "7770:7770"
       - "7771:7771"
     volumes:
-      - /home/smk762/.komodo_3p:/home/komodian/.komodo
+      - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -120,11 +116,10 @@ services:
       - "33824:33824"
       - "33825:33825"
     volumes:
-      - /home/smk762/.komodo_3p/MCL:/home/komodian/.komodo/MCL
+      - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -145,10 +140,9 @@ services:
       - "41888:41888"
       - "41889:41889"
     volumes:
-      - /home/smk762/.mil:/home/komodian/.mil
+      - /home/USERNAME/.mil:/home/komodian/.mil
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -169,11 +163,10 @@ services:
       - "29404:29404"
       - "29405:29405"
     volumes:
-      - /home/smk762/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
+      - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
@@ -194,11 +187,10 @@ services:
       - "27485:27485"
       - "27486:27486"
     volumes:
-      - /home/smk762/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
+      - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
-    network_mode: "host"
     logging:
       driver: "json-file"
       options:
