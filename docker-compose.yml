@@ -1,14 +1,49 @@
 version: '3.8'
 services:
-  mil:
+  aya:
     build:
-      context: ./mil
+      context: ./aya
       dockerfile: Dockerfile
     ports:
-      - "41888:41888"
-      - "41887:41887"
+      - "26001:26001"
+      - "9333:9332"
     volumes:
-      - /home/smk762/.mil:/home/komodian/.mil
+      - /home/smk762/.aryacoin:/home/komodian/.aryacoin
+    shm_size: '2gb'
+    restart: always
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  chips:
+    build:
+      context: ./chips
+      dockerfile: Dockerfile
+    ports:
+      - "57777:57777"
+      - "57776:57776"
+    volumes:
+      - /home/smk762/.chips:/home/komodian/.chips
+      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+    shm_size: '2gb'
+    restart: always
+    network_mode: "host"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  emc2:
+    build:
+      context: ./emc2
+      dockerfile: Dockerfile
+    ports:
+      - "41878:41878"
+      - "41879:41879"
+    volumes:
+      - /home/smk762/.einsteinium:/home/komodian/.einsteinium
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -53,16 +88,15 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-  vrsc:
+  mil:
     build:
-      context: ./vrsc
+      context: ./mil
       dockerfile: Dockerfile
     ports:
-      - "30023:30023"
-      - "30024:30024"
+      - "41888:41888"
+      - "41889:41889"
     volumes:
-      - /home/smk762/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - /home/smk762/.mil:/home/komodian/.mil
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -76,8 +110,8 @@ services:
       context: ./tokel
       dockerfile: Dockerfile
     ports:
-      - "30023:30023"
-      - "30024:30024"
+      - "29404:29404"
+      - "29405:29405"
     volumes:
       - /home/smk762/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
       - /home/smk762/.zcash-params:/home/komodian/.zcash-params
@@ -89,50 +123,16 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-  chips:
+  vrsc:
     build:
-      context: ./chips
+      context: ./vrsc
       dockerfile: Dockerfile
     ports:
-      - "30023:30023"
-      - "30024:30024"
+      - "27485:27485"
+      - "27486:27486"
     volumes:
-      - /home/smk762/.chips:/home/komodian/.chips
+      - /home/smk762/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
       - /home/smk762/.zcash-params:/home/komodian/.zcash-params
-    shm_size: '2gb'
-    restart: always
-    network_mode: "host"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-  emc2:
-    build:
-      context: ./emc2
-      dockerfile: Dockerfile
-    ports:
-      - "30023:30023"
-      - "30024:30024"
-    volumes:
-      - /home/smk762/.einsteinium:/home/komodian/.einsteinium
-    shm_size: '2gb'
-    restart: always
-    network_mode: "host"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-  aya:
-    build:
-      context: ./aya
-      dockerfile: Dockerfile
-    ports:
-      - "30023:30023"
-      - "30024:30024"
-    volumes:
-      - /home/smk762/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
     restart: always
     network_mode: "host"
