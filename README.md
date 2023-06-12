@@ -13,9 +13,16 @@ Simple setup for running 3P notary node daemons for dPoW.
 2. Run `./setup.sh` to create the `.env` and `docker-compose.yml` files
 3. Run `docker-compose build` to build the deamons within the docker containers
 4. Run `docker-compose up -d` to start the containers in the background
-5. Use `docker-compose run <service> bash` to access an interactive shell (where <service> is the coin ticker in lowercase)
 
- To clear old docker cache `docker system prune -a --volumes` (this will mean everything must be rebuilt)
+## Usage
+
+ - Use `docker-compose logs -f` to monitor the logs of all the containers
+ - Use `docker-compose logs -f <service>` to monitor the logs of a single container (where <service> is the coin ticker in lowercase)
+ - Use `docker-compose build <service>` to rebuild a single container (where <service> is the coin ticker in lowercase)
+ - Use `docker-compose up <service> -d` to start a single container in the background (where <service> is the coin ticker in lowercase)
+ - Use `docker-compose run <service> bash` to access an interactive shell (where <service> is the coin ticker in lowercase)
+ - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact.
+ 
 
 ## Make Docker respect UFW
 
