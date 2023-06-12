@@ -17,7 +17,6 @@ echo "rpcpassword=${rpcpass}" >> ~/.mil/mil.conf
 echo "rpcbind=127.0.0.1" >> ~/.mil/mil.conf
 echo "rpcallowip=127.0.0.1" >> ~/.mil/mil.conf
 
-cat ~/.mil/mil.conf
+# cat ~/.mil/mil.conf
 
-#echo "running $@ as root"
 exec "$@"
