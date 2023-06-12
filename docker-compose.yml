@@ -1,4 +1,11 @@
 version: '3.8'
+
+x-zcash-params-volume:
+  &zcash-params
+  type: bind
+  source: /home/smk762/.zcash-params
+  target: /home/komodian/.zcash-params
+
 services:
   aya:
     env_file:
@@ -34,7 +41,7 @@ services:
       - "57776:57776"
     volumes:
       - /home/smk762/.chips:/home/komodian/.chips
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - <<: *zcash-params
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -77,7 +84,7 @@ services:
       - "7771:7771"
     volumes:
       - /home/smk762/.komodo_3p:/home/komodian/.komodo
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - <<: *zcash-params
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -99,7 +106,7 @@ services:
       - "33825:33825"
     volumes:
       - /home/smk762/.komodo_3p/MCL:/home/komodian/.komodo/MCL
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - <<: *zcash-params
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -142,7 +149,7 @@ services:
       - "29405:29405"
     volumes:
       - /home/smk762/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - <<: *zcash-params
     shm_size: '2gb'
     restart: always
     network_mode: "host"
@@ -164,7 +171,7 @@ services:
       - "27486:27486"
     volumes:
       - /home/smk762/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
-      - /home/smk762/.zcash-params:/home/komodian/.zcash-params
+      - <<: *zcash-params
     shm_size: '2gb'
     restart: always
     network_mode: "host"
