@@ -1,4 +1,3 @@
-# Build stage for MIL Core
 FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 

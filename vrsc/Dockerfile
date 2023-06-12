@@ -1,4 +1,3 @@
-# Build stage for MIL Core
 FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 
@@ -9,6 +8,7 @@ WORKDIR /home/komodian
 RUN apt-get update -y
 
 # Install Required Dependencies
+ARG DEBIAN_FRONTEND=noninteractive
 RUN sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git zlib1g-dev wget bsdmainutils automake curl
 
 # Build
