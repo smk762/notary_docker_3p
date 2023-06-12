@@ -14,9 +14,9 @@ WORKDIR /home/komodian
 
 # Install dependencies
 ARG DEBIAN_FRONTEND=noninteractive 
-RUN apt update && apt install software-properties-common autoconf git build-essential libtool libprotobuf-c-dev \
-        libgmp-dev libsqlite3-dev python python3 zip jq libevent-dev pkg-config libssl-dev libcurl4-gnutls-dev cmake -y
-RUN add-apt-repository ppa:bitcoin/bitcoin && apt-get update && apt-get install libdb4.8-dev libdb4.8++-dev -y 
+RUN apt update && apt install  libevent-dev libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
+        libboost-test-dev libboost-thread-dev build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev python3-zmq \
+        zlib1g-dev wget curl bsdmainutils automake cmake clang libsodium-dev libcurl4-gnutls-dev libssl-dev git unzip python jq htop -y
 
 # Build
 COPY build.sh /build.sh

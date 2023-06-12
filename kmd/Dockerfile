@@ -13,13 +13,12 @@ RUN groupadd -r notarygroup
 RUN useradd -r -g notarygroup komodian
 WORKDIR /home/komodian
 
-# Install Required Dependencies
-RUN apt-get update && apt-get install build-essential pkg-config bsdmainutils \
-	libtool libsodium-dev libc6-dev libssl-dev libcurl4-gnutls-dev \
-	ncurses-dev zlib1g-dev cmake clang m4 automake autoconf g++-multilib \
-	python python3 python3-zmq curl wget jq git unzip libboost-system-dev \
-	libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
-	libboost-test-dev libboost-thread-dev -y
+# Install dependencies
+ARG DEBIAN_FRONTEND=noninteractive 
+RUN apt update && apt install  libevent-dev libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev \
+        libboost-test-dev libboost-thread-dev build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev python3-zmq \
+        zlib1g-dev wget curl bsdmainutils automake cmake clang libsodium-dev libcurl4-gnutls-dev libssl-dev git unzip python jq htop -y
+
 
 # Install nanomsg
 RUN git clone https://github.com/nanomsg/nanomsg
