@@ -1,8 +1,7 @@
 #!/bin/bash
 echo $PWD
 echo "========================================"
-cd ~
-
+cd /home/komodian
 BERKELEYDB_VERSION=db-4.8.30.NC
 BERKELEYDB_PREFIX=/opt/${BERKELEYDB_VERSION}
 wget https://download.oracle.com/berkeley-db/${BERKELEYDB_VERSION}.tar.gz

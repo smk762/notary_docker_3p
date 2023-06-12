@@ -1,7 +1,7 @@
 #!/bin/bash
 echo $PWD
 echo "========================================"
-cd ~
+cd /home/komodian
 git clone https://github.com/emc2foundation/einsteinium
 cd einsteinium && git checkout ${COMMIT_HASH}
 

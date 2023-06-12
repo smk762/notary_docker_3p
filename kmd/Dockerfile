@@ -1,9 +1,11 @@
 FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 
-# Create non-root user
-RUN groupadd -r notarygroup
-RUN useradd -r -g notarygroup komodian
+# Setup up user and working directory
+ARG GROUP_ID
+ARG USER_ID
+RUN addgroup --gid ${GROUP_ID} notarygroup
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 WORKDIR /home/komodian
 
 # Install dependencies
@@ -31,7 +33,7 @@ RUN PATH=/home/komodian/komodo/src:/usr/local/bin/:$PATH
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-## Create the data dir
+# Setup up user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 

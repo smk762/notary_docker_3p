@@ -2,8 +2,10 @@ FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 
 # Setup up user and working directory
-RUN groupadd -r notarygroup
-RUN useradd -r -g notarygroup komodian
+ARG GROUP_ID
+ARG USER_ID
+RUN addgroup --gid ${GROUP_ID} notarygroup
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 WORKDIR /home/komodian
 
 # Install dependencies
@@ -24,6 +26,7 @@ RUN PATH=/einsteinium/src:/usr/local/bin/:$PATH
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
+# Setup up user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 

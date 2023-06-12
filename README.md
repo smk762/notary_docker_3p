@@ -16,7 +16,7 @@ PUBKEY=YOUR_3P_NOTARY_PUBKEY
 ```
 3. Run `docker-compose build` to build the deamons within the docker containers
 4. Run `docker-compose up -d` to start the containers in the background
-
+5. Use `docker-compose run <service> bash` to access an interactive shell (where <service> is the coin ticker in lowercase)
 
  To clear old docker cache `docker system prune -a --volumes` (this will mean everything must be rebuilt)
 
@@ -38,3 +38,4 @@ Restart docker
 ```
 sudo systemctl restart docker
 ```
+

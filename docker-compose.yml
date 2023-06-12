@@ -15,6 +15,9 @@ services:
     build:
       context: ./aya
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "26001:26001"
       - "9333:9332"
@@ -36,6 +39,9 @@ services:
     build:
       context: ./chips
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "57777:57777"
       - "57776:57776"
@@ -58,6 +64,9 @@ services:
     build:
       context: ./emc2
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "41878:41878"
       - "41879:41879"
@@ -79,6 +88,9 @@ services:
     build:
       context: ./kmd
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "7770:7770"
       - "7771:7771"
@@ -101,6 +113,9 @@ services:
     build:
       context: ./mcl
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "33824:33824"
       - "33825:33825"
@@ -123,6 +138,9 @@ services:
     build:
       context: ./mil
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "41888:41888"
       - "41889:41889"
@@ -144,6 +162,9 @@ services:
     build:
       context: ./tokel
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "29404:29404"
       - "29405:29405"
@@ -166,6 +187,9 @@ services:
     build:
       context: ./vrsc
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     ports:
       - "27485:27485"
       - "27486:27486"

@@ -1,7 +1,7 @@
 #!/bin/bash
 echo $PWD
 echo "========================================"
-cd ~
+cd /home/komodian
 git clone https://github.com/chips-blockchain/chips -b master
 cd chips && git checkout ${COMMIT_HASH}
 

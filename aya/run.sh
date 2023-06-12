@@ -1,5 +1,5 @@
 #!/bin/bash
 aryacoind -pubkey=${PUBKEY} &
 sleep 20
-ls -la ~/.aryacoin
-tail -f ~/.aryacoin/debug.log
+ls -la /home/komodian/.aryacoin
+tail -f /home/komodian/.aryacoin/debug.log

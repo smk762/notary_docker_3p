@@ -1,10 +1,12 @@
 FROM ubuntu:20.04
 LABEL maintainer="smk@komodoplatform.com"
 
-RUN groupadd -r notarygroup
-RUN useradd -r -g notarygroup komodian
+# Setup up user and working directory
+ARG GROUP_ID
+ARG USER_ID
+RUN addgroup --gid ${GROUP_ID} notarygroup
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 WORKDIR /home/komodian
-
 RUN apt-get update -y
 
 # Install Required Dependencies
@@ -23,11 +25,11 @@ RUN PATH=/home/komodian/VerusCoin/src:/usr/local/bin/:$PATH
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-## Change ownership to non-root user
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Setup up user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
-
-ENTRYPOINT ["/entrypoint.sh"]
 
 # Start daemon with the data directory mounted
 CMD ["/run.sh"]
