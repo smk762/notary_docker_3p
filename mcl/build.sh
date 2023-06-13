@@ -1,5 +1,6 @@
 #!/bin/bash
-set -euxo pipefailecho $PWD
+set -euxo pipefail
+echo $PWD
 echo "========================================"
 cd /home/komodian
 git clone https://github.com/marmarachain/marmara

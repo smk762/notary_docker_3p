@@ -1,5 +1,6 @@
 #!/bin/bash
-set -euxo pipefailecho $PWD
+set -euxo pipefail
+echo $PWD
 echo "========================================"
 cd /home/komodian
 BERKELEYDB_VERSION=db-4.8.30.NC
