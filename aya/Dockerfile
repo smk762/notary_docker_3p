@@ -20,10 +20,6 @@ RUN apt update && apt install $BUILD_PACKAGES -y
 COPY build.sh /build.sh
 RUN /build.sh
 
-RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
-    rm -rf /var/lib/apt/lists/* 
-
-RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
 
 # Configure
 COPY configure.sh /configure.sh
@@ -33,6 +29,12 @@ RUN /configure.sh
 RUN ln -sf /home/komodian/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
 RUN ln -sf /home/komodian/AYAv2/src/aryacoind /usr/local/bin/aryacoind
 RUN PATH=/home/komodian/AYAv2/src:/usr/local/bin/:$PATH
+
+# Cleanup
+RUN rm -rf /home/komodian/AYAv2
+RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
+    rm -rf /var/lib/apt/lists/* 
+RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
