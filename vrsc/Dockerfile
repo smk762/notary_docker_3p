@@ -21,14 +21,10 @@ RUN apt update && apt install $BUILD_PACKAGES -y
 COPY build.sh /build.sh
 RUN /build.sh
 
-# Configure
-COPY configure.sh /configure.sh
-RUN /configure.sh
-
-# Setup symbolic links to binaries
+# Move binaries
 RUN mv /home/komodian/VerusCoin/src/verus /usr/local/bin/verus
 RUN mv /home/komodian/VerusCoin/src/verusd /usr/local/bin/verusd
-RUN PATH=/home/komodian/VerusCoin/src:/usr/local/bin/:$PATH
+RUN PATH=/usr/local/bin/:$PATH
 
 # Cleanup
 RUN rm -rf /home/komodian/VerusCoin
@@ -39,7 +35,11 @@ RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-# Setup up user and working directory
+# Configure
+COPY configure.sh /configure.sh
+RUN /configure.sh
+
+# Setup user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 
