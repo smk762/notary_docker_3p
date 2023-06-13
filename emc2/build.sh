@@ -25,4 +25,6 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.einsteinium/einsteinium.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.einsteinium/einsteinium.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.einsteinium/einsteinium.conf
 
+echo "" > /home/komodian/.einsteinium/debug.log
+
 # cat /home/komodian/.einsteinium/einsteinium.conf

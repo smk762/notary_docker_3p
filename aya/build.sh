@@ -25,4 +25,5 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.aryacoin/aryacoin.conf
 
+echo "" > /home/komodian/.aryacoin/debug.log
 # cat /home/komodian/.aryacoin/aryacoin.conf

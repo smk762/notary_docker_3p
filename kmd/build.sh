@@ -20,4 +20,5 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.komodo/komodo.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.komodo/komodo.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.komodo/komodo.conf
 
+echo "" > /home/komodian/.komodo/debug.log
 # cat /home/komodian/.komodo/komodo.conf

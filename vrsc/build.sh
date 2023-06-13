@@ -20,4 +20,6 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.komodo/VRSC/VRSC.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.komodo/VRSC/VRSC.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.komodo/VRSC/VRSC.conf
 
+echo "" > /home/komodian/.komodo/VRSC/debug.log
+
 # cat /home/komodian/.komodo/VRSC/VRSC.conf

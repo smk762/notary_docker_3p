@@ -20,4 +20,6 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.komodo/TOKEL/komodo.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.komodo/TOKEL/komodo.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.komodo/TOKEL/komodo.conf
 
+echo "" > /home/komodian/.komodo/TOKEL/debug.log
+
 # cat /home/komodian/.komodo/TOKEL/komodo.conf

@@ -37,4 +37,6 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.mil/mil.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.mil/mil.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.mil/mil.conf
 
+echo "" > /home/komodian/.mil/debug.log
+
 # cat /home/komodian/.mil/mil.conf

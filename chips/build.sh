@@ -25,4 +25,5 @@ echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.chips/chips.conf
 echo "rpcbind=127.0.0.1" >> /home/komodian/.chips/chips.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.chips/chips.conf
 
+echo "" > /home/komodian/.chips/debug.log
 # cat /home/komodian/.chips/chips.conf
