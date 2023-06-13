@@ -13,11 +13,11 @@ echo "daemon=1" >> /home/komodian/.komodo/komodo.conf
 echo "txindex=1" >> /home/komodian/.komodo/komodo.conf
 echo "spentindex=1" >> /home/komodian/.komodo/komodo.conf
 echo "addressindex=1" >> /home/komodian/.komodo/komodo.conf
-echo "p2pport=8770" >> /home/komodian/.komodo/komodo.conf
+echo "port=8770" >> /home/komodian/.komodo/komodo.conf
 echo "rpcport=8771" >> /home/komodian/.komodo/komodo.conf
 echo "rpcuser=${RPC_USER}" >> /home/komodian/.komodo/komodo.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.komodo/komodo.conf
-echo "rpcbind=127.0.0.1" >> /home/komodian/.komodo/komodo.conf
+echo "rpcbind=127.0.0.1:8771" >> /home/komodian/.komodo/komodo.conf
 echo "rpcallowip=127.0.0.1" >> /home/komodian/.komodo/komodo.conf
 
 echo "" > /home/komodian/.komodo/debug.log
