@@ -27,8 +27,6 @@ RUN PATH=/home/komodian/marmara/src:/usr/local/bin/:$PATH
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-
-
 # Setup up user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian

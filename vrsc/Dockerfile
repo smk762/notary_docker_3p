@@ -25,11 +25,12 @@ RUN PATH=/home/komodian/VerusCoin/src:/usr/local/bin/:$PATH
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-ENTRYPOINT ["/entrypoint.sh"]
-
 # Setup up user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
+
+ENTRYPOINT ["/entrypoint.sh"]
+
 
 # Start daemon with the data directory mounted
 CMD ["/run.sh"]
