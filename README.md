@@ -4,8 +4,9 @@ Simple setup for running 3P notary node daemons for dPoW.
 
 ## Requirements
 
- - Docker
- - Docker Compose
+ - [Docker](https://docs.docker.com/engine/install/ubuntu/)
+ - [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
+ - Docker linux post install steps: https://docs.docker.com/engine/install/linux-postinstall/
 
 ## Setup
 
