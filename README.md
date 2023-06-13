@@ -31,7 +31,7 @@ curl --url "http://127.0.0.1:7779" --data "{\"conf\":\"komodo.conf\",\"path\":\"
  - Use `docker compose build <service>` to rebuild a single container (where <service> is the coin ticker in lowercase)
  - Use `docker compose up <service> -d` to start a single container in the background (where <service> is the coin ticker in lowercase)
  - Use `docker compose run <service> bash` to access an interactive shell (where <service> is the coin ticker in lowercase)
- - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact.
+ - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
  
 
 ## Make Docker respect UFW
