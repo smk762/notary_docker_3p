@@ -20,7 +20,7 @@ services:
         - GROUP_ID=$GROUP_ID
     ports:
       - "127.0.0.1:26001:26001"
-      - "127.0.0.1:9333:9332"
+      - "127.0.0.1:9332:9332"
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
