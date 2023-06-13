@@ -17,3 +17,7 @@ echo "GROUP_ID=${GROUP_ID}" >> .env
 
 cp docker-compose.template docker-compose.yml
 sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
+
+mkdir -p /home/komodian/.komodo_3p/VRSC
+mkdir -p /home/komodian/.komodo_3p/MCL
+mkdir -p /home/komodian/.komodo_3p/TOKEL
