@@ -2,12 +2,26 @@
 
 set -euxo pipefail
 
+generate_random_string() {
+  local length=$1
+  local output=""
+  exec 10< /dev/urandom
+  while (( ${#output} < length )); do
+    read -n $length -u 10 str
+    str=$(tr -dc 'a-zA-Z0-9' <<< "$str")
+    output="$output$str"
+  done
+  output=${output:0:$length}
+  echo "$output"
+  exec 10<&-
+}
+
 read -p "Enter your pubkey: " PUBKEY
 
-len=$(cat /dev/urandom | tr -dc '4-7' | fold -w 256 | head -n 1 | sed -e 's/^0*//' | head --bytes 2)
-RPC_USER=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $len | head -n 1)
-len=$(cat /dev/urandom | tr -dc '4-7' | fold -w 256 | head -n 1 | sed -e 's/^0*//' | head --bytes 2)
-RPC_PASS=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w $len | head -n 1)
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
 
