@@ -19,8 +19,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "26001:26001"
-      - "9333:9332"
+      - "127.0.0.1:26001:26001"
+      - "127.0.0.1:9333:9332"
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
@@ -42,8 +42,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "57777:57777"
-      - "57776:57776"
+      - "127.0.0.1:57777:57777"
+      - "127.0.0.1:57776:57776"
     volumes:
       - /home/USERNAME/.chips:/home/komodian/.chips
       - <<: *zcash-params
@@ -66,8 +66,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "41878:41878"
-      - "41879:41879"
+      - "127.0.0.1:41878:41878"
+      - "127.0.0.1:41879:41879"
     volumes:
       - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
     shm_size: '2gb'
@@ -89,8 +89,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "8770:8770"
-      - "8771:8771"
+      - "127.0.0.1:8770:8770"
+      - "127.0.0.1:8771:8771"
     volumes:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
       - <<: *zcash-params
@@ -113,8 +113,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "33824:33824"
-      - "33825:33825"
+      - "127.0.0.1:33824:33824"
+      - "127.0.0.1:33825:33825"
     volumes:
       - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
       - <<: *zcash-params
@@ -137,8 +137,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "41888:41888"
-      - "41889:41889"
+      - "127.0.0.1:41888:41888"
+      - "127.0.0.1:41889:41889"
     volumes:
       - /home/USERNAME/.mil:/home/komodian/.mil
     shm_size: '2gb'
@@ -160,8 +160,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "29404:29404"
-      - "29405:29405"
+      - "127.0.0.1:29404:29404"
+      - "127.0.0.1:29405:29405"
     volumes:
       - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
       - <<: *zcash-params
@@ -184,8 +184,8 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "27485:27485"
-      - "27486:27486"
+      - "127.0.0.1:27485:27485"
+      - "127.0.0.1:27486:27486"
     volumes:
       - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
       - <<: *zcash-params

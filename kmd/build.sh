@@ -17,8 +17,8 @@ echo "port=8770" >> /home/komodian/.komodo/komodo.conf
 echo "rpcport=8771" >> /home/komodian/.komodo/komodo.conf
 echo "rpcuser=${RPC_USER}" >> /home/komodian/.komodo/komodo.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.komodo/komodo.conf
-echo "rpcbind=127.0.0.1:8771" >> /home/komodian/.komodo/komodo.conf
-echo "rpcallowip=127.0.0.1" >> /home/komodian/.komodo/komodo.conf
+echo "rpcbind=0.0.0.0:8771" >> /home/komodian/.komodo/komodo.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.komodo/komodo.conf
 
 echo "" > /home/komodian/.komodo/debug.log
 # cat /home/komodian/.komodo/komodo.conf

@@ -22,8 +22,8 @@ echo "port=41878" >> /home/komodian/.einsteinium/einsteinium.conf
 echo "rpcport=41879" >> /home/komodian/.einsteinium/einsteinium.conf
 echo "rpcuser=${RPC_USER}" >> /home/komodian/.einsteinium/einsteinium.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.einsteinium/einsteinium.conf
-echo "rpcbind=127.0.0.1:41879" >> /home/komodian/.einsteinium/einsteinium.conf
-echo "rpcallowip=127.0.0.1" >> /home/komodian/.einsteinium/einsteinium.conf
+echo "rpcbind=0.0.0.0:41879" >> /home/komodian/.einsteinium/einsteinium.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.einsteinium/einsteinium.conf
 
 echo "" > /home/komodian/.einsteinium/debug.log
 

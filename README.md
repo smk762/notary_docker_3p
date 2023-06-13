@@ -28,13 +28,15 @@ curl --url "http://127.0.0.1:7779" --data "{\"conf\":\"komodo.conf\",\"path\":\"
 
  - Use `docker compose stop` to stop all daemon containers
  - Use `docker compose stop <service>` to stop a single daemon container (where <service> is the coin ticker in lowercase)
- - Use `docker compose logs -f` to monitor the logs of all the containers
- - Use `docker compose logs -f <service>` to monitor the logs of a single container (where <service> is the coin ticker in lowercase)
+ - Use `docker compose logs -f --tail 10` to monitor the logs of all the containers, starting with the 10 most recent lines. 
+ - Use `docker compose logs -f --tail 10 <service>` to monitor the logs of a single container, starting with the 10 most recent lines (where <service> is the coin ticker in lowercase)
  - Use `docker compose build <service>` to rebuild a single container (where <service> is the coin ticker in lowercase)
  - Use `docker compose up <service> -d` to start a single container in the background (where <service> is the coin ticker in lowercase)
  - Use `docker compose run <service> bash` to access an interactive shell (where <service> is the coin ticker in lowercase)
  - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
  
+ To use rpc commands:
+ - `komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf getinfo`
 
 ## Make Docker respect UFW
 

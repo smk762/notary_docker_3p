@@ -22,8 +22,8 @@ echo "port=26001" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcport=9332" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcuser=${RPC_USER}" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/komodian/.aryacoin/aryacoin.conf
-echo "rpcbind=127.0.0.1:9332" >> /home/komodian/.aryacoin/aryacoin.conf
-echo "rpcallowip=127.0.0.1" >> /home/komodian/.aryacoin/aryacoin.conf
+echo "rpcbind=0.0.0.0:9332" >> /home/komodian/.aryacoin/aryacoin.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.aryacoin/aryacoin.conf
 
 echo "" > /home/komodian/.aryacoin/debug.log
 # cat /home/komodian/.aryacoin/aryacoin.conf
