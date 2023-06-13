@@ -25,8 +25,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/tokel/src/tokel-cli /usr/local/bin/tokel-cli
-RUN ln -sf /home/komodian/tokel/src/tokeld /usr/local/bin/tokeld
+RUN mv /home/komodian/tokel/src/tokel-cli /usr/local/bin/tokel-cli
+RUN mv /home/komodian/tokel/src/tokeld /usr/local/bin/tokeld
 RUN PATH=/home/komodian/tokel/src:/usr/local/bin/:$PATH
 
 # Cleanup

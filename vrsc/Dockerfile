@@ -26,8 +26,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/VerusCoin/src/verus /usr/local/bin/verus
-RUN ln -sf /home/komodian/VerusCoin/src/verusd /usr/local/bin/verusd
+RUN mv /home/komodian/VerusCoin/src/verus /usr/local/bin/verus
+RUN mv /home/komodian/VerusCoin/src/verusd /usr/local/bin/verusd
 RUN PATH=/home/komodian/VerusCoin/src:/usr/local/bin/:$PATH
 
 # Cleanup

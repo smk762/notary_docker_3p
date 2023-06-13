@@ -25,8 +25,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
-RUN ln -sf /home/komodian/einsteinium/src/einsteiniumd /usr/local/bin/einsteiniumd
+RUN mv /home/komodian/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
+RUN mv /home/komodian/einsteinium/src/einsteiniumd /usr/local/bin/einsteiniumd
 RUN PATH=/home/komodian/einsteinium/src:/usr/local/bin/:$PATH
 
 # Cleanup

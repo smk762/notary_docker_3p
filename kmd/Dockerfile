@@ -32,8 +32,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
-RUN ln -sf /home/komodian/komodo/src/komodod /usr/local/bin/komodod
+RUN mv /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
+RUN mv /home/komodian/komodo/src/komodod /usr/local/bin/komodod
 RUN PATH=/home/komodian/home/komodian/komodo/src:/usr/local/bin/:$PATH
 
 # Cleanup

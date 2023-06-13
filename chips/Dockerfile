@@ -25,8 +25,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/chips/src/chips-cli /usr/local/bin/chips-cli
-RUN ln -sf /home/komodian/chips/src/chipsd /usr/local/bin/chipsd
+RUN mv /home/komodian/chips/src/chips-cli /usr/local/bin/chips-cli
+RUN mv /home/komodian/chips/src/chipsd /usr/local/bin/chipsd
 RUN PATH=/home/komodian/chips/src:/usr/local/bin/:$PATH
 
 # Cleanup

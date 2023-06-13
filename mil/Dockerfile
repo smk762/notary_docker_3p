@@ -25,8 +25,8 @@ COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli
-RUN ln -sf /home/komodian/mil/src/mild /usr/local/bin/mild
+RUN mv /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli
+RUN mv /home/komodian/mil/src/mild /usr/local/bin/mild
 RUN PATH=/home/komodian/mil/src:/usr/local/bin/:$PATH
 
 # Cleanup
