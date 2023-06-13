@@ -6,7 +6,7 @@ Simple setup for running 3P notary node daemons for dPoW.
 
  - [Docker](https://docs.docker.com/engine/install/ubuntu/) / [w/ convenience script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
  - [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
- - Docker linux post install steps: https://docs.docker.com/engine/install/linux-postinstall/ , Configure Docker to start on boot with systemd, setup logrotate: https://docs.docker.com/config/containers/logging/json-file/
+ - Docker linux post install steps: https://docs.docker.com/engine/install/linux-postinstall/ , Configure Docker to start on boot with systemd
  - 100GB+ disk space free
 
 ## Setup
