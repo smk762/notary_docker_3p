@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euxo pipefail
+
 read -p "Enter your pubkey: " PUBKEY
 
 len=$(cat /dev/urandom | tr -dc '4-7' | fold -w 256 | head -n 1 | sed -e 's/^0*//' | head --bytes 2)
