@@ -1,5 +1,4 @@
 #!/bin/bash
-
 set -euxo pipefail
 
 generate_random_string() {
