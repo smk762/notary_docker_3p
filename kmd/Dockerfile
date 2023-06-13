@@ -27,19 +27,20 @@ RUN rm -rf nanomsg
 COPY build.sh /build.sh
 RUN /build.sh
 
-RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
-    rm -rf /var/lib/apt/lists/* 
-
-RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
-
 # Configure
 COPY configure.sh /configure.sh
 RUN /configure.sh
 
 # Setup symbolic links to binaries
-RUN ln -sf /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
-RUN ln -sf /home/komodian/komodo/src/komodod /usr/local/bin/komodod
+RUN mv /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
+RUN mv /home/komodian/komodo/src/komodod /usr/local/bin/komodod
 RUN PATH=/home/komodian/home/komodian/komodo/src:/usr/local/bin/:$PATH
+
+# Cleanup
+RUN rm -rf /home/komodian/komodo
+RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
+    rm -rf /var/lib/apt/lists/* 
+RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
