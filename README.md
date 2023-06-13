@@ -26,6 +26,8 @@ curl --url "http://127.0.0.1:7779" --data "{\"conf\":\"komodo.conf\",\"path\":\"
 
 ## Usage
 
+ - Use `docker compose stop` to stop all daemon containers
+ - Use `docker compose stop <service>` to stop a single daemon container (where <service> is the coin ticker in lowercase)
  - Use `docker compose logs -f` to monitor the logs of all the containers
  - Use `docker compose logs -f <service>` to monitor the logs of a single container (where <service> is the coin ticker in lowercase)
  - Use `docker compose build <service>` to rebuild a single container (where <service> is the coin ticker in lowercase)
