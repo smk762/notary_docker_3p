@@ -4,7 +4,7 @@ echo $PWD
 echo "========================================"
 cd /home/komodian
 git clone https://github.com/KomodoPlatform/AYAv2
-cd AYAv2 && git checkout ${COMMIT_HASH}
+cd AYAv2 && git checkout ${1}
 
 make -C ${PWD}/depends v=1 NO_PROTON=1 NO_QT=1 HOST=$(depends/config.guess) -j$(nproc --all)
 ./autogen.sh
