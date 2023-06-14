@@ -30,20 +30,14 @@ RUN PATH=/usr/local/bin/:$PATH
 RUN rm -rf /home/komodian/AYAv2
 RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
-RUN apt update && apt install -y wget nano htop
-
-COPY entrypoint.sh /entrypoint.sh
-COPY run.sh /run.sh
+RUN apt update && apt install -y wget nano htop libgomp1 libcurl3-gnutls-dev telnet
 
 # Configure
 COPY configure.sh /configure.sh
 RUN /configure.sh
-
-# Setup user and working directory
+COPY entrypoint.sh /entrypoint.sh
+COPY run.sh /run.sh
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
-
 ENTRYPOINT [ "/entrypoint.sh" ]
-
-# Start the daemon
 CMD ["/run.sh"]
