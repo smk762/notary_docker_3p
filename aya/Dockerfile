@@ -30,7 +30,7 @@ RUN PATH=/usr/local/bin/:$PATH
 RUN rm -rf /home/komodian/AYAv2
 RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
-RUN apt update && apt install -y wget nano htop
+RUN apt update && apt install -y wget nano htop libgomp libcurl3-gnutls-dev telnet
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
