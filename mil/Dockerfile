@@ -17,9 +17,13 @@ ARG BUILD_PACKAGES="libevent-dev libboost-system-dev libboost-filesystem-dev lib
 ARG DEBIAN_FRONTEND=noninteractive 
 RUN apt update && apt install $BUILD_PACKAGES -y
 
+# Build DB
+COPY build_db.sh /build_db.sh
+RUN /build_db.sh
+
 # Build
 COPY build.sh /build.sh
-RUN /build.sh ${COMMIT_HASH}
+RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
 RUN mv /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli

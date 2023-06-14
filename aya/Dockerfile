@@ -19,7 +19,7 @@ RUN apt update && apt install $BUILD_PACKAGES -y
 
 # Build
 COPY build.sh /build.sh
-RUN /build.sh ${COMMIT_HASH}
+RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
 RUN mv /home/komodian/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli

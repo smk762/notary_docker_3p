@@ -26,7 +26,7 @@ RUN rm -rf nanomsg
 
 # Build 
 COPY build.sh /build.sh
-RUN /build.sh ${COMMIT_HASH}
+RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
 RUN mv /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
