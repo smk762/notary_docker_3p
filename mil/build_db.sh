@@ -2,10 +2,10 @@
 set -euxo pipefail
 echo $PWD
 echo "========================================"
-mkdir -p /opt/${BERKELEYDB_PREFIX}
-cd /opt/${BERKELEYDB_PREFIX}
 BERKELEYDB_VERSION=db-4.8.30.NC
 BERKELEYDB_PREFIX=/opt/${BERKELEYDB_VERSION}
+mkdir -p /opt/${BERKELEYDB_PREFIX}
+cd /opt/${BERKELEYDB_PREFIX}
 wget https://download.oracle.com/berkeley-db/${BERKELEYDB_VERSION}.tar.gz
 tar -xzf *.tar.gz
 sed s/__atomic_compare_exchange/__atomic_compare_exchange_db/g -i ${BERKELEYDB_VERSION}/dbinc/atomic.h
