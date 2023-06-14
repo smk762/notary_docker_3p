@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euxo pipefail
 verusd -pubkey=${PUBKEY} &
 sleep 20
 ls -la /home/komodian/.komodo/VRSC

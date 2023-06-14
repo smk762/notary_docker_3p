@@ -20,14 +20,10 @@ RUN apt update && apt install $BUILD_PACKAGES -y
 COPY build.sh /build.sh
 RUN /build.sh
 
-# Configure
-COPY configure.sh /configure.sh
-RUN /configure.sh
-
-# Setup symbolic links to binaries
+# Move binaries
 RUN mv /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli
 RUN mv /home/komodian/mil/src/mild /usr/local/bin/mild
-RUN PATH=/home/komodian/mil/src:/usr/local/bin/:$PATH
+RUN PATH=/usr/local/bin/:$PATH
 
 # Cleanup
 RUN rm -rf /home/komodian/mil
@@ -38,7 +34,11 @@ RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
-# Setup up user and working directory
+# Configure
+COPY configure.sh /configure.sh
+RUN /configure.sh
+
+# Setup user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 
