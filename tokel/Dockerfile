@@ -30,7 +30,7 @@ RUN PATH=/usr/local/bin/:$PATH
 RUN rm -rf /home/komodian/tokel
 RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
-RUN apt update && apt install -y wget nano
+RUN apt update && apt install -y wget nano htop
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
