@@ -83,7 +83,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=master
+        - COMMIT_HASH=156dba6
     ports:
       - "127.0.0.1:8770:8770"
       - "127.0.0.1:8771:8771"
@@ -172,7 +172,7 @@ services:
       context: ./vrsc
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=3f0f435
+        - COMMIT_HASH=4beede9
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
