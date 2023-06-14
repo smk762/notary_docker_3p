@@ -14,4 +14,7 @@ echo "rpcbind=0.0.0.0:57776" >> /home/komodian/.chips/chips.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.chips/chips.conf
 
 echo "" > /home/komodian/.chips/debug.log
+
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.chips/chips.conf

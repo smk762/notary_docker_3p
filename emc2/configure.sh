@@ -15,4 +15,6 @@ echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.einsteinium/einsteinium.conf
 
 echo "" > /home/komodian/.einsteinium/debug.log
 
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.einsteinium/einsteinium.conf

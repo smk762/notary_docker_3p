@@ -15,4 +15,6 @@ echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.komodo/TOKEL/TOKEL.conf
 
 echo "" > /home/komodian/.komodo/TOKEL/debug.log
 
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.komodo/TOKEL/TOKEL.conf

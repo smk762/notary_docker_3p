@@ -30,7 +30,7 @@ RUN PATH=/usr/local/bin/:$PATH
 RUN rm -rf /home/komodian/einsteinium
 RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
-RUN apt update && apt install -y libcurl4-gnutls-dev libgomp1 telnet curl nano
+RUN apt update && apt install -y wget nano
 
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh

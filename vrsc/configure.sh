@@ -15,4 +15,6 @@ echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.komodo/VRSC/VRSC.conf
 
 echo "" > /home/komodian/.komodo/VRSC/debug.log
 
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.komodo/VRSC/VRSC.conf
