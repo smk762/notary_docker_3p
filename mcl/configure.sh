@@ -14,4 +14,7 @@ echo "rpcbind=0.0.0.0:33825" >> /home/komodian/.komodo/MCL/MCL.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.komodo/MCL/MCL.conf
 
 echo "" > /home/komodian/.komodo/MCL/debug.log
+
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.komodo/MCL/MCL.conf

@@ -14,4 +14,7 @@ echo "rpcbind=0.0.0.0:8771" >> /home/komodian/.komodo/komodo.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.komodo/komodo.conf
 
 echo "" > /home/komodian/.komodo/debug.log
+
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.komodo/komodo.conf

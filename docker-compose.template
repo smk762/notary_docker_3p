@@ -10,14 +10,13 @@ services:
   aya:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=94e6bc0
     build:
       context: ./aya
       dockerfile: Dockerfile
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=94e6bc0
     ports:
       - "127.0.0.1:26001:26001"
       - "127.0.0.1:9332:9332"
@@ -33,14 +32,13 @@ services:
   chips:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=6e7560a
     build:
       context: ./chips
       dockerfile: Dockerfile
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=6e7560a
     ports:
       - "127.0.0.1:57777:57777"
       - "127.0.0.1:57776:57776"
@@ -57,12 +55,11 @@ services:
   emc2:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=c329ae6
     build:
       context: ./emc2
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=c329ae6
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -80,14 +77,13 @@ services:
   kmd:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=master
     build:
       context: ./kmd
       dockerfile: Dockerfile
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=master
     ports:
       - "127.0.0.1:8770:8770"
       - "127.0.0.1:8771:8771"
@@ -104,12 +100,11 @@ services:
   mcl:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=a92d834
     build:
       context: ./mcl
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=a92d834
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -128,14 +123,13 @@ services:
   mil:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=578bed7
     build:
       context: ./mil
       dockerfile: Dockerfile
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=578bed7
     ports:
       - "127.0.0.1:41888:41888"
       - "127.0.0.1:41889:41889"
@@ -151,12 +145,11 @@ services:
   tokel:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=d2e98de
     build:
       context: ./tokel
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=d2e98de
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -175,12 +168,11 @@ services:
   vrsc:
     env_file:
       - .env
-    environment:
-      - COMMIT_HASH=3f0f435
     build:
       context: ./vrsc
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=3f0f435
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:

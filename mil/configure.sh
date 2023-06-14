@@ -15,4 +15,6 @@ echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.mil/mil.conf
 
 echo "" > /home/komodian/.mil/debug.log
 
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.mil/mil.conf

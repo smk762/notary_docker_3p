@@ -34,9 +34,18 @@ curl --url "http://127.0.0.1:7779" --data "{\"conf\":\"komodo.conf\",\"path\":\"
  - Use `docker compose up <service> -d` to start a single container in the background (where `<service>` is the coin ticker in lowercase)
  - Use `docker compose run <service> bash` to access an interactive shell (where `<service>` is the coin ticker in lowercase)
  - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
- 
- To use rpc commands:
- - `komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf getinfo`
+
+
+#### To use cli commands
+
+ - For KMD: `komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf getinfo`
+ - For MCL, VRSC & TOKEL: `komodo-cli -conf=/home/${USER}/.komodo_3p/{COIN}/{COIN}.conf getinfo`
+ - For all other chains, use the same commands as you normally would.
+
+
+#### Updating daemon versions
+
+When a repo hash or branch changes for an update, update the `COMMIT_HASH` arg in the `docker-compose.yml` file for the relevant service. Then run `docker compose build <service> --no-cache` to rebuild the container.
 
 ## Make Docker respect UFW
 

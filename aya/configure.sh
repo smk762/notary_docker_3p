@@ -14,4 +14,7 @@ echo "rpcbind=0.0.0.0:9332" >> /home/komodian/.aryacoin/aryacoin.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/komodian/.aryacoin/aryacoin.conf
 
 echo "" > /home/komodian/.aryacoin/debug.log
+
+echo "${COMMIT_HASH}" > /home/komodian/COMMIT_HASH
+
 # cat /home/komodian/.aryacoin/aryacoin.conf
