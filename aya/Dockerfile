@@ -22,7 +22,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/AYAv2/src/aryacoin-cli /home/komodian/cli-binaries/aryacoin-cli
+RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/AYAv2/src/aryacoin-cli /home/komodian/.aryacoin/aryacoin-cli
 RUN mv /home/komodian/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
 RUN mv /home/komodian/AYAv2/src/aryacoind /usr/local/bin/aryacoind
 RUN PATH=/usr/local/bin/:$PATH

@@ -23,7 +23,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/VerusCoin/src/verus /home/komodian/cli-binaries/verus
+RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/VerusCoin/src/verus /home/komodian/.komodo/VRSC/verus
 RUN mv /home/komodian/VerusCoin/src/verus /usr/local/bin/verus
 RUN mv /home/komodian/VerusCoin/src/verusd /usr/local/bin/verusd
 RUN PATH=/usr/local/bin/:$PATH
