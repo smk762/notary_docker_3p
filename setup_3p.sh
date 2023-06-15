@@ -40,10 +40,133 @@ echo "Updating docker-compose.yml..."
 cp docker-compose.template docker-compose.yml
 sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
 
+
+echo "Setting up conf files and data folders..."
 mkdir -p /home/${USER}/.komodo_3p
 mkdir -p /home/${USER}/.komodo_3p/VRSC
 mkdir -p /home/${USER}/.komodo_3p/MCL
 mkdir -p /home/${USER}/.komodo_3p/TOKEL
+
+
+mkdir -p /home/${USER}/.komodo_3p
+echo "server=1" > /home/${USER}/.komodo_3p/komodo.conf
+echo "listen=1" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "daemon=1" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "txindex=1" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "spentindex=1" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "addressindex=1" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "port=8770" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "rpcport=8771" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "rpcbind=0.0.0.0:8771" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "" > /home/${USER}/.komodo_3p/debug.log
+
+mkdir -p /home/${USER}/.komodo_3p/TOKEL
+echo "server=1" > /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "listen=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "daemon=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "txindex=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "spentindex=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "addressindex=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "port=29404" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "rpcport=29405" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "rpcbind=0.0.0.0:29405" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "" > /home/${USER}/.komodo_3p/TOKEL/debug.log
+
+mkdir -p /home/${USER}/.komodo_3p/MCL
+echo "server=1" > /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "listen=1" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "daemon=1" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "txindex=1" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "spentindex=1" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "addressindex=1" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "port=33824" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "rpcport=33825" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "rpcbind=0.0.0.0:33825" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "" > /home/${USER}/.komodo_3p/MCL/debug.log
+
+mkdir -p /home/${USER}/.komodo_3p/VRSC
+echo "server=1" > /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "listen=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "daemon=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "txindex=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "spentindex=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "addressindex=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "port=27485" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "rpcport=27486" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "rpcbind=0.0.0.0:27486" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "" > /home/${USER}/.komodo_3p/VRSC/debug.log
+
+mkdir -p /home/${USER}/.aryacoin
+echo "server=1" > /home/${USER}/.aryacoin/aryacoin.conf
+echo "listen=1" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "daemon=1" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "txindex=1" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "spentindex=1" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "addressindex=1" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "port=26001" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "rpcport=9432" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "rpcbind=0.0.0.0:9432" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "" > /home/${USER}/.aryacoin/debug.log
+
+mkdir -p /home/${USER}/.chips
+echo "server=1" > /home/${USER}/.chips/chips.conf
+echo "listen=1" >> /home/${USER}/.chips/chips.conf
+echo "daemon=1" >> /home/${USER}/.chips/chips.conf
+echo "txindex=1" >> /home/${USER}/.chips/chips.conf
+echo "spentindex=1" >> /home/${USER}/.chips/chips.conf
+echo "addressindex=1" >> /home/${USER}/.chips/chips.conf
+echo "port=57777" >> /home/${USER}/.chips/chips.conf
+echo "rpcport=57776" >> /home/${USER}/.chips/chips.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.chips/chips.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.chips/chips.conf
+echo "rpcbind=0.0.0.0:57776" >> /home/${USER}/.chips/chips.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.chips/chips.conf
+echo "" > /home/${USER}/.chips/debug.log
+
+mkdir -p /home/${USER}/.einsteinium
+echo "server=1" > /home/${USER}/.einsteinium/einsteinium.conf
+echo "listen=1" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "daemon=1" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "txindex=1" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "spentindex=1" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "addressindex=1" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "port=41878" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "rpcport=41879" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "rpcbind=0.0.0.0:41879" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "" > /home/${USER}/.einsteinium/debug.log
+
+mkdir -p /home/${USER}/.mil
+echo "server=1" > /home/${USER}/.mil/mil.conf
+echo "listen=1" >> /home/${USER}/.mil/mil.conf
+echo "daemon=1" >> /home/${USER}/.mil/mil.conf
+echo "txindex=1" >> /home/${USER}/.mil/mil.conf
+echo "spentindex=1" >> /home/${USER}/.mil/mil.conf
+echo "addressindex=1" >> /home/${USER}/.mil/mil.conf
+echo "port=41888" >> /home/${USER}/.mil/mil.conf
+echo "rpcport=41889" >> /home/${USER}/.mil/mil.conf
+echo "rpcuser=${RPC_USER}" >> /home/${USER}/.mil/mil.conf
+echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.mil/mil.conf
+echo "rpcbind=0.0.0.0:41889" >> /home/${USER}/.mil/mil.conf
+echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.mil/mil.conf
+echo "" > /home/${USER}/.mil/debug.log
 
 echo "Building docker images..."
 docker compose build
