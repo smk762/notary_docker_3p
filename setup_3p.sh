@@ -22,17 +22,10 @@ then
   echo "pubkey=${pubkey}" > /home/${USER}/dPoW/iguana/pubkey_3p.txt
 fi
 
-len=$(( RANDOM % 34 + 44 ))
-RPC_USER=$(generate_random_string $len)
-len=$(( RANDOM % 34 + 44 ))
-RPC_PASS=$(generate_random_string $len)
+echo "Setting up .env file..."
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
-
-echo "Setting up .env file..."
 echo "PUBKEY=${pubkey}" > .env
-echo "RPC_USER=${RPC_USER}" >> .env
-echo "RPC_PASS=${RPC_PASS}" >> .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env
 
@@ -40,13 +33,12 @@ echo "Updating docker-compose.yml..."
 cp docker-compose.template docker-compose.yml
 sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
 
-
 echo "Setting up conf files and data folders..."
-mkdir -p /home/${USER}/.komodo_3p
-mkdir -p /home/${USER}/.komodo_3p/VRSC
-mkdir -p /home/${USER}/.komodo_3p/MCL
-mkdir -p /home/${USER}/.komodo_3p/TOKEL
 
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
 
 mkdir -p /home/${USER}/.komodo_3p
 echo "server=1" > /home/${USER}/.komodo_3p/komodo.conf
@@ -63,6 +55,11 @@ echo "rpcbind=0.0.0.0:8771" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "" > /home/${USER}/.komodo_3p/debug.log
 
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
+
 mkdir -p /home/${USER}/.komodo_3p/TOKEL
 echo "server=1" > /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "listen=1" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
@@ -77,6 +74,11 @@ echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "rpcbind=0.0.0.0:29405" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "" > /home/${USER}/.komodo_3p/TOKEL/debug.log
+
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
 
 mkdir -p /home/${USER}/.komodo_3p/MCL
 echo "server=1" > /home/${USER}/.komodo_3p/MCL/MCL.conf
@@ -93,6 +95,11 @@ echo "rpcbind=0.0.0.0:33825" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "" > /home/${USER}/.komodo_3p/MCL/debug.log
 
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
+
 mkdir -p /home/${USER}/.komodo_3p/VRSC
 echo "server=1" > /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "listen=1" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
@@ -107,6 +114,11 @@ echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "rpcbind=0.0.0.0:27486" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "" > /home/${USER}/.komodo_3p/VRSC/debug.log
+
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
 
 mkdir -p /home/${USER}/.aryacoin
 echo "server=1" > /home/${USER}/.aryacoin/aryacoin.conf
@@ -123,6 +135,11 @@ echo "rpcbind=0.0.0.0:9432" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "" > /home/${USER}/.aryacoin/debug.log
 
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
+
 mkdir -p /home/${USER}/.chips
 echo "server=1" > /home/${USER}/.chips/chips.conf
 echo "listen=1" >> /home/${USER}/.chips/chips.conf
@@ -138,6 +155,11 @@ echo "rpcbind=0.0.0.0:57776" >> /home/${USER}/.chips/chips.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.chips/chips.conf
 echo "" > /home/${USER}/.chips/debug.log
 
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
+
 mkdir -p /home/${USER}/.einsteinium
 echo "server=1" > /home/${USER}/.einsteinium/einsteinium.conf
 echo "listen=1" >> /home/${USER}/.einsteinium/einsteinium.conf
@@ -152,6 +174,11 @@ echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "rpcbind=0.0.0.0:41879" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "" > /home/${USER}/.einsteinium/debug.log
+
+len=$(( RANDOM % 34 + 44 ))
+RPC_USER=$(generate_random_string $len)
+len=$(( RANDOM % 34 + 44 ))
+RPC_PASS=$(generate_random_string $len)
 
 mkdir -p /home/${USER}/.mil
 echo "server=1" > /home/${USER}/.mil/mil.conf
