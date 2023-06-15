@@ -33,11 +33,6 @@ When a new version of the daemon is announced:
 
 #### To use cli commands
 
-Open wrapper script file for the deamon with `nano ~/komodo/src/komodod_3p` and put the following inside:
-```bash
-#!/bin/bash
-komodod -datadir=/home/${USER}/.komodo_3p -conf=/home/${USER}/.komodo_3p/komodo.conf $@
-```
 Open wrapper script file for the deamon cli with `nano ~/komodo/src/komodo_3p-cli` and put the following inside:
 ```bash
 #!/bin/bash
@@ -45,30 +40,34 @@ komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf $@
 ```
 Make the wrapper scripts executable:
 ```bash
-chmod +x /home/$USER/komodo/src/komodod_3p
 chmod +x /home/$USER/komodo/src/komodo_3p-cli
 ```
-Now we can create some symbolic links:
+Now we can create a symbolic links for the 3P instance of Komodo:
 ```bash
-# For the 3P instance of Komodo (and TOKEl, MCL & VRSC which use the same daemon)
-sudo ln -s /home/$USER/komodo/src/komodod_3p /usr/local/bin/komodod_3p
 sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
-
+```
+After building the 3P docker images, the cli binaries for the other 3P coins will be located in the `~/cli-binaries/` folder, so we can create symbolic links for them as well:
+```bash
 # AYA
-sudo ln -s /home/$USER/AYAv2/src/aryacoind /usr/local/bin/aryacoind
-sudo ln -s /home/$USER/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
+sudo ln -s /home/$USER/cli-binaries/aryacoin-cli /usr/local/bin/aryacoin-cli
 
 # CHIPS
-sudo ln -s /home/$USER/chips/src/chipsd /usr/local/bin/chipsd
-sudo ln -s /home/$USER/chips/src/chips-cli /usr/local/bin/chips-cli
+sudo ln -s /home/$USER/cli-binaries/chips-cli /usr/local/bin/chips-cli
 
 # EMC2
-sudo ln -s /home/$USER/einsteinium/src/einsteiniumd /usr/local/bin/einsteiniumd
-sudo ln -s /home/$USER/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
+sudo ln -s /home/$USER/cli-binaries/einsteinium-cli /usr/local/bin/einsteinium-cli
+
+# MCL
+sudo ln -s /home/$USER/cli-binaries/marmara-cli /usr/local/bin/marmara-cli
 
 # MIL
-sudo ln -s /home/$USER/mil/src/mild /usr/local/bin/mild
-sudo ln -s /home/$USER/mil/src/einsteinium-cli /usr/local/bin/mil-cli
+sudo ln -s /home/$USER/cli-binaries/einsteinium-cli /usr/local/bin/mil-cli
+
+# TOKEL
+sudo ln -s /home/$USER/cli-binaries/tokel-cli /usr/local/bin/tokel-cli
+
+# VRSC
+sudo ln -s /home/$USER/cli-binaries/verus /usr/local/bin/verus-cli
 ```
 
 #### Updating daemon versions
