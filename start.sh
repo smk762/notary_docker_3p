@@ -1,5 +1,4 @@
 #!/bin/bash
-set -euxo pipefail
 
 if [ -z "$1" ]
   then
