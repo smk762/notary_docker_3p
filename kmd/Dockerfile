@@ -17,13 +17,6 @@ ARG BUILD_PACKAGES="libevent-dev libboost-system-dev libboost-filesystem-dev lib
 ARG DEBIAN_FRONTEND=noninteractive 
 RUN apt update && apt install $BUILD_PACKAGES -y
 
-# Install nanomsg
-RUN git clone https://github.com/nanomsg/nanomsg
-RUN cd nanomsg && cmake . -DNN_TESTS=OFF -DNN_ENABLE_DOC=OFF && make -j2 && make install && ldconfig
-
-## Clean the nanomsg build source
-RUN rm -rf nanomsg
-
 # Build 
 COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
