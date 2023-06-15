@@ -55,6 +55,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "rpcbind=0.0.0.0:8771" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.komodo_3p/komodo.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.komodo_3p/komodo.conf
 echo "" > /home/${USER}/.komodo_3p/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -75,6 +78,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "rpcbind=0.0.0.0:29405" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.komodo_3p/TOKEL/TOKEL.conf
 echo "" > /home/${USER}/.komodo_3p/TOKEL/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -95,6 +101,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "rpcbind=0.0.0.0:33825" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.komodo_3p/MCL/MCL.conf
 echo "" > /home/${USER}/.komodo_3p/MCL/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -115,6 +124,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "rpcbind=0.0.0.0:27486" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.komodo_3p/VRSC/VRSC.conf
 echo "" > /home/${USER}/.komodo_3p/VRSC/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -135,6 +147,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "rpcbind=0.0.0.0:9432" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.aryacoin/aryacoin.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.aryacoin/aryacoin.conf
 echo "" > /home/${USER}/.aryacoin/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -155,6 +170,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.chips/chips.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.chips/chips.conf
 echo "rpcbind=0.0.0.0:57776" >> /home/${USER}/.chips/chips.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.chips/chips.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.chips/chips.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.chips/chips.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.chips/chips.conf
 echo "" > /home/${USER}/.chips/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -175,6 +193,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "rpcbind=0.0.0.0:41879" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.einsteinium/einsteinium.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.einsteinium/einsteinium.conf
 echo "" > /home/${USER}/.einsteinium/debug.log
 
 len=$(( RANDOM % 34 + 44 ))
@@ -195,6 +216,9 @@ echo "rpcuser=${RPC_USER}" >> /home/${USER}/.mil/mil.conf
 echo "rpcpassword=${RPC_PASS}" >> /home/${USER}/.mil/mil.conf
 echo "rpcbind=0.0.0.0:41889" >> /home/${USER}/.mil/mil.conf
 echo "rpcallowip=0.0.0.0/0" >> /home/${USER}/.mil/mil.conf
+echo "addnode=15.235.204.174" >> /home/${USER}/.mil/mil.conf
+echo "addnode=209.222.101.247" >> /home/${USER}/.mil/mil.conf
+echo "addnode=103.195.100.32" >> /home/${USER}/.mil/mil.conf
 echo "" > /home/${USER}/.mil/debug.log
 
 echo "Building docker images..."

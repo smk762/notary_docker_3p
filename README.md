@@ -1,14 +1,34 @@
 # notary_docker_3p
 
 Simple setup for running 3P notary node daemons for dPoW.
-
+---
 ## Requirements
 
  - [Docker](https://docs.docker.com/engine/install/ubuntu/) / [w/ convenience script](https://docs.docker.com/engine/install/ubuntu/#install-using-the-convenience-script)
  - [Docker Compose](https://docs.docker.com/compose/install/linux/#install-using-the-repository)
  - Docker linux post install steps: https://docs.docker.com/engine/install/linux-postinstall/ , Configure Docker to start on boot with systemd
  - 100GB+ disk space free
+---
+## Make Docker respect UFW
 
+**Docker adds iptables rules that will override UFW rules!** 
+Make sure to run the steps below to secure the ports used by Docker. See this article for more info: https://www.techrepublic.com/article/how-to-fix-the-docker-and-ufw-security-flaw/
+
+Open docker config file
+```
+sudo nano /etc/default/docker
+```
+
+Add this line; save and exit.
+```
+DOCKER_OPTS="--iptables=false"
+```
+
+Restart docker
+```
+sudo systemctl restart docker
+```
+---
 ## Setup
 
 1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
@@ -19,7 +39,7 @@ Simple setup for running 3P notary node daemons for dPoW.
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
 There are also some other minor differences with paths and ports used for 3P daemons within the docker containers, so a [modified `m_notary_3rdparty`](https://github.com/KomodoPlatform/dPoW/blob/season-seven/iguana/m_notary_3rdparty_docker) file is used to launch Iguana.
 
-
+---
 ### Some other commands that may come in handy later:
 - Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
@@ -30,8 +50,8 @@ When a new version of the daemon is announced:
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
 - To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
 
-
-#### To use cli commands
+---
+### To use cli commands
 
 Open wrapper script file for the deamon cli with `nano ~/komodo/src/komodo_3p-cli` and put the following inside:
 ```bash
@@ -69,31 +89,12 @@ sudo ln -s /home/$USER/cli-binaries/tokel-cli /usr/local/bin/tokel-cli
 # VRSC
 sudo ln -s /home/$USER/cli-binaries/verus /usr/local/bin/verus-cli
 ```
-
-#### Updating daemon versions
+---
+### Updating daemon versions
 
 When a repo hash or branch changes for an update, update the `COMMIT_HASH` arg in the `docker-compose.yml` file for the relevant service. Then run `docker compose build <service> --no-cache` to rebuild the container.
 
-## Make Docker respect UFW
-
-**Docker adds iptables rules that will override UFW rules!** 
-Make sure to run the steps below to secure the ports used by Docker. See this article for more info: https://www.techrepublic.com/article/how-to-fix-the-docker-and-ufw-security-flaw/
-
-Open docker config file
-```
-sudo nano /etc/default/docker
-```
-
-Add this line; save and exit.
-```
-DOCKER_OPTS="--iptables=false"
-```
-
-Restart docker
-```
-sudo systemctl restart docker
-```
-
+---
 ## What might go wrong?
 
 #### Chain needs reindex
