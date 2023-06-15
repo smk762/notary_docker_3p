@@ -37,3 +37,5 @@ mkdir -p /home/${USER}/.komodo_3p
 mkdir -p /home/${USER}/.komodo_3p/VRSC
 mkdir -p /home/${USER}/.komodo_3p/MCL
 mkdir -p /home/${USER}/.komodo_3p/TOKEL
+
+docker compose build

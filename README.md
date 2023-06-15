@@ -11,8 +11,8 @@ Simple setup for running 3P notary node daemons for dPoW.
 
 ## Setup
 
-1. Clone this repository
-2. Run `./setup.sh` to create the `.env` and `docker-compose.yml` files
+1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
+2. Run `./setup_3p.sh` to create the `.env` and `docker-compose.yml` files
 3. Run `docker compose build` to build the deamons within the docker containers
 4. Run `docker compose up -d` to start the containers in the background
 
