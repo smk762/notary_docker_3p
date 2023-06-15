@@ -22,7 +22,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN cp /home/komodian/chips/src/chips-cli /home/komodian/cli-binaries/chips-cli
+RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/chips/src/chips-cli /home/komodian/cli-binaries/chips-cli
 RUN mv /home/komodian/chips/src/chips-cli /usr/local/bin/chips-cli
 RUN mv /home/komodian/chips/src/chipsd /usr/local/bin/chipsd
 RUN PATH=/usr/local/bin/:$PATH
