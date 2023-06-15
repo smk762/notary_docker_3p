@@ -23,6 +23,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
+RUN cp /home/komodian/marmara/src/komodo-cli /home/komodian/cli-binaries/marmara-cli
 RUN mv /home/komodian/marmara/src/komodo-cli /usr/local/bin/komodo-cli
 RUN mv /home/komodian/marmara/src/komodod /usr/local/bin/komodod
 RUN PATH=/usr/local/bin/:$PATH

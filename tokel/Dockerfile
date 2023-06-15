@@ -22,6 +22,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
+RUN cp /home/komodian/tokel/src/tokel-cli /home/komodian/cli-binaries/tokel-cli
 RUN mv /home/komodian/tokel/src/tokel-cli /usr/local/bin/tokel-cli
 RUN mv /home/komodian/tokel/src/tokeld /usr/local/bin/tokeld
 RUN PATH=/usr/local/bin/:$PATH

@@ -22,6 +22,7 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
+RUN cp /home/komodian/einsteinium/src/einsteinium-cli /home/komodian/cli-binaries/einsteinium-cli
 RUN mv /home/komodian/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
 RUN mv /home/komodian/einsteinium/src/einsteiniumd /usr/local/bin/einsteiniumd
 RUN PATH=/usr/local/bin/:$PATH

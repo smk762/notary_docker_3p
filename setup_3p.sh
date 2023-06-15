@@ -35,6 +35,8 @@ sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
 
 echo "Setting up conf files and data folders..."
 
+mkdir -p /home/${USER}/cli-binaries
+
 len=$(( RANDOM % 34 + 44 ))
 RPC_USER=$(generate_random_string $len)
 len=$(( RANDOM % 34 + 44 ))

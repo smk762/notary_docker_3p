@@ -6,6 +6,12 @@ x-zcash-params-volume:
   source: /home/USERNAME/.zcash-params
   target: /home/komodian/.zcash-params
 
+x-cli-binaries-volume:
+  &cli-binaries
+  type: bind
+  source: /home/USERNAME/cli-binaries
+  target: /home/komodian/cli-binaries
+
 services:
   aya:
     env_file:
@@ -22,6 +28,7 @@ services:
       - "127.0.0.1:9432:9432"
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
+      - <<: *cli-binaries
     shm_size: '2gb'
     restart: always
     logging:
@@ -44,6 +51,7 @@ services:
       - "127.0.0.1:57776:57776"
     volumes:
       - /home/USERNAME/.chips:/home/komodian/.chips
+      - <<: *cli-binaries
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
@@ -67,6 +75,7 @@ services:
       - "127.0.0.1:41879:41879"
     volumes:
       - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
+      - <<: *cli-binaries
     shm_size: '2gb'
     restart: always
     logging:
@@ -89,6 +98,7 @@ services:
       - "127.0.0.1:8771:8771"
     volumes:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
+      - <<: *cli-binaries
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
@@ -112,6 +122,7 @@ services:
       - "127.0.0.1:33825:33825"
     volumes:
       - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
+      - <<: *cli-binaries
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
@@ -135,6 +146,7 @@ services:
       - "127.0.0.1:41889:41889"
     volumes:
       - /home/USERNAME/.mil:/home/komodian/.mil
+      - <<: *cli-binaries
     shm_size: '2gb'
     restart: always
     logging:
@@ -157,6 +169,7 @@ services:
       - "127.0.0.1:29405:29405"
     volumes:
       - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
+      - <<: *cli-binaries
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always
@@ -180,6 +193,7 @@ services:
       - "127.0.0.1:27486:27486"
     volumes:
       - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
+      - <<: *cli-binaries
       - <<: *zcash-params
     shm_size: '2gb'
     restart: always

@@ -14,40 +14,62 @@ Simple setup for running 3P notary node daemons for dPoW.
 1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
 2. Run `./setup_3p.sh` to create the `.env` and `docker-compose.yml` files and build the daemon containers
 3. Run `./start_3p.sh` to launch all the deamons within the docker containers, and tail their logs
-4. Alternatively, run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
-5. Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
+
 
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
 There are also some other minor differences with paths and ports used for 3P daemons within the docker containers, so a [modified `m_notary_3rdparty`](https://github.com/KomodoPlatform/dPoW/blob/season-seven/iguana/m_notary_3rdparty_docker) file is used to launch Iguana.
 
-Some other commands that may come in handy later:
 
+### Some other commands that may come in handy later:
+- Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
+- Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
 - Run `./stop_3p.sh` to stop all the deamons
 - Run `./stop_3p.sh <ticker>` to stop a specific deamon
-
 When a new version of the daemon is announced:
 - Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons.
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
-
-
-## Usage
-
- - Use `docker compose stop` to stop all daemon containers
- - Use `docker compose stop <service>` to stop a single daemon container (where <service> is the coin ticker in lowercase)
- - Use `docker compose logs -f --tail 10` to monitor the logs of all the containers
- - Use `docker compose logs -f --tail 10 <service>` to monitor the logs of a single container (where `<service>` is the coin ticker in lowercase)
- - Use `docker compose build <service>` to rebuild a single container (where `<service>` is the coin ticker in lowercase)
- - Use `docker compose up <service> -d` to start a single container in the background (where `<service>` is the coin ticker in lowercase)
- - Use `docker compose run <service> bash` to access an interactive shell (where `<service>` is the coin ticker in lowercase)
- - To clear old docker cache `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
+- To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
 
 
 #### To use cli commands
 
- - For KMD: `komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf getinfo`
- - For MCL, VRSC & TOKEL: `komodo-cli -conf=/home/${USER}/.komodo_3p/{COIN}/{COIN}.conf getinfo`
- - For all other chains, use the same commands as you normally would.
+Open wrapper script file for the deamon with `nano ~/komodo/src/komodod_3p` and put the following inside:
+```bash
+#!/bin/bash
+komodod -datadir=/home/${USER}/.komodo_3p -conf=/home/${USER}/.komodo_3p/komodo.conf $@
+```
+Open wrapper script file for the deamon cli with `nano ~/komodo/src/komodo_3p-cli` and put the following inside:
+```bash
+#!/bin/bash
+komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf $@
+```
+Make the wrapper scripts executable:
+```bash
+chmod +x /home/$USER/komodo/src/komodod_3p
+chmod +x /home/$USER/komodo/src/komodo_3p-cli
+```
+Now we can create some symbolic links:
+```bash
+# For the 3P instance of Komodo (and TOKEl, MCL & VRSC which use the same daemon)
+sudo ln -s /home/$USER/komodo/src/komodod_3p /usr/local/bin/komodod_3p
+sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
 
+# AYA
+sudo ln -s /home/$USER/AYAv2/src/aryacoind /usr/local/bin/aryacoind
+sudo ln -s /home/$USER/AYAv2/src/aryacoin-cli /usr/local/bin/aryacoin-cli
+
+# CHIPS
+sudo ln -s /home/$USER/chips/src/chipsd /usr/local/bin/chipsd
+sudo ln -s /home/$USER/chips/src/chips-cli /usr/local/bin/chips-cli
+
+# EMC2
+sudo ln -s /home/$USER/einsteinium/src/einsteiniumd /usr/local/bin/einsteiniumd
+sudo ln -s /home/$USER/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
+
+# MIL
+sudo ln -s /home/$USER/mil/src/mild /usr/local/bin/mild
+sudo ln -s /home/$USER/mil/src/einsteinium-cli /usr/local/bin/mil-cli
+```
 
 #### Updating daemon versions
 
