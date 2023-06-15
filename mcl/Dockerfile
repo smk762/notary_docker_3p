@@ -33,9 +33,6 @@ RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
 RUN apt update && apt install -y wget nano htop libgomp1 libcurl3-gnutls-dev telnet
 
-# Configure
-COPY configure.sh /configure.sh
-RUN /configure.sh
 COPY entrypoint.sh /entrypoint.sh
 COPY run.sh /run.sh
 
