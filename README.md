@@ -66,7 +66,7 @@ Now we can create a symbolic links for the 3P instance of Komodo:
 ```bash
 sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
 ```
-After building the 3P docker images, the cli binaries for the other 3P coins will be located in the `~/cli-binaries/` folder, so we can create symbolic links for them as well:
+After building the 3P docker images, the cli binaries for the other 3P coins will be located in their `conf` folders, so we can create symbolic links for them as well:
 ```bash
 # AYA
 sudo ln -s /home/$USER/.aryacoin/aryacoin-cli /usr/local/bin/aryacoin-cli
@@ -87,7 +87,7 @@ sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
 sudo ln -s /home/$USER/.komodo/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 
 # VRSC
-sudo ln -s /home/$USER/.komodo/TOKEL/verus /usr/local/bin/verus-cli
+sudo ln -s /home/$USER/.komodo/VRSC/verus /usr/local/bin/verus-cli
 ```
 ---
 ### Updating daemon versions
