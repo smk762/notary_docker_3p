@@ -1,6 +1,5 @@
 #!/bin/bash
 set -euxo pipefail
 einsteiniumd -pubkey=${PUBKEY} &
-sleep 20
-ls -la /home/komodian/.einsteinium
+cp /usr/local/bin/einsteinium-cli /home/komodian/.einsteinium/einsteinium-cli
 tail -f /home/komodian/.einsteinium/debug.log

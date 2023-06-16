@@ -26,7 +26,6 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/mil/src/mil-cli /home/komodian/mil/mil-cli
 RUN mv /home/komodian/mil/src/mil-cli /usr/local/bin/mil-cli
 RUN mv /home/komodian/mil/src/mild /usr/local/bin/mild
 RUN PATH=/usr/local/bin/:$PATH

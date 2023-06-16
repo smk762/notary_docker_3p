@@ -22,7 +22,6 @@ COPY build.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN mkdir /home/komodian/cli-binaries && cp /home/komodian/komodo/src/komodo-cli /home/komodian/.komodo/komodo-cli
 RUN mv /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
 RUN mv /home/komodian/komodo/src/komodod /usr/local/bin/komodod
 RUN PATH=/usr/local/bin/:$PATH
