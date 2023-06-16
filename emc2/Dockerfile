@@ -23,7 +23,7 @@ RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
 RUN mv /home/komodian/einsteinium/src/einsteinium-cli /usr/local/bin/einsteinium-cli
-RUN mv /home/komodian//.komodo/TOKEL/src/einsteiniumd /usr/local/bin/einsteiniumd
+RUN mv /home/komodian/.einsteinium/TOKEL/src/einsteiniumd /usr/local/bin/einsteiniumd
 RUN PATH=/usr/local/bin/:$PATH
 
 # Cleanup
