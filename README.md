@@ -69,25 +69,25 @@ sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
 After building the 3P docker images, the cli binaries for the other 3P coins will be located in the `~/cli-binaries/` folder, so we can create symbolic links for them as well:
 ```bash
 # AYA
-sudo ln -s /home/$USER/cli-binaries/aryacoin-cli /usr/local/bin/aryacoin-cli
+sudo ln -s /home/$USER/.aryacoin/aryacoin-cli /usr/local/bin/aryacoin-cli
 
 # CHIPS
-sudo ln -s /home/$USER/cli-binaries/chips-cli /usr/local/bin/chips-cli
+sudo ln -s /home/$USER/.chips/chips-cli /usr/local/bin/chips-cli
 
 # EMC2
-sudo ln -s /home/$USER/cli-binaries/einsteinium-cli /usr/local/bin/einsteinium-cli
+sudo ln -s /home/$USER/.einsteinium/einsteinium-cli /usr/local/bin/einsteinium-cli
 
 # MCL
-sudo ln -s /home/$USER/cli-binaries/marmara-cli /usr/local/bin/marmara-cli
+# For MCL, use `komodo-cli -ac_name=MCL`, or create a wrapper script and symlink it
 
 # MIL
-sudo ln -s /home/$USER/cli-binaries/einsteinium-cli /usr/local/bin/mil-cli
+sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
 
 # TOKEL
-sudo ln -s /home/$USER/cli-binaries/tokel-cli /usr/local/bin/tokel-cli
+sudo ln -s /home/$USER/.komodo/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 
 # VRSC
-sudo ln -s /home/$USER/cli-binaries/verus /usr/local/bin/verus-cli
+sudo ln -s /home/$USER/.komodo/TOKEL/verus /usr/local/bin/verus-cli
 ```
 ---
 ### Updating daemon versions
