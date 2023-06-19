@@ -11,10 +11,10 @@ sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
 if [ -z "$1" ]
   then
     echo "Building docker images..."
-    docker compose build
+    docker compose build $@
     ./start_3p.sh
   else
     echo "Building docker images..."
-    docker compose build $1
-    ./start_3p.sh $1
+    docker compose build $1 $@
+    ./start_3p.sh $1 
 fi

@@ -49,7 +49,7 @@ There are also some other minor differences with paths and ports used for 3P dae
 - Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons when a new version of the daemon is announced.
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
 - To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
-
+- To force a rebuild of a specific docker image, use `docker compose build <service> --no-cache`
 
 ---
 ### To use cli commands
