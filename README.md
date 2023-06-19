@@ -34,21 +34,22 @@ sudo systemctl restart docker
 1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
 2. Run `./setup_3p.sh` to create the `.env` and `docker-compose.yml` files and build the daemon containers
 3. Run `./start_3p.sh` to launch all the deamons within the docker containers, and tail their logs
-
+4. Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
+5. Run `./stop_3p.sh` to stop all the deamons
 
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
 There are also some other minor differences with paths and ports used for 3P daemons within the docker containers, so a [modified `m_notary_3rdparty`](https://github.com/KomodoPlatform/dPoW/blob/season-seven/iguana/m_notary_3rdparty_docker) file is used to launch Iguana.
 
 ---
 ### Some other commands that may come in handy later:
+- Run `./add_peers.sh` to help add connections when doing initial sync.
 - Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
-- Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
-- Run `./stop_3p.sh` to stop all the deamons
 - Run `./stop_3p.sh <ticker>` to stop a specific deamon
-When a new version of the daemon is announced:
-- Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons.
+- Run `./logs_3p.sh <ticker>` to stop a specific deamon
+- Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons when a new version of the daemon is announced.
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
 - To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
+
 
 ---
 ### To use cli commands
