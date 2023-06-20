@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.7'
 
 x-zcash-params-volume:
   &zcash-params
@@ -14,12 +14,12 @@ services:
       context: ./aya
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=d40b0d7
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=4beede9
     ports:
       - "127.0.0.1:26001:26001"
-      - "127.0.0.1:9332:9332"
+      - "127.0.0.1:9432:9432"
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
@@ -83,7 +83,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=master
+        - COMMIT_HASH=156dba6
     ports:
       - "127.0.0.1:8770:8770"
       - "127.0.0.1:8771:8771"
@@ -104,7 +104,7 @@ services:
       context: ./mcl
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=a92d834
+        - COMMIT_HASH=c675fcb
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -172,7 +172,7 @@ services:
       context: ./vrsc
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=3f0f435
+        - COMMIT_HASH=185d1a5
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
