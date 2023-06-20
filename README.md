@@ -45,7 +45,7 @@ There are also some other minor differences with paths and ports used for 3P dae
 - Run `./add_peers.sh` to help add connections when doing initial sync.
 - Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./stop_3p.sh <ticker>` to stop a specific deamon
-- Run `./logs_3p.sh <ticker>` to stop a specific deamon
+- Run `./logs_3p.sh <ticker>` to view logs a specific deamon
 - Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons when a new version of the daemon is announced.
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
 - To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
@@ -102,7 +102,7 @@ sudo ln -s /home/$USER/.komodo/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 sudo ln -s /home/$USER/.komodo/VRSC/verus /usr/local/bin/verus-cli
 ```
 
-Alternatively, run the `./setup_clis.sh` script **after** installing the daemond to create the wrappers and symbolic links for you.
+Alternatively, run the `./setup_clis.sh` script **after** installing the daemons to create the wrappers and symbolic links for you.
 
 ---
 ### Updating daemon versions
