@@ -172,7 +172,7 @@ services:
       context: ./vrsc
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=caa1107
+        - COMMIT_HASH=185d1a5
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
