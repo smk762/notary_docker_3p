@@ -14,9 +14,9 @@ services:
       context: ./aya
       dockerfile: Dockerfile
       args:
+        - COMMIT_HASH=d40b0d7
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=91958f9
     ports:
       - "127.0.0.1:26001:26001"
       - "127.0.0.1:9432:9432"
@@ -104,7 +104,7 @@ services:
       context: ./mcl
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=a92d834
+        - COMMIT_HASH=c675fcb
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -172,7 +172,7 @@ services:
       context: ./vrsc
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=4beede9
+        - COMMIT_HASH=caa1107
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
