@@ -108,14 +108,6 @@ sudo ln -s /home/$USER/.komodo/VRSC/verus /usr/local/bin/verus-cli
 ```
 
 Alternatively, run the `./setup_clis.sh` script **after** installing the daemons to create the wrappers and symbolic links for you.
-<<<<<<< HEAD
-
----
-### Updating daemon versions
-
-When a repo hash or branch changes for an update, update the `COMMIT_HASH` arg in the `docker-compose.yml` file for the relevant service. Then run `docker compose build <service> --no-cache` to rebuild the container.
-=======
->>>>>>> 1fb434338b00467fbf6e218b0f391e19da030b33
 
 ---
 ## What might go wrong?
