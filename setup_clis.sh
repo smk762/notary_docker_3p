@@ -29,4 +29,3 @@ sudo ln -s /home/$USER/.komodo/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 
 # VRSC
 sudo ln -s /home/$USER/.komodo/VRSC/verus /usr/local/bin/verus-cli
-```
