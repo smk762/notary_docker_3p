@@ -59,16 +59,26 @@ Open wrapper script file for the deamon cli with `nano ~/komodo/src/komodo_3p-cl
 #!/bin/bash
 komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf $@
 ```
-Make the wrapper scripts executable:
+Make the wrapper script executable:
 ```bash
 chmod +x /home/$USER/komodo/src/komodo_3p-cli
 ```
-Now we can create a symbolic links for the 3P instance of Komodo:
+
+Marmara is a bit different, as it doesnt have it's own `mcl-cli` binary, so we can create a wrapper script called for it instead with `nano mcl-cli` and put the following inside:
 ```bash
-sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
+#!/bin/bash
+komodo-cli -conf=/home/${USER}/.komodo_3p/MCL/komodo.conf $@
 ```
-After building the 3P docker images, the cli binaries for the other 3P coins will be located in their `conf` folders, so we can create symbolic links for them as well:
+Make the wrapper script executable:
 ```bash
+chmod +x /home/$USER/komodo/src/mcl-cli
+```
+
+After building the 3P docker images, the cli binaries for the other 3P coins will be located in their `conf` folders. Lets create symbolic links for all the 3rd party coins' cli binaries:
+```bash
+# KMD (3P)
+sudo ln -s /home/$USER/komodo/src/komodo_3p-cli /usr/local/bin/komodo_3p-cli
+
 # AYA
 sudo ln -s /home/$USER/.aryacoin/aryacoin-cli /usr/local/bin/aryacoin-cli
 
@@ -79,7 +89,7 @@ sudo ln -s /home/$USER/.chips/chips-cli /usr/local/bin/chips-cli
 sudo ln -s /home/$USER/.einsteinium/einsteinium-cli /usr/local/bin/einsteinium-cli
 
 # MCL
-# For MCL, use `komodo-cli -ac_name=MCL`, or create a wrapper script and symlink it
+sudo ln -s /home/$USER/komodo/src/mcl-cli /usr/local/bin/mcl-cli
 
 # MIL
 sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
