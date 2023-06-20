@@ -46,7 +46,12 @@ There are also some other minor differences with paths and ports used for 3P dae
 - Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./stop_3p.sh <ticker>` to stop a specific deamon
 - Run `./logs_3p.sh <ticker>` to stop a specific deamon
-- Run `./update_3p.sh` to stop all daemons, rebuild docker images, and then restart all daemons when a new version of the daemon is announced.
+
+---
+### Updating daemon versions
+
+When there is an update to any daemon repository, we need to update our `docker-compose.yml` file with the updated `COMMIT_HASH` for deamons which need to be rebuilt.
+- Run `./update_3p.sh` to stop all daemons, update this repo, regenerate the `docker-compose.yml` file, rebuild the docker images, and then restart all daemons.
 - Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
 - To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
 - To force a rebuild of a specific docker image, use `docker compose build <service> --no-cache`
@@ -102,12 +107,7 @@ sudo ln -s /home/$USER/.komodo/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 sudo ln -s /home/$USER/.komodo/VRSC/verus /usr/local/bin/verus-cli
 ```
 
-Alternatively, run the `./setup_clis.sh` script **after** installing the daemond to create the wrappers and symbolic links for you.
-
----
-### Updating daemon versions
-
-When a repo hash or branch changes for an update, update the `COMMIT_HASH` arg in the `docker-compose.yml` file for the relevant service. Then run `docker compose build <service> --no-cache` to rebuild the container.
+Alternatively, run the `./setup_clis.sh` script **after** installing the daemons to create the wrappers and symbolic links for you.
 
 ---
 ## What might go wrong?
