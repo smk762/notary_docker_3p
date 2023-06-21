@@ -1,0 +1,12 @@
+# Declare the associative array
+declare -A service_cli
+
+# Assign values to the array
+service_cli["aya"]="aryacoin-cli"
+service_cli["chips"]="chips-cli"
+service_cli["emc2"]="einsteinium-cli"
+service_cli["kmd"]="komodo_3p-cli"
+service_cli["mcl"]="mcl-cli"
+service_cli["mil"]="mil-cli"
+service_cli["tokel"]="tokel-cli"
+service_cli["vrsc"]="verus-cli"
