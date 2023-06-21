@@ -4,15 +4,13 @@ set -euxo pipefail
 
 source ./service_cli
 
-arg=$1
-
-if [ -z "$arg" ]; then
+if [[ -z ${1-} ]]; then
   for key in "${!service_cli[@]}"; do
     ${service_cli[$key]} stop
   done
   docker compose stop
 else
-  ${service_cli[$arg]} stop
-  docker compose stop $arg
+  ${service_cli[$1]} stop
+  docker compose stop $1
 fi
 
