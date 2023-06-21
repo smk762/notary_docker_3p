@@ -104,7 +104,7 @@ sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
 sudo ln -s /home/$USER/.komodo_3p/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 
 # VRSC
-sudo ln -s /home/$USER/.komodo_3p/VRSC/verus /usr/local/bin/verus-cli
+sudo ln -s /home/$USER/.komodo_3p/VRSC/verus-cli /usr/local/bin/verus-cli
 ```
 
 Alternatively, run the `./setup_clis.sh` script **after** installing the daemons to create the wrappers and symbolic links for you.
