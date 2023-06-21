@@ -15,7 +15,7 @@ if [ -z "$1" ]
     ./stop_3p.sh
     ./start_3p.sh
   else
-    echo "Building docker images..."
+    echo "Building docker image: $1"
     docker compose build $1 $@
     ./stop_3p.sh $1
     ./start_3p.sh $1 
