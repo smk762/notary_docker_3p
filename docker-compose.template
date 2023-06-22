@@ -24,6 +24,7 @@ services:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
     restart: always
+    stop_grace_period: 2m
     logging:
       driver: "json-file"
       options:
@@ -46,6 +47,7 @@ services:
       - /home/USERNAME/.chips:/home/komodian/.chips
       - <<: *zcash-params
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
@@ -68,6 +70,7 @@ services:
     volumes:
       - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
@@ -91,6 +94,7 @@ services:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
       - <<: *zcash-params
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
@@ -114,6 +118,7 @@ services:
       - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
       - <<: *zcash-params
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
@@ -137,6 +142,7 @@ services:
       - /home/USERNAME/.mil:/home/komodian/.mil
     shm_size: '2gb'
     restart: always
+    stop_grace_period: 2m
     logging:
       driver: "json-file"
       options:
@@ -159,6 +165,7 @@ services:
       - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
       - <<: *zcash-params
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
@@ -182,6 +189,7 @@ services:
       - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
       - <<: *zcash-params
     shm_size: '2gb'
+    stop_grace_period: 2m
     restart: always
     logging:
       driver: "json-file"
