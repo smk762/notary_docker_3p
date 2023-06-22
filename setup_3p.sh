@@ -1,5 +1,8 @@
 #!/bin/bash
 
+mkdir -p /home/${USER}/.zcash-params
+./fetch-params.sh
+
 generate_random_string() {
   local length=$1
   local output=""
@@ -14,12 +17,12 @@ generate_random_string() {
   exec 10<&-
 }
 
-source /home/${USER}/dPoW/iguana/pubkey_3p.txt
+source pubkey_3p.txt
 if test -z "$pubkey"
 then
   read -p "Enter your pubkey: " pubkey
   # TODO: validate pubkey
-  echo "pubkey=${pubkey}" > /home/${USER}/dPoW/iguana/pubkey_3p.txt
+  echo "pubkey=${pubkey}" > pubkey_3p.txt
 fi
 
 echo "Setting up .env file..."

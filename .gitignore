@@ -1,2 +1,4 @@
 .env
 docker-compose.yml
+pubkey.txt
+pubkey_3p.txt
