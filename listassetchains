@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+import json
+
+with open('assetchains.json') as file:
+    assetchains = json.load(file)
+    for chain in assetchains:
+        print(chain['ac_name'])
