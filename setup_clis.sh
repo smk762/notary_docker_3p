@@ -25,7 +25,15 @@ sudo ln -s /home/$USER/.einsteinium/einsteinium-cli /usr/local/bin/einsteinium-c
 sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
 
 # TOKEL
+echo "#!/bin/bash" >  /home/${USER}/.komodo_3p/TOKEL/tokel-cli
+echo 'tokel-cli-bin -conf=/home/'${USER}'/.komodo_3p/TOKEL/TOKEL.conf $@' >> /home/${USER}/.komodo_3p/TOKEL/tokel-cli
+chmod +x /home/${USER}/.komodo_3p/TOKEL/tokel-cli
+sudo ln -s /home/$USER/.komodo_3p/TOKEL/tokel-cli-bin /usr/local/bin/tokel-cli-bin
 sudo ln -s /home/$USER/.komodo_3p/TOKEL/tokel-cli /usr/local/bin/tokel-cli
 
 # VRSC
-sudo ln -s /home/$USER/.komodo_3p/VRSC/verus /usr/local/bin/verus-cli
+echo "#!/bin/bash" >  /home/${USER}/.komodo_3p/VRSC/verus-cli
+echo 'verus-cli-bin -conf=/home/'${USER}'/.komodo_3p/VRSC/VRSC.conf $@' >> /home/${USER}/.komodo_3p/VRSC/verus-cli
+chmod +x /home/${USER}/.komodo_3p/VRSC/verus-cli
+sudo ln -s /home/$USER/.komodo_3p/VRSC/verus-cli-bin /usr/local/bin/verus-cli-bin
+sudo ln -s /home/$USER/.komodo_3p/VRSC/verus-cli /usr/local/bin/verus-cli

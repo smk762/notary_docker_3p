@@ -45,7 +45,7 @@ There are also some other minor differences with paths and ports used for 3P dae
 - Run `./add_peers.sh` to help add connections when doing initial sync.
 - Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./stop_3p.sh <ticker>` to stop a specific deamon
-- Run `./logs_3p.sh <ticker>` to stop a specific deamon
+- Run `./logs_3p.sh <ticker>` to view logs of a specific deamon
 
 ---
 ### Updating daemon versions
