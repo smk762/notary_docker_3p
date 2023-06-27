@@ -155,7 +155,7 @@ services:
       context: ./tokel
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=d2e98de
+        - COMMIT_HASH=f1fc997
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
