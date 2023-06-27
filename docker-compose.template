@@ -25,7 +25,7 @@ services:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
     shm_size: '2gb'
     restart: always
-    stop_grace_period: 2m
+    stop_grace_period: 30s
     logging:
       driver: "json-file"
       options:
