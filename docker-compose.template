@@ -3,6 +3,7 @@ version: '3.7'
 x-zcash-params-volume:
   &zcash-params
   type: bind
+  read_only: true
   source: /home/USERNAME/.zcash-params
   target: /home/komodian/.zcash-params
 
@@ -61,7 +62,7 @@ services:
       context: ./emc2
       dockerfile: Dockerfile
       args:
-        - COMMIT_HASH=c329ae6
+        - COMMIT_HASH=8d988f0
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
@@ -134,7 +135,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=578bed7
+        - COMMIT_HASH=5df2e4d
     ports:
       - "127.0.0.1:41888:41888"
       - "127.0.0.1:41889:41889"
