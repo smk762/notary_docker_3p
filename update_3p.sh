@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm assetchains.json
+wget https://raw.githubusercontent.com/KomodoPlatform/dPoW/season-seven/iguana/assetchains.json
+
 echo "Updating repository..."
 git pull
 
