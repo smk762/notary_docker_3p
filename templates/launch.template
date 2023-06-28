@@ -9,8 +9,8 @@ if ! [ -f DEBUG ]; then
     echo "" > DEBUG
 fi
 
-
 exec LAUNCH &
+sleep 5
 tail -f DEBUG & wait
 
 set +x
