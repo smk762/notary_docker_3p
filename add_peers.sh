@@ -2,7 +2,7 @@
 
 # In case you are having trouble getting chains to sync, you can try addding these peers, or add your own manually.
 
-# EMC Peers
+# EMC2 Peers
 einsteinium-cli addnode "138.201.207.115:41878" add
 einsteinium-cli addnode "167.99.104.43:41878" add
 einsteinium-cli addnode "54.39.28.123:41878" add

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -x
+
+trap 'CLI stop'  SIGHUP SIGINT SIGTERM
+
+# Running COIN daemon
+exec LAUNCH &
+tail -f DEBUG & wait
+
+set +x

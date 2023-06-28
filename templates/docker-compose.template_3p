@@ -1,0 +1,199 @@
+version: '3.7'
+
+x-zcash-params-volume:
+  &zcash-params
+  type: bind
+  read_only: true
+  source: /home/USERNAME/.zcash-params
+  target: /home/komodian/.zcash-params
+
+services:
+  aya:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.AYA
+      args:
+        - COMMIT_HASH=d40b0d7
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    ports:
+      - "127.0.0.1:26001:26001"
+      - "127.0.0.1:9432:9432"
+    volumes:
+      - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
+    shm_size: '2gb'
+    restart: always
+    stop_grace_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  chips:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.CHIPS
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=f0dfd82
+    ports:
+      - "127.0.0.1:57777:57777"
+      - "127.0.0.1:57776:57776"
+    volumes:
+      - /home/USERNAME/.chips:/home/komodian/.chips
+      - <<: *zcash-params
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  emc2:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.EMC2
+      args:
+        - COMMIT_HASH=8d988f0
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    ports:
+      - "127.0.0.1:41878:41878"
+      - "127.0.0.1:41879:41879"
+    volumes:
+      - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  kmd_3p:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.KMD
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=156dba6
+    ports:
+      - "127.0.0.1:8770:8770"
+      - "127.0.0.1:8771:8771"
+    volumes:
+      - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
+      - <<: *zcash-params
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  mcl:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.MCL
+      args:
+        - COMMIT_HASH=c675fcb
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    ports:
+      - "127.0.0.1:33824:33824"
+      - "127.0.0.1:33825:33825"
+    volumes:
+      - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
+      - <<: *zcash-params
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  mil:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.MIL
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=5df2e4d
+    ports:
+      - "127.0.0.1:41888:41888"
+      - "127.0.0.1:41889:41889"
+    volumes:
+      - /home/USERNAME/.mil:/home/komodian/.mil
+    shm_size: '2gb'
+    restart: always
+    stop_grace_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  tokel:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.TOKEL
+      args:
+        - COMMIT_HASH=f1fc997
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    ports:
+      - "127.0.0.1:29404:29404"
+      - "127.0.0.1:29405:29405"
+    volumes:
+      - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
+      - <<: *zcash-params
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+  vrsc:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.VRSC
+      args:
+        - COMMIT_HASH=e8371ac
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    ports:
+      - "127.0.0.1:27485:27485"
+      - "127.0.0.1:27486:27486"
+    volumes:
+      - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
+      - <<: *zcash-params
+    shm_size: '2gb'
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
