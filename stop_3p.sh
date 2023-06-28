@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -euxo pipefail
+set -x
 
 source ./service_cli
 
@@ -16,3 +16,4 @@ else
   docker compose stop $1
 fi
 
+set +x

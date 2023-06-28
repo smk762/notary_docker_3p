@@ -38,4 +38,4 @@ fi
 echo "Setting up cli wrapper symlinks (needs sudo)..."
 ./link_clis.sh
 
-echo "Done! Use `start_3p.sh` to launch your daemons..."
+echo "Done! Use './start_3p.sh' to launch your daemons..."
