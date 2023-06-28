@@ -5,7 +5,7 @@ declare -A service_cli
 service_cli["aya"]="aryacoin-cli"
 service_cli["chips"]="chips-cli"
 service_cli["emc2"]="einsteinium-cli"
-service_cli["kmd"]="komodo_3p-cli"
+service_cli["kmd_3p"]="komodo_3p-cli"
 service_cli["mcl"]="mcl-cli"
 service_cli["mil"]="mil-cli"
 service_cli["tokel"]="tokel-cli"
