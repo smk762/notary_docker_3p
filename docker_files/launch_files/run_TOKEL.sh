@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -x
 
-trap 'marmara-cli stop'  SIGHUP SIGINT SIGTERM
+trap 'tokel-cli stop'  SIGHUP SIGINT SIGTERM
 
 # Running TOKEL daemon
 exec tokeld -pubkey=${PUBKEY} &

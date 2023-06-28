@@ -183,14 +183,14 @@ def get_conf_file(coin):
 
 def get_cli_command(coin) -> str:
     if coin == 'AYA':
-        return f"ayacoin-cli"
+        return f"aryacoin-cli"
     if coin == 'CHIPS':
         return f"chips-cli"
     if coin == 'EMC2':
         return f"einsteinium-cli"
     if coin == 'KMD':
         return f"komodo-cli"
-    if coin == 'KMD':
+    if coin == 'KMD_3P':
         return f"komodo_3p-cli"
     if coin == 'LTC':
         return f"litecoin-cli"
@@ -199,7 +199,7 @@ def get_cli_command(coin) -> str:
     if coin == 'MIL':
         return f"mil-cli"
     if coin == 'TOKEL':
-        return f"marmara-cli"
+        return f"tokel-cli"
     if coin == 'VRSC':
         return f"verus-cli"
     return f"komodo-cli -ac_name={coin}"

@@ -22,14 +22,11 @@ echo "Setting up cli wrappers..."
 
 if [[ "$1" == "nobuild" ]]; then
     echo "Not building docker images..."
-    exit 0
-fi
-
-if [ -z "$1" ]; then
+elif [ -z "$1" ]; then
     echo "Building docker images..."
     docker compose build $@
     ./stop_3p.sh
-  else
+else
     echo "Building docker image: $1"
     docker compose build $1 $@
     ./stop_3p.sh $1
@@ -38,4 +35,4 @@ fi
 echo "Setting up cli wrapper symlinks (needs sudo)..."
 ./link_clis.sh
 
-echo "Done! Use './start_3p.sh' to launch your daemons..."
+echo "Done! Use ./start_3p.sh to launch your daemons..."
