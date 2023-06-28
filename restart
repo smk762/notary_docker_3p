@@ -3,10 +3,10 @@
 if [ -z "$1" ]
   then
     echo "Restarting docker images..."
-    ./stop_3p.sh
-    ./start_3p.sh
+    ./stop
+    ./start
   else
     echo "Restarting docker image: $1"
-    ./stop_3p.sh $1
-    ./start_3p.sh $1 
+    ./stop $1
+    ./start $1 
 fi

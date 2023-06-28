@@ -18,4 +18,4 @@ echo "PUBKEY=${pubkey}" > .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env
 
-./update_3p.sh "$1" "$@"
+./update "$1" "$@"
