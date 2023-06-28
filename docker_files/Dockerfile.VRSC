@@ -43,4 +43,4 @@ USER komodian
 # ENTRYPOINT ["/entrypoint.sh"]
 
 # Start daemon with the data directory mounted
-ENTRYPOINT ["/run.sh"]
+CMD ["/run.sh"]

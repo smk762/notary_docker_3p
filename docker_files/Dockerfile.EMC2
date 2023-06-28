@@ -36,5 +36,5 @@ COPY entrypoint.sh /entrypoint.sh
 COPY launch_files/run_EMC2.sh /run.sh
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
-# ENTRYPOINT [ "/entrypoint.sh" ]
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT [ "/entrypoint.sh" ]
+CMD ["/run.sh"]
