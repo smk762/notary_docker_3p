@@ -226,8 +226,12 @@ def get_launch_string(coin):
 
 def create_cli_wrappers():
     for coin in coins:
+        coin = coin.split('_')[0]
         cli = get_cli_command(coin)
-        wrapper = f"cli_wrappers/{cli}"
+        if "ac_name" in cli:
+            wrapper = f"{coin.lower}-cli"
+        else:
+            wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
             conf.write(f'docker compose run {coin.lower()} {cli} "$@"\n')
