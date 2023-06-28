@@ -46,7 +46,9 @@ There are also some other minor differences with paths and ports used for 3P dae
 - Run `./start <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./stop <ticker>` to stop a specific deamon
 - Run `./logs <ticker>` to view logs of a specific deamon
-- Run `./purge` to remove all docker containers, images, volumes and networks. Use if all else fails, and you want to start fresh. Local chain data will be preserved.
+- Run `./purge` to remove all docker containers, images, volumes and networks. **Local chain data will be preserved.**
+    - To clear space from older builds, run `./purge` while your containers are running. It will delete all other containers.
+    - If all else fails and you want to start fresh, run `./stop` first, then `./purge` to delete everything.
 
 ---
 ### Updating daemon versions
