@@ -147,8 +147,8 @@ def get_coin_daemon(coin):
     return f"no daemon for {coin}"
 
 
-def get_data_path(coin):
-    return os.path.split(get_conf_file(coin))[0]
+def get_data_path(coin, container=True):
+    return os.path.split(get_conf_file(coin, container))[0]
 
 
 def get_debug_file(coin, container=True) -> str:
@@ -158,7 +158,11 @@ def get_debug_file(coin, container=True) -> str:
     return f"{path}/debug.log"
 
 
-def get_conf_file(coin):
+def get_conf_file(coin, container=True):
+    if container:
+        data_dir = ".komodo"
+    else:
+        data_dir = ".komodo_3p"
     if coin == 'AYA':
         conf_file = f"{home}/.aryacoin/aryacoin.conf"
     elif coin == 'CHIPS':
@@ -167,18 +171,18 @@ def get_conf_file(coin):
         conf_file = f"{home}/.einsteinium/einsteinium.conf"
     elif coin == 'KMD':
         conf_file = f"{home}/.komodo/komodo.conf"
-    elif coin == 'KMD_3P':
-        conf_file = f"{home}/.komodo_3p/komodo.conf"
     elif coin == 'LTC':
         conf_file = f"{home}/.litecoin/litecoin.conf"
-    elif coin == 'MCL':
-        conf_file = f"{home}/.komodo_3p/MCL/MCL.conf"
     elif coin == 'MIL':
         conf_file = f"{home}/.mil/mil.conf"
+    elif coin == 'KMD_3P':
+        conf_file = f"{home}/.{data_dir}/komodo.conf"
+    elif coin == 'MCL':
+        conf_file = f"{home}/.{data_dir}/MCL/MCL.conf"
     elif coin == 'TOKEL':
-        conf_file = f"{home}/.komodo_3p/TOKEL/TOKEL.conf"
+        conf_file = f"{home}/.{data_dir}/TOKEL/TOKEL.conf"
     elif coin == 'VRSC':
-        conf_file = f"{home}/.komodo_3p/VRSC/VRSC.conf"
+        conf_file = f"{home}/.{data_dir}/VRSC/VRSC.conf"
     else:
         conf_file = f"{home}/.komodo/{coin}/{coin}.conf"
     return conf_file
@@ -274,8 +278,8 @@ def create_confs(server="third_party"):
     for coin in coins:
         rpcuser = generate_rpc_pass()
         rpcpass = generate_rpc_pass()
-        conf_file = get_conf_file(coin)
-        data_path = get_data_path(coin)
+        conf_file = get_conf_file(coin, False)
+        data_path = get_data_path(coin, False)
         if not os.path.exists(data_path):
             os.makedirs(data_path)
         # Use existing rpcuser and rpcpass if they exist
