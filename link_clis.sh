@@ -21,7 +21,7 @@ sudo ln -sf ${script_path}/cli_wrappers/komodo_3p-cli /usr/local/bin/komodo_3p-c
 
 # MCL
 rm -f /home/${USER}/.komodo_3p/MCL/mcl-cli
-sudo ln -sf ${script_path}/cli_wrappers/marmara-cli /usr/local/bin/marmara-cli
+sudo ln -sf ${script_path}/cli_wrappers/mcl-cli /usr/local/bin/mcl-cli
 
 # MIL
 rm -f /home/$USER/.mil/mil-cli

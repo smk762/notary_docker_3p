@@ -202,7 +202,7 @@ def get_cli_command(coin) -> str:
     if coin == 'LTC':
         return f"litecoin-cli"
     if coin == 'MCL':
-        return f"marmara-cli"
+        return f"mcl-cli"
     if coin == 'MIL':
         return f"mil-cli"
     if coin == 'TOKEL':
