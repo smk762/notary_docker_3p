@@ -153,9 +153,9 @@ def get_data_path(coin):
 
 def get_debug_file(coin, container=True) -> str:
     path = get_data_path(coin)
-    if not container:
-        return f"{path}/debug.log"
-    path.replace(home, "/home/komodian")
+    if container:
+        path = path.replace(home, "/home/komodian")
+    return f"{path}/debug.log"
 
 
 def get_conf_file(coin):
