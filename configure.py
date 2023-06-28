@@ -151,8 +151,11 @@ def get_data_path(coin):
     return os.path.split(get_conf_file(coin))[0]
 
 
-def get_debug_file(coin) -> str:
-    return f"{get_data_path(coin)}/debug.log"
+def get_debug_file(coin, container=True) -> str:
+    path = get_data_path(coin)
+    if not container:
+        return f"{path}/debug.log"
+    path.replace(home, "/home/komodian")
 
 
 def get_conf_file(coin):
@@ -300,7 +303,7 @@ def create_confs(server="third_party"):
             conf.write('addnode=104.238.221.61\n')
             conf.write('addnode=199.127.60.142\n')
         # create debug.log files if not existing
-        debug_file = get_debug_file(coin)
+        debug_file = get_debug_file(coin, False)
         if not os.path.exists(debug_file):
             with open(debug_file, 'w') as f:
                 f.write('')
