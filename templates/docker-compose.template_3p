@@ -83,7 +83,7 @@ services:
       - .env
     build:
       context: ./docker_files
-      dockerfile: Dockerfile.KMD
+      dockerfile: Dockerfile.KMD_3P
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
