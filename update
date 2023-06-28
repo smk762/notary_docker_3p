@@ -25,14 +25,15 @@ if [[ "$1" == "nobuild" ]]; then
 elif [ -z "$1" ]; then
     echo "Building docker images..."
     docker compose build $@ --remove-orphans
+    echo "Setting up cli wrapper symlinks (needs sudo)..."
+    ./link_clis.sh
     ./stop
 else
     echo "Building docker image: $1"
     docker compose build $1 $@ --remove-orphans
+    echo "Setting up cli wrapper symlinks (needs sudo)..."
+    ./link_clis.sh
     ./stop $1
 fi
-
-echo "Setting up cli wrapper symlinks (needs sudo)..."
-./link_clis.sh
 
 echo "Done! Use ./start to launch your daemons..."
