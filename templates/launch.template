@@ -4,6 +4,12 @@ set -x
 trap 'CLI stop'  SIGHUP SIGINT SIGTERM
 
 # Running COIN daemon
+
+if ! [ -f DEBUG ]; then
+    echo "" > DEBUG
+fi
+
+
 exec LAUNCH &
 tail -f DEBUG & wait
 
