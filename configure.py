@@ -249,8 +249,11 @@ def create_launch_files():
     for coin in coins:
         launch = get_launch_params(coin)
         launch_file = f"docker_files/launch_files/run_{coin}.sh"
-        cli = get_cli_command(coin)
         debug = get_debug_file(coin)
+        # This is messy, but it works. Will make it cleaner later
+        # inside container, komodo-cli is just komodo-cli
+        coin = coin.split('_')[0]
+        cli = get_cli_command(coin)
         with open(launch_file, 'w') as f:
             with open('templates/launch.template', 'r') as t:
                 for line in t.readlines():
