@@ -24,11 +24,11 @@ if [[ "$1" == "nobuild" ]]; then
     echo "Not building docker images..."
 elif [ -z "$1" ]; then
     echo "Building docker images..."
-    docker compose build $@
+    docker compose build $@ --remove-orphans
     ./stop_3p.sh
 else
     echo "Building docker image: $1"
-    docker compose build $1 $@
+    docker compose build $1 $@ --remove-orphans
     ./stop_3p.sh $1
 fi
 

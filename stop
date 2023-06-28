@@ -9,11 +9,11 @@ if [[ -z ${1-} ]]; then
     ${service_cli[$key]} stop
   done
   sleep 60
-  docker compose stop
+  docker compose stop --remove-orphans
 else
   ${service_cli[$1]} stop
   sleep 60
-  docker compose stop $1
+  docker compose stop $1 --remove-orphans
 fi
 
 set +x
