@@ -176,13 +176,13 @@ def get_conf_file(coin, container=True):
     elif coin == 'MIL':
         conf_file = f"{home}/.mil/mil.conf"
     elif coin == 'KMD_3P':
-        conf_file = f"{home}/.{data_dir}/komodo.conf"
+        conf_file = f"{home}/{data_dir}/komodo.conf"
     elif coin == 'MCL':
-        conf_file = f"{home}/.{data_dir}/MCL/MCL.conf"
+        conf_file = f"{home}/{data_dir}/MCL/MCL.conf"
     elif coin == 'TOKEL':
-        conf_file = f"{home}/.{data_dir}/TOKEL/TOKEL.conf"
+        conf_file = f"{home}/{data_dir}/TOKEL/TOKEL.conf"
     elif coin == 'VRSC':
-        conf_file = f"{home}/.{data_dir}/VRSC/VRSC.conf"
+        conf_file = f"{home}/{data_dir}/VRSC/VRSC.conf"
     else:
         conf_file = f"{home}/.komodo/{coin}/{coin}.conf"
     return conf_file
