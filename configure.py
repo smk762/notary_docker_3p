@@ -226,7 +226,6 @@ def get_launch_string(coin):
 
 def create_cli_wrappers():
     for coin in coins:
-        coin = coin.split('_')[0]
         cli = get_cli_command(coin)
         if "ac_name" in cli:
             wrapper = f"{coin.lower}-cli"
