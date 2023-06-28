@@ -160,7 +160,7 @@ def get_debug_file(coin, container=True) -> str:
 
 def get_conf_file(coin):
     if coin == 'AYA':
-        conf_file = f"{home}/.komodo/komodo.conf"
+        conf_file = f"{home}/.aryacoin/aryacoin.conf"
     elif coin == 'CHIPS':
         conf_file = f"{home}/.chips/chips.conf"
     elif coin == 'EMC2':
@@ -172,13 +172,13 @@ def get_conf_file(coin):
     elif coin == 'LTC':
         conf_file = f"{home}/.litecoin/litecoin.conf"
     elif coin == 'MCL':
-        conf_file = f"{home}/.komodo_3p/MCL.conf"
+        conf_file = f"{home}/.komodo_3p/MCL/MCL.conf"
     elif coin == 'MIL':
         conf_file = f"{home}/.mil/mil.conf"
     elif coin == 'TOKEL':
-        conf_file = f"{home}/.komodo_3p/TOKEL.conf"
+        conf_file = f"{home}/.komodo_3p/TOKEL/TOKEL.conf"
     elif coin == 'VRSC':
-        conf_file = f"{home}/.komodo_3p/VRSC.conf"
+        conf_file = f"{home}/.komodo_3p/VRSC/VRSC.conf"
     else:
         conf_file = f"{home}/.komodo/{coin}/{coin}.conf"
     return conf_file
@@ -208,10 +208,12 @@ def get_cli_command(coin) -> str:
     return f"komodo-cli -ac_name={coin}"
   
 
-def get_launch_string(coin):
+def get_launch_params(coin):
     launch = get_coin_daemon(coin)
     if coin == 'KMD':
         launch += " -gen -genproclimit=1 -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary=.litecoin/litecoin.conf"
+    elif coin == 'KMD_3P':
+        launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004"
     for i in assetchains:
         if i["ac_name"] == coin:
             params = []
@@ -231,7 +233,7 @@ def create_cli_wrappers():
     for coin in coins:
         cli = get_cli_command(coin)
         if "ac_name" in cli:
-            wrapper = f"{coin.lower}-cli"
+            wrapper = f"cli_wrappers/{coin.lower}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
         # This is messy, but it works. Will make it cleaner later
@@ -245,9 +247,8 @@ def create_cli_wrappers():
 
 def create_launch_files():
     for coin in coins:
-        coin = coin.split('_')[0]
+        launch = get_launch_params(coin)
         launch_file = f"docker_files/launch_files/run_{coin}.sh"
-        launch = get_launch_string(coin)
         cli = get_cli_command(coin)
         debug = get_debug_file(coin)
         with open(launch_file, 'w') as f:
