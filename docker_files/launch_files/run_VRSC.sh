@@ -4,7 +4,13 @@ set -x
 trap 'verus-cli stop'  SIGHUP SIGINT SIGTERM
 
 # Running VRSC daemon
+
+if ! [ -f /home/komodian/.komodo_3p/debug.log ]; then
+    echo "" > /home/komodian/.komodo_3p/debug.log
+fi
+
 exec verusd -pubkey=${PUBKEY} &
-tail -f /home/smk762/.komodo_3p/debug.log & wait
+sleep 5
+tail -f /home/komodian/.komodo_3p/debug.log & wait
 
 set +x

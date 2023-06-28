@@ -40,7 +40,7 @@ COPY launch_files/run_VRSC.sh /run.sh
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 
-ENTRYPOINT ["/entrypoint.sh"]
+# ENTRYPOINT ["/entrypoint.sh"]
 
 # Start daemon with the data directory mounted
-CMD ["/run.sh"]
+ENTRYPOINT ["/run.sh"]

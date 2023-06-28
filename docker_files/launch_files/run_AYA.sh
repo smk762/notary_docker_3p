@@ -4,7 +4,13 @@ set -x
 trap 'aryacoin-cli stop'  SIGHUP SIGINT SIGTERM
 
 # Running AYA daemon
+
+if ! [ -f /home/komodian/.komodo/debug.log ]; then
+    echo "" > /home/komodian/.komodo/debug.log
+fi
+
 exec aryacoind -pubkey=${PUBKEY} &
-tail -f /home/smk762/.komodo/debug.log & wait
+sleep 5
+tail -f /home/komodian/.komodo/debug.log & wait
 
 set +x
