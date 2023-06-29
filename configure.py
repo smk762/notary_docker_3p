@@ -357,7 +357,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
             conf.write(f'rpcbind={rpcip}:{data[coin]["rpcport"]}\n')
-            conf.write(f'rpcallowip={rpcip}\n')
+            conf.write(f'rpcallowip={rpcip}/0\n')
             conf.write(f'port={data[coin]["p2pport"]}\n')
             conf.write(f'rpcport={data[coin]["rpcport"]}\n')
             conf.write('addnode=77.75.121.138 # Dragonhound_AR\n')
