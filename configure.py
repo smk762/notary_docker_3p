@@ -9,6 +9,7 @@ import os
 # Get the list of coins
 
 home = os.path.expanduser('~')
+script_path = os.path.realpath(os.path.dirname(__file__))
 
 with open(f'assetchains.json') as file:
     assetchains = json.load(file)
@@ -152,7 +153,7 @@ def get_data_path(coin, container=True):
 
 
 def get_debug_file(coin, container=True) -> str:
-    path = get_data_path(coin)
+    path = get_data_path(coin, container)
     if container:
         path = path.replace(home, "/home/komodian")
     return f"{path}/debug.log"
@@ -240,12 +241,9 @@ def create_cli_wrappers():
             wrapper = f"cli_wrappers/{coin.lower}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
-        # This is messy, but it works. Will make it cleaner later
-        if coin == 'KMD_3P':
-            cli = f"komodo-cli"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
-            conf.write(f'docker compose run {coin.lower()} {cli} "$@"\n')
+            conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
