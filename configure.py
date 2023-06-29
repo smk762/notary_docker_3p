@@ -285,12 +285,14 @@ def create_cli_wrappers():
     for coin in coins:
         cli = get_cli_command(coin)
         if "ac_name" in cli:
-            wrapper = f"cli_wrappers/{coin.lower}-cli"
+            wrapper = f"cli_wrappers/{coin.lower()}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
+            # docker exec -it notary_docker_3p-vrsc-1 verus-cli  getinfo
             conf.write('#!/bin/bash\n')
-            conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
+            conf.write(f'docker exec -it {coin.lower()} {get_cli_command(coin)} "$@"\n')
+            # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
