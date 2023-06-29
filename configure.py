@@ -214,7 +214,7 @@ def get_conf_file(coin, container=True):
     return conf_file
 
 
-def get_cli_command(coin) -> str:
+def get_cli_command(coin, container=True) -> str:
     if coin == 'AYA':
         return f"aryacoin-cli"
     if coin == 'CHIPS':
@@ -224,7 +224,10 @@ def get_cli_command(coin) -> str:
     if coin == 'KMD':
         return f"komodo-cli"
     if coin == 'KMD_3P':
-        return f"komodo_3p-cli"
+        if not container:
+            return f"komodo_3p-cli"
+        else:
+            return f"komodo-cli"
     if coin == 'LTC':
         return f"litecoin-cli"
     if coin == 'MCL':
@@ -283,7 +286,7 @@ def get_user_pubkey(server='3p'):
 
 def create_cli_wrappers():
     for coin in coins:
-        cli = get_cli_command(coin)
+        cli = get_cli_command(coin, False)
         if "ac_name" in cli:
             wrapper = f"cli_wrappers/{coin.lower()}-cli"
         else:
@@ -291,7 +294,7 @@ def create_cli_wrappers():
         with open(wrapper, 'w') as conf:
             # docker exec -it notary_docker_3p-vrsc-1 verus-cli  getinfo
             conf.write('#!/bin/bash\n')
-            conf.write(f'docker exec -it {coin.lower()} {get_cli_command(coin)} "$@"\n')
+            conf.write(f'docker exec -it {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
             # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
@@ -354,7 +357,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
             conf.write(f'rpcbind={rpcip}:{data[coin]["rpcport"]}\n')
-            conf.write(f'rpcallowip={rpcip}\n')
+            conf.write(f'rpcallowip={rpcip}/0\n')
             conf.write(f'port={data[coin]["p2pport"]}\n')
             conf.write(f'rpcport={data[coin]["rpcport"]}\n')
             conf.write('addnode=77.75.121.138 # Dragonhound_AR\n')
