@@ -1,6 +1,7 @@
 #!/bin/python3
 import string
 import shutil
+import requests
 import secrets
 import json
 import sys
@@ -105,7 +106,7 @@ coins_3p = {
         "rpcport": 41879
     },
     "MCL": {
-        "daemon": "marmarad",
+        "daemon": "komodod",
         "p2pport": 33824,
         "rpcport": 33825
     },
@@ -138,6 +139,30 @@ def generate_rpc_pass(length=24):
     special_chars = "@~-_|():+"
     rpc_chars = string.ascii_letters + string.digits + special_chars
     return "".join(secrets.choice(rpc_chars) for _ in range(length))
+
+
+def get_pubkey_address(coin: str, pubkey: str) -> str:
+    url = "https://stats.kmd.io/api/tools/address_from_pubkey/"
+    url += f"?pubkey={pubkey}"
+    try:
+        data = requests.get(url).json()["results"]
+        if "error" in data:
+            print(f"Error: {data['error']}")
+            return ""
+        for i in data:
+            if i["coin"] == coin:
+                return i["address"]
+    except Exception as e:
+        print(f"Error: {e}")
+    return ""
+
+
+def get_coin_server(coin: str) -> str:
+    if coin in coins_main:
+        return "main"
+    elif coin in coins_3p:
+        return "3p"
+    return f"no server for {coin}!"
 
 
 def get_coin_daemon(coin):
@@ -219,6 +244,9 @@ def get_launch_params(coin):
         launch += " -gen -genproclimit=1 -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary=.litecoin/litecoin.conf"
     elif coin == 'KMD_3P':
         launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004"
+    elif coin == 'MCL':
+        launch += " -ac_name=MCL -ac_supply=2000000 -ac_cc=2 -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -ac_marmara=1 -ac_staked=75 -ac_reward=3000000000 -daemon"
+
     for i in assetchains:
         if i["ac_name"] == coin:
             params = []
@@ -230,8 +258,27 @@ def get_launch_params(coin):
                     params.append(format_param(param, value))
             launch_str = ' '.join(params)
             launch += f" {launch_str}"
-    launch += f" -pubkey=${{PUBKEY}}"
+    server = get_coin_server(coin)
+    pubkey = get_user_pubkey(server)
+    launch += f" -pubkey={pubkey}"
     return launch
+
+
+def get_user_pubkey(server='3p'):
+    if server == '3p':
+        file = "pubkey_3p.txt"
+    else:
+        file = "pubkey.txt"
+    if os.path.exists(file):
+        with open(file, 'r') as f:
+            for line in f:
+                if line.startswith("pubkey="):
+                    return line.split("=")[1].strip()
+    print(f"No {file} found! Lets create it now...")
+    pubkey = input(f"Enter your {server} pubkey: ")
+    with open(file, 'w') as f:
+        f.write(f"pubkey={pubkey}")
+    return pubkey
 
 
 def create_cli_wrappers():
@@ -267,12 +314,17 @@ def create_launch_files():
             os.chmod(launch_file, 0o755)
 
 
-def create_confs(server="third_party"):
-    if server == "third_party":
+def create_confs(server="3p", coins_list=None):
+    if server == "3p":
         data = coins_3p
+        rpcip = "0.0.0.0"
     else:
         data = coins_main
-    coins = list(data.keys())
+        rpcip = "127.0.0.1"
+    if coins_list:
+        coins = coins_list
+    else:
+        coins = list(data.keys())
     for coin in coins:
         rpcuser = generate_rpc_pass()
         rpcpass = generate_rpc_pass()
@@ -299,15 +351,32 @@ def create_confs(server="third_party"):
             conf.write('server=1\n')
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
-            conf.write(f'rpcbind=0.0.0.0:{data[coin]["rpcport"]}\n')
-            conf.write('rpcallowip=0.0.0.0/0\n')
+            conf.write(f'rpcbind={rpcip}:{data[coin]["rpcport"]}\n')
+            conf.write(f'rpcallowip={rpcip}\n')
             conf.write(f'port={data[coin]["p2pport"]}\n')
             conf.write(f'rpcport={data[coin]["rpcport"]}\n')
             conf.write('addnode=77.75.121.138 # Dragonhound_AR\n')
             conf.write('addnode=209.222.101.247 # Dragonhound_NA\n')
             conf.write('addnode=103.195.100.32 # Dragonhound_DEV\n')
-            conf.write('addnode=104.238.221.61\n')
-            conf.write('addnode=199.127.60.142\n')
+            conf.write('addnode=178.159.2.9 # Dragonhound_EU\n')
+            conf.write('addnode=148.113.1.52 # gcharang_AR\n')
+            conf.write('addnode=51.161.209.100 # gcharang_SH\n')
+            conf.write('addnode=148.113.8.6 # gcharang_DEV\n')
+            conf.write('addnode=144.76.80.75 # Alright_DEV\n')
+            conf.write('addnode=65.21.77.109 # Alright_EU\n')
+            conf.write('addnode=89.19.26.211 # Marmara1\n')
+            conf.write('addnode=89.19.26.212 # Marmara2\n')
+            if coin in ["MCL", "VRSC", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
+                conf.write('whitelistaddress=RDragoNHdwovvsDLSLMiAEzEArAD3kq6FN # s6_dragonhound_DEV_main\n')
+                conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
+                conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
+                conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
+                # Adds user main & 3p addresses for this node to whitelist
+                for server in ["3p", "main"]:
+                    address = get_pubkey_address("KMD", get_user_pubkey(server))
+                    if address != "":
+                        conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
+                print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO {conf_file}!")
         # create debug.log files if not existing
         debug_file = get_debug_file(coin, False)
         if not os.path.exists(debug_file):
@@ -315,8 +384,8 @@ def create_confs(server="third_party"):
                 f.write('')
 
 
-def create_compose_yaml(server='thirty_party'):
-    if server == 'thirty_party':
+def create_compose_yaml(server='3p'):
+    if server == '3p':
         shutil.copy('templates/docker-compose.template_3p', 'docker-compose.yml')
     else:
         # Not yet used in 3P repo
@@ -367,10 +436,12 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'clis':
         create_cli_wrappers()
     elif sys.argv[1] == 'confs':
+        # Temporary to fix earlier misconfiguration
+        create_confs("main", ["KMD"])
         create_confs()
     elif sys.argv[1] == 'launch':
         create_launch_files()
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
     else:
-        print('Invalid option, must be in ["clis", "confs", "launch"]')
+        print('Invalid option, must be in ["clis", "confs", "launch", "yaml]')
