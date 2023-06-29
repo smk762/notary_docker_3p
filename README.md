@@ -34,7 +34,7 @@ sudo systemctl restart docker
 1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
 2. Run `./setup` to create the `.env` and `docker-compose.yml` files and build the daemon containers
 3. Run `./start` to launch all the deamons within the docker containers, and tail their logs
-4. Run `./iguana` to launch Iguana for the 3P daemons within the docker containers
+4. Run `./iguana_3p` to launch Iguana for the 3P daemons within the docker containers
 5. Run `./stop` to stop all the deamons
 
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
