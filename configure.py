@@ -241,12 +241,9 @@ def create_cli_wrappers():
             wrapper = f"cli_wrappers/{coin.lower}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
-        # This is messy, but it works. Will make it cleaner later
-        if coin == 'KMD_3P':
-            cli = f"komodo-cli"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
-            conf.write(f'docker compose -f {script_path}/docker-compose.yml run {coin.lower()} {cli} "$@"\n')
+            conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
