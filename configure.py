@@ -231,7 +231,10 @@ def get_cli_command(coin, container=True) -> str:
     if coin == 'LTC':
         return f"litecoin-cli"
     if coin == 'MCL':
-        return f"mcl-cli"
+        if not container:
+            return f"mcl-cli"
+        else:
+            return f"mcl-cli -ac_name=MCL"
     if coin == 'MIL':
         return f"mil-cli"
     if coin == 'TOKEL':
