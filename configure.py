@@ -1,6 +1,7 @@
 #!/bin/python3
 import string
 import shutil
+import requests
 import secrets
 import json
 import sys
@@ -138,6 +139,22 @@ def generate_rpc_pass(length=24):
     special_chars = "@~-_|():+"
     rpc_chars = string.ascii_letters + string.digits + special_chars
     return "".join(secrets.choice(rpc_chars) for _ in range(length))
+
+
+def get_pubkey_address(coin: str, pubkey: str) -> str:
+    url = "https://stats.kmd.io/api/tools/address_from_pubkey/"
+    url += f"?pubkey={pubkey}"
+    try:
+        data = requests.get(url).json()["results"]
+        if "error" in data:
+            print(f"Error: {data['error']}")
+            return ""
+        for i in data:
+            if i["coin"] == coin:
+                return i["address"]
+    except Exception as e:
+        print(f"Error: {e}")
+    return ""
 
 
 def get_coin_server(coin: str) -> str:
@@ -297,12 +314,17 @@ def create_launch_files():
             os.chmod(launch_file, 0o755)
 
 
-def create_confs(server="3p"):
+def create_confs(server="3p", coins_list=None):
     if server == "3p":
         data = coins_3p
+        rpcip = "0.0.0.0"
     else:
         data = coins_main
-    coins = list(data.keys())
+        rpcip = "127.0.0.1"
+    if coins_list:
+        coins = coins_list
+    else:
+        coins = list(data.keys())
     for coin in coins:
         rpcuser = generate_rpc_pass()
         rpcpass = generate_rpc_pass()
@@ -329,8 +351,8 @@ def create_confs(server="3p"):
             conf.write('server=1\n')
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
-            conf.write(f'rpcbind=0.0.0.0:{data[coin]["rpcport"]}\n')
-            conf.write('rpcallowip=0.0.0.0/0\n')
+            conf.write(f'rpcbind={rpcip}:{data[coin]["rpcport"]}\n')
+            conf.write(f'rpcallowip={rpcip}/0\n')
             conf.write(f'port={data[coin]["p2pport"]}\n')
             conf.write(f'rpcport={data[coin]["rpcport"]}\n')
             conf.write('addnode=77.75.121.138 # Dragonhound_AR\n')
@@ -349,7 +371,11 @@ def create_confs(server="3p"):
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
-                conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
+                for server in ["3p", "main"]:
+                    address = get_pubkey_address("KMD", get_user_pubkey(server))
+                    if address != "":
+                        conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
+                print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO YOUR {coin} CONF FILE!")
             
 
             
@@ -412,6 +438,8 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'clis':
         create_cli_wrappers()
     elif sys.argv[1] == 'confs':
+        # Temporary to fix earlier misconfiguration
+        create_confs("main", ["KMD"])
         create_confs()
     elif sys.argv[1] == 'launch':
         create_launch_files()
