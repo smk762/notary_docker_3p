@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    echo "Restarting docker images..."
+    ./stop
+    ./start
+  else
+    echo "Restarting docker image: $1"
+    ./stop $1
+    ./start $1 
+fi

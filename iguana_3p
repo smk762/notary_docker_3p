@@ -1,0 +1,6 @@
+#!/bin/bash
+iguana_pid_3p=$(echo $(pgrep iguana -a | grep 3rd) | awk '{print $1}')
+kill -9 $iguana_pid_3p
+sleep 1
+cd ~/dPoW/iguana
+./m_notary_3rdparty_docker

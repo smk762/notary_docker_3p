@@ -32,82 +32,37 @@ sudo systemctl restart docker
 ## Setup
 
 1. Clone this repository: `git clone https://github.com/smk762/notary_docker_3p`
-2. Run `./setup_3p.sh` to create the `.env` and `docker-compose.yml` files and build the daemon containers
-3. Run `./start_3p.sh` to launch all the deamons within the docker containers, and tail their logs
-4. Run `./iguana_3p.sh` to launch Iguana for the 3P daemons within the docker containers
-5. Run `./stop_3p.sh` to stop all the deamons
+2. Run `./setup` to create the `.env` and `docker-compose.yml` files and build the daemon containers
+3. Run `./start` to launch all the deamons within the docker containers, and tail their logs
+4. Run `./iguana_3p` to launch Iguana for the 3P daemons within the docker containers
+5. Run `./stop` to stop all the deamons
 
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
 There are also some other minor differences with paths and ports used for 3P daemons within the docker containers, so a [modified `m_notary_3rdparty`](https://github.com/KomodoPlatform/dPoW/blob/season-seven/iguana/m_notary_3rdparty_docker) file is used to launch Iguana.
 
 ---
 ### Some other commands that may come in handy later:
-- Run `./add_peers.sh` to help add connections when doing initial sync.
-- Run `./start_3p.sh <ticker>` to launch a specific deamon within a docker container, and tail it's logs
-- Run `./stop_3p.sh <ticker>` to stop a specific deamon
-- Run `./logs_3p.sh <ticker>` to view logs of a specific deamon
+- Run `./add_peers` to help add connections when doing initial sync.
+- Run `./start <ticker>` to launch a specific deamon within a docker container, and tail it's logs
+- Run `./stop <ticker>` to stop a specific deamon
+- Run `./logs <ticker>` to view logs of a specific deamon
+- Run `./purge` to remove all docker containers, images, volumes and networks. **Local chain data will be preserved.**
+    - To clear space from older builds, run `./purge` while your containers are running. It will delete all other containers.
+    - If all else fails and you want to start fresh, run `./stop` first, then `./purge` to delete everything.
 
 ---
 ### Updating daemon versions
 
 When there is an update to any daemon repository, we need to update our `docker-compose.yml` file with the updated `COMMIT_HASH` for deamons which need to be rebuilt.
-- Run `./update_3p.sh` to stop all daemons, update this repo, regenerate the `docker-compose.yml` file, rebuild the docker images, and then restart all daemons.
-- Run `./update_3p.sh <ticker>` to stop a specific daemon, rebuild its docker image, and then restart the daemon.
-- To clear old docker cache, use `docker system prune -a --volumes`. This will mean everything must be rebuilt, but the data folders will remain intact on the host machine.
-- To force a rebuild of a specific docker image, use `docker compose build <service> --no-cache`
+- Run `./update` to stop all daemons, update this repo, regenerate the `docker-compose.yml` file, and rebuild the docker images.
+- Run `./update <ticker>` to stop a specific daemon and rebuild its image.
+- Run `./update <ticker> --no-cache` to stop a specific daemon and force rebuild its image from fresh.
+- Once update is complete, run `./start` to start all daemons again.
+- Run `./setup nobuild` to refresh configs without rebuilding images. 
 
 ---
 ### To use cli commands
-
-Open wrapper script file for the deamon cli with `nano /home/${USER}/.komodo_3p/komodo_3p-cli` and put the following inside:
-```bash
-#!/bin/bash
-komodo-cli -conf=/home/${USER}/.komodo_3p/komodo.conf $@
-```
-Make the wrapper script executable:
-```bash
-chmod +x /home/${USER}/.komodo_3p/komodo_3p-cli
-```
-
-Marmara is a bit different, as it doesnt have it's own `mcl-cli` binary, so we can create a wrapper script called for it instead with `nano /home/${USER}/.komodo_3p/MCL/mcl-cli` and put the following inside:
-```bash
-#!/bin/bash
-komodo-cli -conf=/home/${USER}/.komodo_3p/MCL/MCL.conf $@
-```
-
-Make the wrapper script executable:
-```bash
-chmod +x /home/${USER}/.komodo_3p/MCL/mcl-cli
-```
-
-After building the 3P docker images, the cli binaries for the other 3P coins will be located in their `conf` folders. Lets create symbolic links for all the 3rd party coins' cli binaries:
-```bash
-# KMD (3P)
-sudo ln -s /home/${USER}/.komodo_3p/komodo_3p-cli /usr/local/bin/komodo_3p-cli
-
-# AYA
-sudo ln -s /home/$USER/.aryacoin/aryacoin-cli /usr/local/bin/aryacoin-cli
-
-# CHIPS
-sudo ln -s /home/$USER/.chips/chips-cli /usr/local/bin/chips-cli
-
-# EMC2
-sudo ln -s /home/$USER/.einsteinium/einsteinium-cli /usr/local/bin/einsteinium-cli
-
-# MCL
-sudo ln -s /home/${USER}/.komodo_3p/MCL/mcl-cli /usr/local/bin/mcl-cli
-
-# MIL
-sudo ln -s /home/$USER/.mil/mil-cli /usr/local/bin/mil-cli
-
-# TOKEL
-sudo ln -s /home/$USER/.komodo_3p/TOKEL/tokel-cli /usr/local/bin/tokel-cli
-
-# VRSC
-sudo ln -s /home/$USER/.komodo_3p/VRSC/verus-cli /usr/local/bin/verus-cli
-```
-
-Alternatively, run the `./setup_clis.sh` script **after** installing the daemons to create the wrappers and symbolic links for you.
+Wrapper scripts for all CLI commands are automatically created and linked to `/usr/local/bin` when the docker containers are built. This allows you to run commands like `mcl-cli getinfo` from anywhere on the host machine.
 
 ---
 ## What might go wrong?
@@ -120,7 +75,10 @@ mil_1    | : You need to rebuild the database using -reindex-chainstate to chang
 mil_1    | Please restart with -reindex or -reindex-chainstate to recover.
 ```
 
-To overcome this, you can either delete the data folders and restart the containers, or enter the container to launch the daemons with `reindex` manually.
+To overcome this, you can either:
+- Delete the data folders and restart the containers
+- Stop the service with `./stop <ticker>` and then run `./start <ticker> -reindex` to launch the daemon with reindex.
+- Enter the container with to launch the daemons with `-reindex` manually (see below)
 
 ```
 # Enter the container
