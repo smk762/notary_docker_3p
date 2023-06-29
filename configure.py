@@ -243,7 +243,7 @@ def create_cli_wrappers():
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
-            conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
+            conf.write(f'{cli} -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
