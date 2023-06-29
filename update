@@ -22,6 +22,7 @@ echo "Setting up cli wrappers..."
 
 if [[ "$1" == "nobuild" ]]; then
     echo "Not building docker images..."
+    ./link_clis.sh
 elif [ -z "$1" ]; then
     echo "Building docker images..."
     docker compose build $@ 
