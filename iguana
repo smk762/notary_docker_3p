@@ -1,3 +1,5 @@
 #!/bin/bash
+pkill -9 iguana
+sleep 1
 cd ~/dPoW/iguana
 ./m_notary_3rdparty_docker
