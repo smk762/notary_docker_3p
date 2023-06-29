@@ -352,7 +352,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
             conf.write(f'rpcbind={rpcip}:{data[coin]["rpcport"]}\n')
-            conf.write(f'rpcallowip={rpcip}/0\n')
+            conf.write(f'rpcallowip={rpcip}\n')
             conf.write(f'port={data[coin]["p2pport"]}\n')
             conf.write(f'rpcport={data[coin]["rpcport"]}\n')
             conf.write('addnode=77.75.121.138 # Dragonhound_AR\n')
@@ -366,19 +366,17 @@ def create_confs(server="3p", coins_list=None):
             conf.write('addnode=65.21.77.109 # Alright_EU\n')
             conf.write('addnode=89.19.26.211 # Marmara1\n')
             conf.write('addnode=89.19.26.212 # Marmara2\n')
-            if coin in ["MCL", "VRSC", "TOKEL", "KMD_3P"] or coin in coins_main and coin != "LTC":
+            if coin in ["MCL", "VRSC", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
                 conf.write('whitelistaddress=RDragoNHdwovvsDLSLMiAEzEArAD3kq6FN # s6_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
+                # Adds user main & 3p addresses for this node to whitelist
                 for server in ["3p", "main"]:
                     address = get_pubkey_address("KMD", get_user_pubkey(server))
                     if address != "":
                         conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
-                print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO YOUR {coin} CONF FILE!")
-            
-
-            
+                print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO {conf_file}!")
         # create debug.log files if not existing
         debug_file = get_debug_file(coin, False)
         if not os.path.exists(debug_file):
