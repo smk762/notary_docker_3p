@@ -19,7 +19,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "127.0.0.1:26001:26001"
+      - "26001:26001"
       - "127.0.0.1:9432:9432"
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
@@ -42,8 +42,8 @@ services:
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=f0dfd82
     ports:
+      - "57776:57776"
       - "127.0.0.1:57777:57777"
-      - "127.0.0.1:57776:57776"
     volumes:
       - /home/USERNAME/.chips:/home/komodian/.chips
       - <<: *zcash-params
@@ -66,7 +66,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "127.0.0.1:41878:41878"
+      - "41878:41878"
       - "127.0.0.1:41879:41879"
     volumes:
       - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
@@ -89,7 +89,7 @@ services:
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=156dba6
     ports:
-      - "127.0.0.1:8770:8770"
+      - "8770:8770"
       - "127.0.0.1:8771:8771"
     volumes:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
@@ -113,7 +113,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "127.0.0.1:33824:33824"
+      - "33824:33824"
       - "127.0.0.1:33825:33825"
     volumes:
       - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
@@ -137,7 +137,7 @@ services:
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=5df2e4d
     ports:
-      - "127.0.0.1:41888:41888"
+      - "41888:41888"
       - "127.0.0.1:41889:41889"
     volumes:
       - /home/USERNAME/.mil:/home/komodian/.mil
@@ -160,7 +160,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "127.0.0.1:29404:29404"
+      - "29404:29404"
       - "127.0.0.1:29405:29405"
     volumes:
       - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
@@ -184,7 +184,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
     ports:
-      - "127.0.0.1:27485:27485"
+      - "27485:27485"
       - "127.0.0.1:27486:27486"
     volumes:
       - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC

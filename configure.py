@@ -28,8 +28,8 @@ coins_main = {
     },
     "LTC": {
         "daemon": "litecoind",
-        "p2pport": 9333,
-        "rpcport": 9332
+        "p2pport": 9332,
+        "rpcport": 9333
     },
     "CLC": {
         "daemon": "komodod",
