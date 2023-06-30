@@ -354,8 +354,9 @@ def create_confs(server="3p", coins_list=None):
             conf.write(f'rpcuser={rpcuser}\n')
             conf.write(f'rpcpassword={rpcpass}\n')
             conf.write('txindex=1\n')
-            conf.write('addressindex=1\n')
-            conf.write('spentindex=1\n')
+            # These will force a reindex on a bootstrap
+            #conf.write('addressindex=1\n')
+            #conf.write('spentindex=1\n')
             conf.write('server=1\n')
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
@@ -435,7 +436,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('      options:\n')
                 conf.write('        max-size: "20m"\n')
                 conf.write('        max-file: "10"\n')
-                conf.write(f'    command: ["/run.sh"]\n')
+                conf.write(f'    command: ["/run_{coin}.sh"]\n')
                 conf.write('\n')
 
 if __name__ == '__main__':
@@ -445,7 +446,6 @@ if __name__ == '__main__':
         create_cli_wrappers()
     elif sys.argv[1] == 'confs':
         # Temporary to fix earlier misconfiguration
-        create_confs("main", ["KMD"])
         create_confs()
     elif sys.argv[1] == 'launch':
         create_launch_files()

@@ -6,22 +6,28 @@ mkdir -p /home/${USER}/.zcash-params
 ./fetch-params.sh
 
 source pubkey_3p.txt
-if test -z "$pubkey"
-then
+if test -z "$pubkey"; then
   read -p "Enter your 3p pubkey: " pubkey
-  # TODO: validate pubkey
-  echo "pubkey=${pubkey}" > pubkey_3p.txt
+  if [ ${#pubkey} -ne 66 ]; then
+    echo "Invalid pubkey length!"
+  else
+    echo "pubkey=${pubkey}" > pubkey_3p.txt
+  fi
 fi
 pubkey_3p=$pubkey
 
 source pubkey.txt
-if test -z "$pubkey"
-then
+if test -z "$pubkey"; then
   read -p "Enter your main pubkey: " pubkey
-  # TODO: validate pubkey
+  if [ ${#pubkey} -ne 66 ]; then
+    echo "Invalid pubkey length!"
+  else
+    echo "pubkey=${pubkey}" > pubkey_3p.txt
+  fi
   echo "pubkey=${pubkey}" > pubkey.txt
 fi
 pubkey_main=$pubkey
+
 
 echo "Setting up .env file..."
 USER_ID=$(id -u)

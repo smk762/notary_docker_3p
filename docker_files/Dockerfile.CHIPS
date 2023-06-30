@@ -39,7 +39,7 @@ HEALTHCHECK --start-period=15m --interval=15m --timeout=60s CMD CMD bash /usr/lo
 STOPSIGNAL SIGTERM
 
 COPY entrypoint.sh /entrypoint.sh
-COPY launch_files/run_CHIPS.sh /run.sh
+COPY launch_files/run_CHIPS.sh /run_CHIPS.sh
 
 # Setup user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
