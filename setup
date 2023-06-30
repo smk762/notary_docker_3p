@@ -30,6 +30,5 @@ echo "PUBKEY=${pubkey_main}" > .env
 echo "PUBKEY_3P=${pubkey_3p}" >> .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env
-echo "DOCKER_HOST_IP=172.17.0.1" >> .env
 
 ./update "$1" "$@"

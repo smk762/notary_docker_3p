@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Temp to unset docker_host_ip var
+echo "Setting up .env file..."
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+echo "PUBKEY=${pubkey_main}" > .env
+echo "PUBKEY_3P=${pubkey_3p}" >> .env
+echo "USER_ID=${USER_ID}" >> .env
+echo "GROUP_ID=${GROUP_ID}" >> .env
+
 # Update repo
 echo "Updating repository..."
 git pull || echo "No git pull failed! Fix the issue and try again..."; exit 1
