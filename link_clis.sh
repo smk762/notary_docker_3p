@@ -18,6 +18,7 @@ sudo ln -sf ${script_path}/cli_wrappers/einsteinium-cli /usr/local/bin/einsteini
 rm -f /home/${USER}/.komodo_3p/komodo_3p-cli
 rm -f /home/${USER}/.komodo_3p/komodo-cli
 rm -f /home/${USER}/.komodo_3p/*-cli
+rm -f /home/${USER}/.komodo/*-cli
 sudo ln -sf ${script_path}/cli_wrappers/komodo_3p-cli /usr/local/bin/komodo_3p-cli
 
 # MCL
