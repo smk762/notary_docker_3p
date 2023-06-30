@@ -11,7 +11,7 @@ echo "GROUP_ID=${GROUP_ID}" >> .env
 
 # Update repo
 echo "Updating repository..."
-git pull || echo "No git pull failed! Fix the issue and try again..."; exit 1
+git pull || sleep 5
 
 # Update assetchains.json
 rm assetchains.json
