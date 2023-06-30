@@ -398,13 +398,12 @@ def create_compose_yaml(server='3p'):
     else:
         # Not yet used in 3P repo
         shutil.copy('templates/docker-compose.template_main', 'docker-compose.yml')
-        antara_coins = ["KMD", "DOC"]
         with open('docker-compose.yml', 'a+') as conf:
-            for coin in antara_coins:
+            for coin in coins_main:
                 if coin == 'KMD':
                     cli = "komodo-cli"
                 else:
-                    cli = "komodo-cli -ac_name={coin}"
+                    cli = f"komodo-cli -ac_name={coin}"
                 p2pport = coins_main[coin]["p2pport"]
                 rpcport = coins_main[coin]["rpcport"]
                 conf.write(f'  {coin.lower()}:\n')
@@ -417,7 +416,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('        - USER_ID=$USER_ID\n')
                 conf.write('        - GROUP_ID=$GROUP_ID\n')
                 conf.write('        - COMMIT_HASH=156dba6\n')
-                conf.write(f'        - SERVICE_CLI={cli}\n')
+                conf.write(f'        - SERVICE_CLI="{cli}"\n')
                 conf.write('    ports:\n')
                 conf.write(f'      - "127.0.0.1:{p2pport}:{p2pport}"\n')
                 conf.write(f'      - "127.0.0.1:{rpcport}:{rpcport}"\n')
@@ -427,6 +426,7 @@ def create_compose_yaml(server='3p'):
                     conf.write('      - /home/USERNAME/.komodo:/home/komodian/.komodo\n')
                 else:
                     conf.write(f'      - /home/USERNAME/.komodo/{coin}:/home/komodian/.komodo/{coin}\n')
+                conf.write(f"    container_name: {coin.lower()}\n")
                 conf.write("    shm_size: '2gb'\n")
                 conf.write('    restart: always\n')
                 conf.write('    stop_grace_period: 10s\n')
@@ -435,7 +435,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('      options:\n')
                 conf.write('        max-size: "20m"\n')
                 conf.write('        max-file: "10"\n')
-                conf.write(f'    command: ["/run_{coin}.sh"]\n')
+                conf.write(f'    command: ["/run.sh"]\n')
                 conf.write('\n')
 
 if __name__ == '__main__':

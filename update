@@ -1,40 +1,42 @@
 #!/bin/bash
 
-rm assetchains.json
-wget https://raw.githubusercontent.com/KomodoPlatform/dPoW/season-seven/iguana/assetchains.json
-
+# Update repo
 echo "Updating repository..."
-git pull
+git pull || echo "No git pull failed! Fix the issue and try again..."; exit 1
 
-echo "Setting launch files..."
+# Update assetchains.json
+rm assetchains.json
+wget https://raw.githubusercontent.com/KomodoPlatform/dPoW/master/iguana/assetchains.json
+
+# Creating launch files
+echo "Setting up launch files..."
 ./configure.py launch
 
+# Updating docker-compose yaml
 echo "Updating docker-compose.yml..."
 ./configure.py yaml
 sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
 
-echo "Setting up conf files and data folders..."
+# Setting up conf files
+echo "Setting up conf files..."
 ./configure.py confs
 
+# Setting up cli wrappers
 echo "Setting up cli wrappers..."
 ./configure.py clis
 
 
 if [[ "$1" == "nobuild" ]]; then
     echo "Not building docker images..."
-    ./link_clis.sh
 elif [ -z "$1" ]; then
     echo "Building docker images..."
     docker compose build $@ 
-    echo "Setting up cli wrapper symlinks (needs sudo)..."
-    ./link_clis.sh
     ./stop
 else
     echo "Building docker image: $1"
     docker compose build $1 $@ 
-    echo "Setting up cli wrapper symlinks (needs sudo)..."
-    ./link_clis.sh
     ./stop $1
 fi
+./link_clis.sh
 
 echo "Done! Use ./start to launch your daemons..."
