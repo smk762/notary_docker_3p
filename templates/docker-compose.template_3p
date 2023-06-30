@@ -32,6 +32,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   chips:
     env_file:
       - .env
@@ -57,6 +59,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   emc2:
     env_file:
       - .env
@@ -81,6 +85,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   kmd_3p:
     env_file:
       - .env
@@ -106,6 +112,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   mcl:
     env_file:
       - .env
@@ -131,6 +139,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   mil:
     env_file:
       - .env
@@ -155,6 +165,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   tokel:
     env_file:
       - .env
@@ -180,6 +192,8 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
+
   vrsc:
     env_file:
       - .env
@@ -205,3 +219,4 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
+    command: ["/run.sh"]
