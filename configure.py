@@ -446,7 +446,6 @@ if __name__ == '__main__':
         create_cli_wrappers()
     elif sys.argv[1] == 'confs':
         # Temporary to fix earlier misconfiguration
-        create_confs("main", ["KMD"])
         create_confs()
     elif sys.argv[1] == 'launch':
         create_launch_files()
