@@ -436,7 +436,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('      options:\n')
                 conf.write('        max-size: "20m"\n')
                 conf.write('        max-file: "10"\n')
-                conf.write(f'    command: ["/run.sh"]\n')
+                conf.write(f'    command: ["/run_{coin}.sh"]\n')
                 conf.write('\n')
 
 if __name__ == '__main__':
