@@ -295,9 +295,9 @@ def create_cli_wrappers():
         else:
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
-            # docker exec -it notary_docker_3p-vrsc-1 verus-cli  getinfo
+            # docker exec notary_docker_3p-vrsc-1 verus-cli  getinfo
             conf.write('#!/bin/bash\n')
-            conf.write(f'docker exec -it {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
+            conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
             # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
