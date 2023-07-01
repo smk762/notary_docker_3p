@@ -220,7 +220,10 @@ def get_cli_command(coin, container=True) -> str:
     if coin == 'CHIPS':
         return f"chips-cli"
     if coin == 'EMC2':
-        return f"einsteinium-cli"
+        if not container:
+            return f"emc-cli"
+        else:
+            return f"einsteinium-cli"
     if coin == 'KMD':
         return f"komodo-cli"
     if coin == 'KMD_3P':

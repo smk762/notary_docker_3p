@@ -15,6 +15,6 @@ sed s/__atomic_compare_exchange/__atomic_compare_exchange_db/g -i ${BDB_PREFIX}/
 cd ${BDB_PREFIX}/${BDB_VERSION}/build_unix
 
 ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${BDB_PREFIX}
-make -j4
+make -j2
 make install
 rm -rf ${BDB_PREFIX}/${BDB_VERSION}/docs
