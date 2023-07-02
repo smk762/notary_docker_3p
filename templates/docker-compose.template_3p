@@ -33,7 +33,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_AYA.sh"]
+    command: ["/run.sh"]
 
   chips:
     env_file:
@@ -61,7 +61,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_CHIPS.sh"]
+    command: ["/run.sh"]
 
   emc2:
     env_file:
@@ -88,7 +88,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_EMC2.sh"]
+    command: ["/run.sh"]
 
   kmd_3p:
     env_file:
@@ -116,7 +116,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_KMD_3P.sh"]
+    command: ["/run.sh"]
 
   mcl:
     env_file:
@@ -144,7 +144,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_MCL.sh"]
+    command: ["/run.sh"]
 
   mil:
     env_file:
@@ -171,7 +171,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_MIL.sh"]
+    command: ["/run.sh"]
 
   tokel:
     env_file:
@@ -199,7 +199,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_TOKEL.sh"]
+    command: ["/run.sh"]
 
   vrsc:
     env_file:
@@ -227,4 +227,4 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_VRSC.sh"]
+    command: ["/run.sh"]
