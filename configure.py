@@ -11,6 +11,7 @@ import os
 
 home = os.path.expanduser('~')
 script_path = os.path.realpath(os.path.dirname(__file__))
+dpow_path = os.path.join(home, "dpow")
 
 with open(f'assetchains.json') as file:
     assetchains = json.load(file)
@@ -275,9 +276,9 @@ def get_launch_params(coin):
 
 def get_user_pubkey(server='3p'):
     if server == '3p':
-        file = "pubkey_3p.txt"
+        file = f"{dpow_path}/iguana/pubkey_3p.txt"
     else:
-        file = "pubkey.txt"
+        file = f"{dpow_path}/iguana/pubkey.txt"
     if os.path.exists(file):
         with open(file, 'r') as f:
             for line in f:
