@@ -101,3 +101,7 @@ Error response from daemon: driver failed programming external connectivity on e
 ```
 
 Make sure you are not running any other instances of the daemon on your host machine. Stop the deamons, and then run `docker compose up -d` again.
+
+#### More info
+
+https://www.cloudbees.com/blog/how-to-clean-up-deleting-all-docker-images
