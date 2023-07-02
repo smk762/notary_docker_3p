@@ -6,7 +6,7 @@ import secrets
 import json
 import sys
 import os
-from const import home, script_path, dpow_path, coins_main, coins_3p, assetchains
+from const import home, script_path, dpow_path, assetchains, coins, coins_main, coins_3p
 
 
 def format_param(param, value):
@@ -326,6 +326,7 @@ def create_compose_yaml(server='3p'):
 
 # Tests to confirm pubeys set
 get_user_pubkey('main')
+get_user_pubkey('3p')
 
 
 
