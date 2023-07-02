@@ -5,7 +5,7 @@ import os
 
 home = os.path.expanduser('~')
 script_path = os.path.realpath(os.path.dirname(__file__))
-dpow_path = os.path.join(home, "dpow")
+dpow_path = os.path.join(home, "dPoW")
 
 with open(f'{dpow_path}/iguana/assetchains.json') as file:
     assetchains = json.load(file)
