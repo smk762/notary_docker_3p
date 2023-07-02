@@ -9,12 +9,6 @@ RUN addgroup --gid ${GROUP_ID} notarygroup
 RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 WORKDIR /home/komodian
 
-# Move binaries
-RUN mv /home/komodian/komodo/src/komodo-cli /usr/local/bin/komodo-cli
-RUN mv /home/komodian/komodo/src/komodod /usr/local/bin/komodod
-RUN PATH=/usr/local/bin/:$PATH
-
-RUN apt update && apt install -y nano htop libgomp1
 
 # Healthcheck
 COPY healthcheck.sh /usr/local/bin
