@@ -354,8 +354,9 @@ def create_confs(server="3p", coins_list=None):
             conf.write(f'rpcuser={rpcuser}\n')
             conf.write(f'rpcpassword={rpcpass}\n')
             conf.write('txindex=1\n')
-            conf.write('addressindex=1\n')
-            conf.write('spentindex=1\n')
+            # These will force a reindex on a bootstrap
+            #conf.write('addressindex=1\n')
+            #conf.write('spentindex=1\n')
             conf.write('server=1\n')
             conf.write('daemon=1\n')
             conf.write('rpcworkqueue=256\n')
@@ -404,13 +405,12 @@ def create_compose_yaml(server='3p'):
     else:
         # Not yet used in 3P repo
         shutil.copy('templates/docker-compose.template_main', 'docker-compose.yml')
-        antara_coins = ["KMD", "DOC"]
         with open('docker-compose.yml', 'a+') as conf:
-            for coin in antara_coins:
+            for coin in coins_main:
                 if coin == 'KMD':
                     cli = "komodo-cli"
                 else:
-                    cli = "komodo-cli -ac_name={coin}"
+                    cli = f"komodo-cli -ac_name={coin}"
                 p2pport = coins_main[coin]["p2pport"]
                 rpcport = coins_main[coin]["rpcport"]
                 conf.write(f'  {coin.lower()}:\n')
@@ -423,7 +423,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('        - USER_ID=$USER_ID\n')
                 conf.write('        - GROUP_ID=$GROUP_ID\n')
                 conf.write('        - COMMIT_HASH=156dba6\n')
-                conf.write(f'        - SERVICE_CLI={cli}\n')
+                conf.write(f'        - SERVICE_CLI="{cli}"\n')
                 conf.write('    ports:\n')
                 conf.write(f'      - "127.0.0.1:{p2pport}:{p2pport}"\n')
                 conf.write(f'      - "127.0.0.1:{rpcport}:{rpcport}"\n')
@@ -433,6 +433,7 @@ def create_compose_yaml(server='3p'):
                     conf.write('      - /home/USERNAME/.komodo:/home/komodian/.komodo\n')
                 else:
                     conf.write(f'      - /home/USERNAME/.komodo/{coin}:/home/komodian/.komodo/{coin}\n')
+                conf.write(f"    container_name: {coin.lower()}\n")
                 conf.write("    shm_size: '2gb'\n")
                 conf.write('    restart: always\n')
                 conf.write('    stop_grace_period: 10s\n')
@@ -451,7 +452,6 @@ if __name__ == '__main__':
         create_cli_wrappers()
     elif sys.argv[1] == 'confs':
         # Temporary to fix earlier misconfiguration
-        create_confs("main", ["KMD"])
         create_confs()
     elif sys.argv[1] == 'launch':
         create_launch_files()

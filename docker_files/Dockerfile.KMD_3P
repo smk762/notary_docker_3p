@@ -5,6 +5,7 @@ LABEL maintainer="smk@komodoplatform.com"
 ARG COMMIT_HASH
 ARG GROUP_ID
 ARG USER_ID
+ARG SERVICE_CLI
 RUN addgroup --gid ${GROUP_ID} notarygroup
 RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 WORKDIR /home/komodian
@@ -32,14 +33,19 @@ RUN apt remove --purge -y $BUILD_PACKAGES $(apt-mark showauto) && \
     rm -rf /var/lib/apt/lists/* 
 RUN apt update && apt install -y nano htop libgomp1
 
+# Healthcheck
+COPY healthcheck.sh /usr/local/bin
+HEALTHCHECK --start-period=15m --interval=15m --timeout=60s CMD CMD bash /usr/local/healthcheck.sh "${SERVICE_CLI}" || exit 1
+STOPSIGNAL SIGTERM
+
 COPY entrypoint.sh /entrypoint.sh
-COPY launch_files/run_KMD_3P.sh /run.sh
+COPY launch_files/run_KMD_3P.sh /run_KMD_3P.sh
 
 # Setup user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
 
-# ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 
 # Start daemon with the data directory mounted
-CMD ["/run.sh"]
+
