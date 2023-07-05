@@ -9,7 +9,7 @@ if ! [ -f DEBUG ]; then
     echo "" > DEBUG
 fi
 
-exec LAUNCH &
+exec LAUNCH "$@" &
 sleep 5
 tail -f DEBUG & wait
 
