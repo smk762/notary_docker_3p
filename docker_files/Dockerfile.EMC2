@@ -35,11 +35,11 @@ RUN apt update && apt install -y nano htop libgomp1
 
 # Healthcheck
 COPY healthcheck.sh /usr/local/bin
-HEALTHCHECK --start-period=15m --interval=15m --timeout=60s CMD CMD bash /usr/local/healthcheck.sh "${SERVICE_CLI}" || exit 1
+HEALTHCHECK --start-period=15m --interval=15m --timeout=60s CMD bash /usr/local/bin/healthcheck.sh "${SERVICE_CLI}" || exit 1
 STOPSIGNAL SIGTERM
 
 COPY entrypoint.sh /entrypoint.sh
-COPY launch_files/run_EMC2.sh /run_EMC2.sh
+COPY launch_files/run_EMC2.sh /run.sh
 
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian

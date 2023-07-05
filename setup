@@ -5,29 +5,11 @@ pip3 install -r requirements.txt
 mkdir -p /home/${USER}/.zcash-params
 ./fetch-params.sh
 
-source pubkey_3p.txt
-if test -z "$pubkey"; then
-  read -p "Enter your 3p pubkey: " pubkey
-  if [ ${#pubkey} -ne 66 ]; then
-    echo "Invalid pubkey length!"
-  else
-    echo "pubkey=${pubkey}" > pubkey_3p.txt
-  fi
-fi
+source /home/${USER}/dPoW/iguana/pubkey_3p.txt
 pubkey_3p=$pubkey
 
-source pubkey.txt
-if test -z "$pubkey"; then
-  read -p "Enter your main pubkey: " pubkey
-  if [ ${#pubkey} -ne 66 ]; then
-    echo "Invalid pubkey length!"
-  else
-    echo "pubkey=${pubkey}" > pubkey_3p.txt
-  fi
-  echo "pubkey=${pubkey}" > pubkey.txt
-fi
+source /home/${USER}/dPoW/iguana/pubkey_3p.txt
 pubkey_main=$pubkey
-
 
 echo "Setting up .env file..."
 USER_ID=$(id -u)

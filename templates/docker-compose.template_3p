@@ -18,6 +18,7 @@ services:
         - COMMIT_HASH=d40b0d7
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - SERVICE_CLI="aryacoin-cli"
     ports:
       - "127.0.0.1:26001:26001"
       - "127.0.0.1:9432:9432"
@@ -32,7 +33,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_AYA.sh"]
+    command: ["/run.sh"]
 
   chips:
     env_file:
@@ -44,6 +45,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=f0dfd82
+        - SERVICE_CLI="chips-cli"
     ports:
       - "127.0.0.1:57777:57777"
       - "127.0.0.1:57776:57776"
@@ -59,7 +61,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_CHIPS.sh"]
+    command: ["/run.sh"]
 
   emc2:
     env_file:
@@ -71,6 +73,7 @@ services:
         - COMMIT_HASH=8d988f0
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - SERVICE_CLI="einsteinium-cli"
     ports:
       - "127.0.0.1:41878:41878"
       - "127.0.0.1:41879:41879"
@@ -85,7 +88,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_EMC2.sh"]
+    command: ["/run.sh"]
 
   kmd_3p:
     env_file:
@@ -97,6 +100,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=156dba6
+        - SERVICE_CLI="komodo-cli"
     ports:
       - "127.0.0.1:8770:8770"
       - "127.0.0.1:8771:8771"
@@ -112,7 +116,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_KMD_3P.sh"]
+    command: ["/run.sh"]
 
   mcl:
     env_file:
@@ -124,6 +128,7 @@ services:
         - COMMIT_HASH=c675fcb
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - SERVICE_CLI="mcl-cli -ac_name=MCL"
     ports:
       - "127.0.0.1:33824:33824"
       - "127.0.0.1:33825:33825"
@@ -139,7 +144,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_MCL.sh"]
+    command: ["/run.sh"]
 
   mil:
     env_file:
@@ -151,6 +156,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=5df2e4d
+        - SERVICE_CLI="mil-cli"
     ports:
       - "127.0.0.1:41888:41888"
       - "127.0.0.1:41889:41889"
@@ -165,7 +171,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_MIL.sh"]
+    command: ["/run.sh"]
 
   tokel:
     env_file:
@@ -177,6 +183,7 @@ services:
         - COMMIT_HASH=f1fc997
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - SERVICE_CLI="tokel-cli"
     ports:
       - "127.0.0.1:29404:29404"
       - "127.0.0.1:29405:29405"
@@ -192,7 +199,7 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_TOKEL.sh"]
+    command: ["/run.sh"]
 
   vrsc:
     env_file:
@@ -201,9 +208,10 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.VRSC
       args:
-        - COMMIT_HASH=e8371ac
+        - COMMIT_HASH=66e16e7
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
+        - SERVICE_CLI="verus-cli"
     ports:
       - "127.0.0.1:27485:27485"
       - "127.0.0.1:27486:27486"
@@ -219,4 +227,4 @@ services:
       options:
         max-size: "20m"
         max-file: "10"
-    command: ["/run_VRSC.sh"]
+    command: ["/run.sh"]

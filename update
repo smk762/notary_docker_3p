@@ -9,6 +9,8 @@ echo "PUBKEY_3P=${pubkey_3p}" >> .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env
 
+./stop $1
+
 # Update repo
 echo "Updating repository..."
 git pull || sleep 5

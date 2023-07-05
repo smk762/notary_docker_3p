@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -z "$1" ]
+  then
+    read -p "Please specify a coin to reindex: " coin
+    coin = "${1}"
+    coin_lower=$(echo $coin | awk '{print tolower($0)}')
+
+fi
+docker compose run bash ${coin_lower} docker_files/launch_files/run_${coin}.sh -reindex
