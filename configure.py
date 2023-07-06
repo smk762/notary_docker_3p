@@ -331,6 +331,14 @@ def create_compose_yaml(server='3p'):
                 conf.write(f'    command: ["/run_{coin}.sh"]\n')
                 conf.write('\n')
 
+
+def get_mm2_userpass():
+    if os.path.exists(f"{script_path}/mm2/MM2.json"):
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            return json.load(f)["rpc_password"]
+    return generate_rpc_pass()
+
+
 def setup_mm2():
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
         rpc_password = generate_rpc_pass(16)

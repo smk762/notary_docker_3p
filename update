@@ -1,11 +1,12 @@
 #!/bin/bash
 
 if [[ "$1" == "mm2" ]]; then
-    echo "Updating mm2..."
-    echo "Setting up .env file..."
+    echo "Updating coins file..."
+    wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O coins
+    echo "Setting up mm2 .env file..."
     USER_ID=$(id -u)
     GROUP_ID=$(id -g)
-    userpass=$(./configure.py get_password)
+    userpass=$(./configure.py get_mm2_userpass)
     echo "USER_ID=${USER_ID}" >> mm2/.env
     echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
     echo "USERPASS=${userpass}" >> mm2/.env
