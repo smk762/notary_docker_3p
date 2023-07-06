@@ -345,7 +345,7 @@ def setup_mm2(domain):
         m = mnemonic.Mnemonic('english')
         mm2_seed = m.generate(strength=256)
         
-        with open("rpc", "w+") as f:
+        with open(f"{script_path}/mm2/rpc", "w+") as f:
             f.write(f'rpc_password="{rpc_password}"\n')
         print("rpc file created.")
 
