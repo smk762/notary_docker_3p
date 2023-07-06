@@ -367,10 +367,9 @@ def setup_mm2(domain):
     else:
         with open(f"{script_path}/mm2/MM2.json", "r") as f:
             rpc_password = json.load(f)["rpc_password"]
-    if not os.path.exists(f"{script_path}/mm2/rpc"):
-        with open(f"{script_path}/mm2/rpc", "w+") as f:
-            f.write(f'rpc_password="{rpc_password}"\n')
-        print("rpc file created.")
+    with open(f"{script_path}/mm2/rpc", "w+") as f:
+        f.write(f'rpc_password="{rpc_password}"\n')
+    print("rpc file created.")
 
 
 # Tests to confirm pubeys set
