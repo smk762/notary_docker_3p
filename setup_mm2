@@ -2,6 +2,9 @@
 
 source mm2/.env
 
+echo "Updating coins file..."
+wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O mm2/coins
+
 if [ -z "$DOMAIN" ]; then
     if [ -z "$1" ]; then
         read -p "Please enter your domain name: " DOMAIN
