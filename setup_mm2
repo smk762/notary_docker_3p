@@ -56,3 +56,4 @@ sudo chown $USER:$USER --recursive ./mm2/$DOMAIN
 echo $DIR/letsencrypt/live/$DOMAIN
 
 ./configure.py setup_mm2 $DOMAIN
+./update mm2

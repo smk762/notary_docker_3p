@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Update repo
+echo "Updating repository..."
+git pull || sleep 5
+
 if [[ "$1" == "mm2" ]]; then
     echo "Updating coins file..."
     wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O mm2/coins
@@ -31,9 +35,6 @@ echo "GROUP_ID=${GROUP_ID}" >> .env
 
 ./stop $1
 
-# Update repo
-echo "Updating repository..."
-git pull || sleep 5
 
 # Update assetchains.json
 rm assetchains.json
