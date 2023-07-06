@@ -2,7 +2,9 @@
 
 source ./service_cli
 
-if [[ -z ${1-} ]]; then
+if [[ "$1" == "mm2" ]]; then
+  docker compose stop mm2
+elif [[ -z ${1-} ]]; then
   for key in "${!service_cli[@]}"; do
     echo "stopping $key"
     ${service_cli[$key]} stop
