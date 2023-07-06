@@ -6,7 +6,7 @@ echo "Setting up .env file..."
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
 
-userpass=$(./configure get_password)
+userpass=$(./configure.py get_password)
 echo "MM2_CONF_PATH=/home/komodian/mm2/MM2.json" > mm2/.env
 echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
 echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
@@ -50,5 +50,5 @@ sudo chown $USER:$USER --recursive $DOMAIN
 sudo ufw delete allow 80/tcp
 sudo ufw delete allow 443/tcp
 
-./configure setup_mm2
+./configure.py setup_mm2
 ./update mm2
