@@ -228,3 +228,22 @@ services:
         max-size: "20m"
         max-file: "10"
     command: ["/run.sh"]
+
+  mm2:
+    restart: always
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.atomicdex
+    volumes:
+      - ./:/mm2
+    ports:
+      - 127.0.0.1:7783:7783
+      - 127.0.0.1:38890:38890
+      - 127.0.0.1:38900:38900
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+
+  

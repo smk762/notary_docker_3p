@@ -1,0 +1,36 @@
+#!/bin/bash
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 38900
+sudo ufw allow 38890
+
+if [ -z "$1" ]; then
+    read -p "Please enter your domain name: " DOMAIN
+else
+    DOMAIN="${1}"
+fi
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+LETSENCRYPT_VOLUME_DIR=$DIR/letsencrypt
+EMAIL="my-email@gmail.com"
+
+sudo docker run \
+  --rm \
+  --name certbot \
+  -p 80:80 \
+  -p 443:443 \
+  -v "$LETSENCRYPT_VOLUME_DIR:/etc/letsencrypt" \
+  certbot/certbot \
+  certonly \
+  -d $DOMAIN \
+  --standalone \
+  --email=$EMAIL \
+  --agree-tos \
+  --no-eff-email
+
+# Copy the certificate files  to local folder and set permissions
+sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN .
+sudo chown $USER:$USER --recursive $DOMAIN
+
+sudo ufw delete allow 80/tcp
+sudo ufw delete allow 443/tcp

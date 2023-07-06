@@ -1,0 +1,8 @@
+mm2
+*.zip
+*.log
+*.json
+coins
+.env
+rpc
+DB/

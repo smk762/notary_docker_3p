@@ -1,0 +1,20 @@
+FROM komodoofficial/atomicdexapi:dev-19c8218
+LABEL maintainer="smk@komodoplatform.com"
+
+# Setup up user and working directory
+ARG DEBIAN_FRONTEND=noninteractive 
+ARG GROUP_ID
+ARG USER_ID
+RUN addgroup --gid ${GROUP_ID} notarygroup
+RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
+
+WORKDIR /home/komodian
+COPY ./mm2_files /home/komodian/mm2/
+COPY entrypoint.sh /entrypoint.sh
+
+ENV userpass=${userpass}
+ENV PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Setup user and working directory
+RUN chown -R komodian:notarygroup /home/komodian
+USER komodian
