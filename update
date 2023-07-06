@@ -2,7 +2,7 @@
 
 if [[ "$1" == "mm2" ]]; then
     echo "Updating coins file..."
-    wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O coins
+    wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O mm2/coins
     echo "Setting up mm2 .env file..."
     USER_ID=$(id -u)
     GROUP_ID=$(id -g)
