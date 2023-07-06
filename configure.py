@@ -339,7 +339,7 @@ def get_mm2_userpass():
     return generate_rpc_pass()
 
 
-def setup_mm2():
+def setup_mm2(domain):
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
         rpc_password = generate_rpc_pass(16)
         m = mnemonic.Mnemonic('english')
@@ -359,11 +359,10 @@ def setup_mm2():
             "rpc_password": rpc_password,
             "passphrase": mm2_seed,
             "seednodes": ["80.82.76.214", "89.248.168.39", "65.108.90.210"],
-            "userhome": "/${HOME#\"/\"}",
             "metrics": 120,
             "wss_certs": {
-                "server_priv_key": f"/home/komodian/mm2/{DOMAIN}/privkey.pem",
-                "certificate": f"/home/komodian/mm2/{DOMAIN}/fullchain.pem"
+                "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
+                "certificate": f"/home/komodian/mm2/{domain}/fullchain.pem"
             }
         }
         with open(f"{script_path}/mm2/MM2.json", "w+") as f:
@@ -390,7 +389,11 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
     elif sys.argv[1] == 'setup_mm2':
-        setup_mm2()
+        if len(sys.argv) < 3:
+            domain = input('Domain name for seed node: ')
+        else:
+            domain = sys.argv[2]
+        setup_mm2(domain)
     elif sys.argv[1] == 'get_password':
         print(generate_rpc_pass())
     else:
