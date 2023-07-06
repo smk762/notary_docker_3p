@@ -1,7 +1,5 @@
 #!/bin/bash
 
-pip3 install -r requirements.txt
-
 echo "Setting up .env file..."
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
