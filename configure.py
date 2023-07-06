@@ -332,7 +332,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('\n')
 
 def setup_mm2():
-    if not os.path.exists("mm2/MM2.json"):
+    if not os.path.exists(f"{script_path}/mm2/MM2.json"):
         rpc_password = generate_rpc_pass(16)
         m = mnemonic.Mnemonic('english')
         mm2_seed = m.generate(strength=256)
@@ -358,7 +358,7 @@ def setup_mm2():
                 "certificate": f"/home/komodian/mm2/{DOMAIN}/fullchain.pem"
             }
         }
-        with open("MM2.json", "w+") as f:
+        with open(f"{script_path}/mm2/MM2.json", "w+") as f:
             json.dump(conf, f, indent=4)
         print("MM2.json file created.")
 
