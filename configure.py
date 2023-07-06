@@ -344,10 +344,6 @@ def setup_mm2(domain):
         rpc_password = generate_rpc_pass(16)
         m = mnemonic.Mnemonic('english')
         mm2_seed = m.generate(strength=256)
-        
-        with open(f"{script_path}/mm2/rpc", "w+") as f:
-            f.write(f'rpc_password="{rpc_password}"\n')
-        print("rpc file created.")
 
         conf = {
             "gui": "S7_Notary",
@@ -368,6 +364,13 @@ def setup_mm2(domain):
         with open(f"{script_path}/mm2/MM2.json", "w+") as f:
             json.dump(conf, f, indent=4)
         print("MM2.json file created.")
+    else:
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            rpc_password = json.load(f)["rpc_password"]
+    if not os.path.exists(f"{script_path}/mm2/rpc"):
+        with open(f"{script_path}/mm2/rpc", "w+") as f:
+            f.write(f'rpc_password="{rpc_password}"\n')
+        print("rpc file created.")
 
 
 # Tests to confirm pubeys set
