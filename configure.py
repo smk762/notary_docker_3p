@@ -384,6 +384,6 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'setup_mm2':
         setup_mm2()
     elif sys.argv[1] == 'get_password':
-        generate_rpc_pass()
+        print(generate_rpc_pass())
     else:
         print('Invalid option, must be in ["clis", "confs", "launch", "yaml", "setup_mm2", "get_password"]')

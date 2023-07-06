@@ -14,8 +14,7 @@ echo "USERPASS=${userpass}" >> mm2/.env
 echo "USER_ID=${USER_ID}" >> mm2/.env
 echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
 
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+sudo ufw allow 80
 sudo ufw allow 38900
 sudo ufw allow 38890
 
@@ -38,17 +37,14 @@ sudo docker run \
   certbot/certbot \
   certonly \
   -d $DOMAIN \
-  --standalone \
   --email=$EMAIL \
   --agree-tos \
-  --no-eff-email
+  --no-eff-email \
+  --standalone
 
 # Copy the certificate files  to local folder and set permissions
 sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN .
 sudo chown $USER:$USER --recursive $DOMAIN
-
-sudo ufw delete allow 80/tcp
-sudo ufw delete allow 443/tcp
 
 ./configure.py setup_mm2
 ./update mm2
