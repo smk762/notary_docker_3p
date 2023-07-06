@@ -38,6 +38,7 @@ sudo docker run \
   certonly \
   -d $DOMAIN \
   --email=$EMAIL \
+  --non-interactive \
   --agree-tos \
   --no-eff-email \
   --standalone
