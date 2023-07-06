@@ -43,7 +43,7 @@ sudo docker run \
   --standalone
 
 # Copy the certificate files  to local folder and set permissions
-sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN .
+sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN ./mm2
 sudo chown $USER:$USER --recursive $DOMAIN
 echo $DIR/letsencrypt/live/$DOMAIN
 
