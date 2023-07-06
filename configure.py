@@ -1,12 +1,19 @@
 #!/usr/bin/env python3
+import os
+import sys
+import json
 import string
 import shutil
-import requests
 import secrets
-import json
-import sys
-import os
+import os.path
+import requests
+import mnemonic
 from const import home, script_path, dpow_path, assetchains, coins, coins_main, coins_3p
+from dotenv import load_dotenv
+
+load_dotenv()
+MM2_RPC_IP = os.getenv('MM2_RPC_IP')
+DOMAIN = os.getenv('DOMAIN')
 
 
 def format_param(param, value):
@@ -324,6 +331,38 @@ def create_compose_yaml(server='3p'):
                 conf.write(f'    command: ["/run_{coin}.sh"]\n')
                 conf.write('\n')
 
+def setup_mm2():
+    if not os.path.exists("mm2/MM2.json"):
+        rpc_password = generate_rpc_pass(16)
+        m = mnemonic.Mnemonic('english')
+        mm2_seed = m.generate(strength=256)
+        
+        with open("rpc", "w+") as f:
+            f.write(f'rpc_password="{rpc_password}"\n')
+        print("rpc file created.")
+
+        conf = {
+            "gui": "S7_Notary",
+            "netid": 7777,
+            "i_am_seed": True,
+            "rpc_local_only": False,
+            "rpcport": 7783,
+            "rpcip": "0.0.0.0",
+            "rpc_password": rpc_password,
+            "passphrase": mm2_seed,
+            "seednodes": ["80.82.76.214", "89.248.168.39", "65.108.90.210"],
+            "userhome": "/${HOME#\"/\"}",
+            "metrics": 120,
+            "wss_certs": {
+                "server_priv_key": f"/home/komodian/mm2/{DOMAIN}/privkey.pem",
+                "certificate": f"/home/komodian/mm2/{DOMAIN}/fullchain.pem"
+            }
+        }
+        with open("MM2.json", "w+") as f:
+            json.dump(conf, f, indent=4)
+        print("MM2.json file created.")
+
+
 # Tests to confirm pubeys set
 get_user_pubkey('main')
 get_user_pubkey('3p')
@@ -342,5 +381,9 @@ if __name__ == '__main__':
         create_launch_files()
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
+    elif sys.argv[1] == 'setup_mm2':
+        setup_mm2()
+    elif sys.argv[1] == 'get_password':
+        generate_rpc_pass()
     else:
-        print('Invalid option, must be in ["clis", "confs", "launch", "yaml]')
+        print('Invalid option, must be in ["clis", "confs", "launch", "yaml", "setup_mm2", "get_password"]')

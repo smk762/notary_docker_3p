@@ -8,11 +8,13 @@ ARG USER_ID
 RUN addgroup --gid ${GROUP_ID} notarygroup
 RUN adduser --disabled-password --gecos '' --uid ${USER_ID} --gid ${GROUP_ID} komodian
 
-WORKDIR /home/komodian
-COPY ./mm2_files /home/komodian/mm2/
-COPY entrypoint.sh /entrypoint.sh
+WORKDIR /home/komodian/mm2
 
-ENV userpass=${userpass}
+ENV MM2_CONF_PATH=/home/komodian/mm2/MM2.json
+ENV MM_COINS_PATH=/home/komodian/mm2/coins
+ENV MM_LOG=/home/komodian/mm2/mm2.log
+ENV USERPASS=${userpass}
+
 ENV PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 # Setup user and working directory
