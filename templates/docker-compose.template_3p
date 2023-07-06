@@ -228,6 +228,9 @@ services:
     build:
       context: ./mm2
       dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
     volumes:
       - ./:/mm2
     ports:
