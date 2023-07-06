@@ -45,7 +45,7 @@ sudo docker run \
 
 # Copy the certificate files  to local folder and set permissions
 sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN ./mm2
-sudo chown $USER:$USER --recursive $DOMAIN
+sudo chown $USER:$USER --recursive ./mm2/$DOMAIN
 echo $DIR/letsencrypt/live/$DOMAIN
 
 ./configure.py setup_mm2
