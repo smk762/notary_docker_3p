@@ -1,0 +1,59 @@
+#!/bin/bash
+
+source mm2/.env
+
+echo "Updating coins file..."
+wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O mm2/coins
+
+if [ -z "$DOMAIN" ]; then
+    if [ -z "$1" ]; then
+        read -p "Please enter your domain name: " DOMAIN
+    else
+        DOMAIN="${1}"
+    fi
+fi
+
+echo "Setting up .env file..."
+USER_ID=$(id -u)
+GROUP_ID=$(id -g)
+userpass=$(./configure.py get_password)
+
+echo "MM2_CONF_PATH=/home/komodian/mm2/MM2.json" > mm2/.env
+echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
+echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
+echo "USERPASS=${userpass}" >> mm2/.env
+echo "USER_ID=${USER_ID}" >> mm2/.env
+echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
+echo "DOMAIN=${DOMAIN}" >> mm2/.env
+
+sudo ufw allow 80
+sudo ufw allow 38900
+sudo ufw allow 38890
+
+
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+LETSENCRYPT_VOLUME_DIR=$DIR/letsencrypt
+EMAIL="my-email@gmail.com"
+
+sudo docker run \
+  --rm \
+  --name certbot \
+  -p 80:80 \
+  -p 443:443 \
+  -v "$LETSENCRYPT_VOLUME_DIR:/etc/letsencrypt" \
+  certbot/certbot \
+  certonly \
+  -d $DOMAIN \
+  --email=$EMAIL \
+  --non-interactive \
+  --agree-tos \
+  --no-eff-email \
+  --standalone
+
+# Copy the certificate files  to local folder and set permissions
+sudo cp --recursive --dereference $DIR/letsencrypt/live/$DOMAIN ./mm2
+sudo chown $USER:$USER --recursive ./mm2/$DOMAIN
+echo $DIR/letsencrypt/live/$DOMAIN
+
+./configure.py setup_mm2 $DOMAIN
+./update mm2

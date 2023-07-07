@@ -25,7 +25,6 @@ services:
     container_name: aya
     volumes:
       - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
-    shm_size: '2gb'
     restart: always
     stop_grace_period: 10s
     logging:
@@ -53,7 +52,6 @@ services:
     volumes:
       - /home/USERNAME/.chips:/home/komodian/.chips
       - <<: *zcash-params
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -80,7 +78,6 @@ services:
     container_name: emc2
     volumes:
       - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -108,7 +105,6 @@ services:
     volumes:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
       - <<: *zcash-params
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -136,7 +132,6 @@ services:
     volumes:
       - /home/USERNAME/.komodo_3p/MCL:/home/komodian/.komodo/MCL
       - <<: *zcash-params
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -163,7 +158,6 @@ services:
     container_name: mil
     volumes:
       - /home/USERNAME/.mil:/home/komodian/.mil
-    shm_size: '2gb'
     restart: always
     stop_grace_period: 10s
     logging:
@@ -191,7 +185,6 @@ services:
     volumes:
       - /home/USERNAME/.komodo_3p/TOKEL:/home/komodian/.komodo/TOKEL
       - <<: *zcash-params
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -219,7 +212,6 @@ services:
     volumes:
       - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
       - <<: *zcash-params
-    shm_size: '2gb'
     stop_grace_period: 10s
     restart: always
     logging:
@@ -228,3 +220,26 @@ services:
         max-size: "20m"
         max-file: "10"
     command: ["/run.sh"]
+
+  mm2:
+    container_name: mm2
+    env_file:
+      - .env
+    build:
+      context: ./mm2
+      dockerfile: Dockerfile
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+    volumes:
+      - ./:/mm2
+    ports:
+      - 127.0.0.1:7783:7783
+      - 0.0.0.0:38890:38890
+      - 0.0.0.0:38900:38900
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    restart: always
