@@ -109,10 +109,9 @@ Shortly after launch `mm2`, you should see a line in the logs like below:
 ```
 mm2_libp2p::atomicdex_behaviour:653] INFO Local peer id: PeerId("12D3KooWNGGBfPWQbubupECdkYhj1VomMLUUAYpsR2Bo3R4NzHju")
 ```
+The simplest way to find this is via `docker compose logs mm2 | grep Local`
 
 DM the `PeerID` value to @smk on Discord, and it will be added to the notary seednode list for uptime and version monitoring to apply the bonus scoring for participating notaries.
-
-
 
 ---
 ## What might go wrong?

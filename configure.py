@@ -272,6 +272,7 @@ def create_confs(server="3p", coins_list=None):
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
+                conf.write('whitelistaddress=RSzqu1ZmAbbM2WUNdqNtPLTcLB54kwLp6D # Notary Faucet\n')                
                 # Adds user main & 3p addresses for this node to whitelist
                 for server in ["3p", "main"]:
                     address = get_pubkey_address("KMD", get_user_pubkey(server))
