@@ -201,7 +201,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.VRSC
       args:
-        - COMMIT_HASH=f1c6d40
+        - COMMIT_HASH=9573cef
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="verus-cli"
