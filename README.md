@@ -62,7 +62,7 @@ When there is an update to any daemon repository, we need to update our `docker-
 
 ---
 ### To use cli commands
-Wrapper scripts for all CLI commands are automatically created and linked to `/usr/local/bin` when the docker containers are built. This allows you to run commands like `mcl-cli getinfo` from anywhere on the host machine.
+Wrapper scripts for all CLI commands are automatically created and linked to `/home/${USER}/.local/bin` when the docker containers are built. This allows you to run commands like `mcl-cli getinfo` from anywhere on the host machine.
 
 
 ### AtomicDEX Seed Node
