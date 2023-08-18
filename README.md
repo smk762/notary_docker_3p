@@ -75,16 +75,17 @@ When there is an update to any daemon repository, we need to update our `docker-
 
 ### To use cli commands
 
-Wrapper scripts for all CLI commands are automatically created and linked to `/usr/local/bin` when the docker containers are built. This allows you to run commands like `mcl-cli getinfo` from anywhere on the host machine.
-
+Wrapper scripts for all CLI commands are automatically created and linked to `/home/${USER}/.local/bin` when the docker containers are built. This allows you to run commands like `mcl-cli getinfo` from anywhere on the host machine.
 
 ### AtomicDEX Seed Node
+
 The `mm2` container is used to run a seed node for AtomicDEX. It is not mandatory to run this container, but it is recommended.
 The seed node will generate its own seed prase and rpcpassword on first run. If you want to use your own, edit `docker_files/mm2_files/MM2.json` and rebuild the mm2 container.
 
-Before building and launching the AtomicDEX container, we need to setup SSL certificates for WSS capability. For this, we'll need to register a domain and generate SSL certificates (in the container). 
+Before building and launching the AtomicDEX container, we need to setup SSL certificates for WSS capability. For this, we'll need to register a domain and generate SSL certificates (in the container).
 
 #### Step 1: Get a Domain Name
+
 There are many providers, and they are available for as low as $5/year. I'll use https://www.hover.com/domain-pricing for example.
 
 Setup nameservers for DNS propagation - https://help.hover.com/hc/en-us/articles/217282477
@@ -98,7 +99,6 @@ My domain name will be `smk.dog`. The settings below will create the subdomains 
 Additional subdomains for each of your nodes can be added as required.
 
 ![image](https://user-images.githubusercontent.com/35845239/171760521-1f0c3a59-3fbd-4c9e-8abf-6249bd856c57.png)
-
 
 #### Step 2: Generate SSL certificates with [LetsEncrypt](https://letsencrypt.org/getting-started/)
 
@@ -119,9 +119,11 @@ You can confirm external connections are being accepted by going to https://webs
 #### Step 4: Register your SeedNode's PeerID
 
 Shortly after launch `mm2`, you should see a line in the logs like below:
+
 ```
 mm2_libp2p::atomicdex_behaviour:653] INFO Local peer id: PeerId("12D3KooWNGGBfPWQbubupECdkYhj1VomMLUUAYpsR2Bo3R4NzHju")
 ```
+
 The simplest way to find this is via `docker compose logs mm2 | grep Local`
 
 DM the `PeerID` value to @smk on Discord, and it will be added to the notary seednode list for uptime and version monitoring to apply the bonus scoring for participating notaries.
