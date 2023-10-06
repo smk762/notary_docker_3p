@@ -348,14 +348,14 @@ def setup_mm2(domain):
 
         conf = {
             "gui": "S7_Notary",
-            "netid": 7777,
+            "netid": 8762,
             "i_am_seed": True,
             "rpc_local_only": False,
             "rpcport": 7783,
             "rpcip": "0.0.0.0",
             "rpc_password": rpc_password,
             "passphrase": mm2_seed,
-            "seednodes": ["80.82.76.214", "89.248.168.39", "65.108.90.210"],
+            "seednodes": ["streamseed1.komodo.earth", "streamseed2.komodo.earth", "streamseed3.komodo.earth"],
             "metrics": 120,
             "wss_certs": {
                 "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
