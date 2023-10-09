@@ -64,4 +64,4 @@ else
 fi
 ./link_clis.sh
 
-echo "Done! Use ./start to launch your daemons..."
+echo "Done! Use ./start $1 to launch your daemons..."
