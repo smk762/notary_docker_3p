@@ -11,27 +11,20 @@ if [[ "$1" == "mm2" ]]; then
     USER_ID=$(id -u)
     GROUP_ID=$(id -g)
     userpass=$(./configure.py get_mm2_userpass)
-    echo "USER_ID=${USER_ID}" >> mm2/.env
-    echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
-    echo "USERPASS=${userpass}" >> mm2/.env
+    domain=$(./configure.py get_domain)
     echo "MM2_CONF_PATH=/home/komodian/mm2/MM2.json" > mm2/.env
     echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
     echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
+    echo "USER_ID=${USER_ID}" >> mm2/.env
+    echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
+    echo "USERPASS=${userpass}" >> mm2/.env
+    echo "DOMAIN=${DOMAIN}" >> mm2/.env
     ./configure.py setup_mm2
     echo "Building docker image: mm2"
     docker compose build mm2 $@ 
     docker compose stop mm2
     exit 0
 fi
-
-# Temp to unset docker_host_ip var
-echo "Setting up .env file..."
-USER_ID=$(id -u)
-GROUP_ID=$(id -g)
-echo "PUBKEY=${pubkey_main}" > .env
-echo "PUBKEY_3P=${pubkey_3p}" >> .env
-echo "USER_ID=${USER_ID}" >> .env
-echo "GROUP_ID=${GROUP_ID}" >> .env
 
 ./stop $1
 

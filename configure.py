@@ -158,6 +158,16 @@ def get_launch_params(coin):
     return launch
 
 
+def get_domain():
+    if DOMAIN:
+        if DOMAIN != "":
+            return DOMAIN
+    if os.path.exists(f"{script_path}/mm2/MM2.json"):
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            return json.load(f)["wss_certs"]["certificate"].split("/")[-2]
+    return input("Enter your domain name: ")
+
+
 def get_user_pubkey(server='3p'):
     if server == '3p':
         file = f"{dpow_path}/iguana/pubkey_3p.txt"
@@ -408,6 +418,8 @@ if __name__ == '__main__':
         create_compose_yaml()
     elif sys.argv[1] == 'update_mm2':
         update_mm2()
+    elif sys.argv[1] == 'get_domain':
+        print(get_domain())
     elif sys.argv[1] == 'setup_mm2':
         if len(sys.argv) < 3:
             domain = input('Domain name for seed node: ')
