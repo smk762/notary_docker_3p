@@ -422,7 +422,7 @@ if __name__ == '__main__':
         print(get_domain())
     elif sys.argv[1] == 'setup_mm2':
         if len(sys.argv) < 3:
-            domain = input('Domain name for seed node: ')
+            domain = get_domain()
         else:
             domain = sys.argv[2]
         setup_mm2(domain)
