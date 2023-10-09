@@ -339,6 +339,21 @@ def get_mm2_userpass():
             return json.load(f)["rpc_password"]
     return generate_rpc_pass()
 
+def update_mm2():
+    with open(f"{script_path}/mm2/MM2.json", "r") as f:
+        config = json.load(f)
+        config.update({
+            "netid": 8762,
+            "seednodes": [
+                "streamseed1.komodo.earth",
+                "streamseed2.komodo.earth",
+                "streamseed3.komodo.earth",
+                "streamwatchtower1.komodo.earth"
+            ]
+        })
+    with open(f"{script_path}/mm2/MM2.json", "w+") as f:
+        json.dump(config, f, indent=4)
+
 
 def setup_mm2(domain):
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
@@ -391,6 +406,8 @@ if __name__ == '__main__':
         create_launch_files()
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
+    elif sys.argv[1] == 'update_mm2':
+        update_mm2()
     elif sys.argv[1] == 'setup_mm2':
         if len(sys.argv) < 3:
             domain = input('Domain name for seed node: ')

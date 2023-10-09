@@ -27,9 +27,8 @@ echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
 echo "DOMAIN=${DOMAIN}" >> mm2/.env
 
 sudo ufw allow 80
-sudo ufw allow 42855
-sudo ufw allow 42845
-
+sudo ufw allow 42845 comment 'MM2 Seednode TCP'
+sudo ufw allow 42855 comment 'MM2 Seednode WSS'
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 LETSENCRYPT_VOLUME_DIR=$DIR/letsencrypt

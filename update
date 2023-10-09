@@ -64,6 +64,13 @@ elif [ -z "$1" ]; then
     echo "Building docker images..."
     docker compose build $@ 
     ./stop
+elif [[ "$1" == "mm2" ]]; then
+    ./configure.py update_mm2
+    sudo ufw allow 42845 comment 'MM2 Seednode TCP'
+    sudo ufw allow 42855 comment 'MM2 Seednode WSS'
+    echo "Building docker image: $1"
+    docker compose build $1 $@ 
+    ./stop $1
 else
     echo "Building docker image: $1"
     docker compose build $1 $@ 
