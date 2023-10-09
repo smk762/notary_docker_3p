@@ -49,10 +49,12 @@ elif [[ "$1" == "mm2" ]]; then
     echo "USERPASS=${userpass}" >> mm2/.env
     echo "DOMAIN=${domain}" >> mm2/.env
     ./configure.py update_mm2
+    sudo apt install snapd
+    sudo snap install certbot --classic
     sudo certbot renew
     sudo cp --recursive --dereference /etc/letsencrypt/live/$domain ./mm2
     sudo chown $USER:$USER --recursive ./mm2/$domain
-    
+
     echo "Building docker image: mm2"
     sudo ufw allow 42845 comment 'MM2 Seednode TCP'
     sudo ufw allow 42855 comment 'MM2 Seednode WSS'
