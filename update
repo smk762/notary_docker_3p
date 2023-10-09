@@ -50,8 +50,6 @@ elif [[ "$1" == "mm2" ]]; then
     echo "DOMAIN=${DOMAIN}" >> mm2/.env
     ./configure.py update_mm2
     echo "Building docker image: mm2"
-    docker compose build mm2 $@ 
-    docker compose stop mm2
     sudo ufw allow 42845 comment 'MM2 Seednode TCP'
     sudo ufw allow 42855 comment 'MM2 Seednode WSS'
     echo "Building docker image: $1"
