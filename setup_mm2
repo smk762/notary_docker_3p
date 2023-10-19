@@ -7,7 +7,7 @@ wget https://raw.githubusercontent.com/KomodoPlatform/coins/master/coins -O mm2/
 
 if [ -z "$DOMAIN" ]; then
     if [ -z "$1" ]; then
-        read -p "Please enter your domain name: " DOMAIN
+        DOMAIN=$(./configure.py get_domain)
     else
         DOMAIN="${1}"
     fi
@@ -21,15 +21,15 @@ userpass=$(./configure.py get_password)
 echo "MM2_CONF_PATH=/home/komodian/mm2/MM2.json" > mm2/.env
 echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
 echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
+echo "DOMAIN=${DOMAIN}" >> mm2/.env
 echo "USERPASS=${userpass}" >> mm2/.env
 echo "USER_ID=${USER_ID}" >> mm2/.env
 echo "GROUP_ID=${GROUP_ID}" >> mm2/.env
 echo "DOMAIN=${DOMAIN}" >> mm2/.env
 
 sudo ufw allow 80
-sudo ufw allow 38900
-sudo ufw allow 38890
-
+sudo ufw allow 42845 comment 'MM2 Seednode TCP'
+sudo ufw allow 42855 comment 'MM2 Seednode WSS'
 
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 LETSENCRYPT_VOLUME_DIR=$DIR/letsencrypt

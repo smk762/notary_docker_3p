@@ -99,7 +99,7 @@ Additional subdomains for each of your nodes can be added as required.
 
 #### Step 4: Confirm WSS is working
 
-You can confirm external connections are being accepted by going to https://websocketking.com/ and trying to connect to your domain on port 38900. For example, `wss://dev.smk.dog:38900`
+You can confirm external connections are being accepted by going to https://websocketking.com/ and trying to connect to your domain on port 42855. For example, `wss://dev.smk.dog:42855`
 
 ![image](https://user-images.githubusercontent.com/35845239/171772951-86d6fb8e-c9d0-40ee-88b6-3124a942d1b8.png)
 

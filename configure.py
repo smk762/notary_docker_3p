@@ -158,6 +158,16 @@ def get_launch_params(coin):
     return launch
 
 
+def get_domain():
+    if DOMAIN:
+        if DOMAIN != "":
+            return DOMAIN
+    if os.path.exists(f"{script_path}/mm2/MM2.json"):
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            return json.load(f)["wss_certs"]["certificate"].split("/")[-2]
+    return input("Enter your domain name: ")
+
+
 def get_user_pubkey(server='3p'):
     if server == '3p':
         file = f"{dpow_path}/iguana/pubkey_3p.txt"
@@ -339,6 +349,21 @@ def get_mm2_userpass():
             return json.load(f)["rpc_password"]
     return generate_rpc_pass()
 
+def update_mm2():
+    with open(f"{script_path}/mm2/MM2.json", "r") as f:
+        config = json.load(f)
+        config.update({
+            "netid": 8762,
+            "seednodes": [
+                "streamseed1.komodo.earth",
+                "streamseed2.komodo.earth",
+                "streamseed3.komodo.earth",
+                "streamwatchtower1.komodo.earth"
+            ]
+        })
+    with open(f"{script_path}/mm2/MM2.json", "w+") as f:
+        json.dump(config, f, indent=4)
+
 
 def setup_mm2(domain):
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
@@ -348,14 +373,14 @@ def setup_mm2(domain):
 
         conf = {
             "gui": "S7_Notary",
-            "netid": 7777,
+            "netid": 8762,
             "i_am_seed": True,
             "rpc_local_only": False,
             "rpcport": 7783,
             "rpcip": "0.0.0.0",
             "rpc_password": rpc_password,
             "passphrase": mm2_seed,
-            "seednodes": ["80.82.76.214", "89.248.168.39", "65.108.90.210"],
+            "seednodes": ["streamseed1.komodo.earth", "streamseed2.komodo.earth", "streamseed3.komodo.earth"],
             "metrics": 120,
             "wss_certs": {
                 "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
@@ -391,9 +416,13 @@ if __name__ == '__main__':
         create_launch_files()
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
+    elif sys.argv[1] == 'update_mm2':
+        update_mm2()
+    elif sys.argv[1] == 'get_domain':
+        print(get_domain())
     elif sys.argv[1] == 'setup_mm2':
         if len(sys.argv) < 3:
-            domain = input('Domain name for seed node: ')
+            domain = get_domain()
         else:
             domain = sys.argv[2]
         setup_mm2(domain)
