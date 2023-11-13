@@ -333,6 +333,15 @@ def create_compose_yaml(server='3p'):
                 conf.write('\n')
 
 
+def get_mm2_domain():
+    if os.path.exists(f"{script_path}/mm2/MM2.json"):
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            certpath = json.load(f)["wss_certs"]["certificate"]
+            domain = certpath.split('/')[-2]
+            return domain
+    return ""
+
+
 def get_mm2_userpass():
     if os.path.exists(f"{script_path}/mm2/MM2.json"):
         with open(f"{script_path}/mm2/MM2.json", "r") as f:
@@ -342,6 +351,7 @@ def get_mm2_userpass():
 
 def setup_mm2(domain):
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
+        print(f"{script_path}/mm2/MM2.json does not exist! Lets create one.")
         rpc_password = generate_rpc_pass(16)
         m = mnemonic.Mnemonic('english')
         mm2_seed = m.generate(strength=256)
@@ -355,7 +365,7 @@ def setup_mm2(domain):
             "rpcip": "0.0.0.0",
             "rpc_password": rpc_password,
             "passphrase": mm2_seed,
-            "seednodes": ["80.82.76.214", "89.248.168.39", "65.108.90.210"],
+            "seednodes": ["seed1.komodo.earth", "seed2.komodo.earth", "seed3.komodo.earth"],
             "metrics": 120,
             "wss_certs": {
                 "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
@@ -392,10 +402,12 @@ if __name__ == '__main__':
     elif sys.argv[1] == 'yaml':
         create_compose_yaml()
     elif sys.argv[1] == 'setup_mm2':
-        if len(sys.argv) < 3:
-            domain = input('Domain name for seed node: ')
-        else:
-            domain = sys.argv[2]
+        domain = get_mm2_domain()
+        if domain == "":
+            if len(sys.argv) < 3:
+                domain = input('Domain name for seed node: ')
+            else:
+                domain = sys.argv[2]
         setup_mm2(domain)
     elif sys.argv[1] == 'get_password':
         print(generate_rpc_pass())
