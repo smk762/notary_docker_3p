@@ -346,38 +346,39 @@ def get_mm2_userpass():
     if os.path.exists(f"{script_path}/mm2/MM2.json"):
         with open(f"{script_path}/mm2/MM2.json", "r") as f:
             return json.load(f)["rpc_password"]
-    return generate_rpc_pass()
+    return generate_rpc_pass(16)
 
 
 def setup_mm2(domain):
+    rpc_password = get_mm2_userpass()
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
         print(f"{script_path}/mm2/MM2.json does not exist! Lets create one.")
-        rpc_password = generate_rpc_pass(16)
         m = mnemonic.Mnemonic('english')
-        mm2_seed = m.generate(strength=256)
+        passphrase = m.generate(strength=256)
 
-        conf = {
-            "gui": "S7_Notary",
-            "netid": 7777,
-            "i_am_seed": True,
-            "rpc_local_only": False,
-            "rpcport": 7783,
-            "rpcip": "0.0.0.0",
-            "rpc_password": rpc_password,
-            "passphrase": mm2_seed,
-            "seednodes": ["seed1.komodo.earth", "seed2.komodo.earth", "seed3.komodo.earth"],
-            "metrics": 120,
-            "wss_certs": {
-                "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
-                "certificate": f"/home/komodian/mm2/{domain}/fullchain.pem"
-            }
-        }
-        with open(f"{script_path}/mm2/MM2.json", "w+") as f:
-            json.dump(conf, f, indent=4)
-        print("MM2.json file created.")
     else:
         with open(f"{script_path}/mm2/MM2.json", "r") as f:
-            rpc_password = json.load(f)["rpc_password"]
+            passphrase = json.load(f)["passphrase"]
+    conf = {
+        "gui": "S7_Notary",
+        "netid": 7777,
+        "i_am_seed": True,
+        "rpc_local_only": False,
+        "rpcport": 7783,
+        "rpcip": "0.0.0.0",
+        "rpc_password": rpc_password,
+        "passphrase": passphrase,
+        "seednodes": ["seed1.komodo.earth", "seed2.komodo.earth", "seed3.komodo.earth"],
+        "metrics": 120,
+        "wss_certs": {
+            "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
+            "certificate": f"/home/komodian/mm2/{domain}/fullchain.pem"
+        }
+    }
+    with open(f"{script_path}/mm2/MM2.json", "w+") as f:
+        json.dump(conf, f, indent=4)
+    print("MM2.json file created.")
+
     with open(f"{script_path}/mm2/rpc", "w+") as f:
         f.write(f'rpc_password="{rpc_password}"\n')
     print("rpc file created.")
