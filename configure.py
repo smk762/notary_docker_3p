@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import getpass
 import string
 import shutil
 import secrets
@@ -382,6 +383,22 @@ def setup_mm2(domain):
     with open(f"{script_path}/mm2/rpc", "w+") as f:
         f.write(f'rpc_password="{rpc_password}"\n')
     print("rpc file created.")
+
+    
+    user = getpass.getuser()
+    hook_script = f"{script_path}/mm2/post-cert-renew.sh"
+    user_hook_script = f"{script_path}/mm2/post-cert-renew-{user}.sh"
+    print(f"Updating post renew hook: {hook_script} for {user}@{domain}")
+    with open(hook_script, "r") as f:
+        lines = f.readlines()
+        new_lines = []
+        for line in lines:
+            line = line.replace("USER", user)
+            line = line.replace("DOMAIN", domain)
+            new_lines.append(line)
+    with open(f"{user_hook_script}", 'w') as f:
+        for line in new_lines:
+            f.write(line)
 
 
 # Tests to confirm pubeys set
