@@ -18,6 +18,13 @@ if [[ "$1" == "mm2" ]]; then
     echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
     echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
     ./configure.py setup_mm2
+
+    # Updating docker-compose yaml
+    echo "Updating docker-compose.yml..."
+    ./configure.py yaml
+    sed "s/USERNAME/${USER}/gi" -i "docker-compose.yml"
+
+    # Build MM2 image
     echo "Building docker image: mm2"
     docker compose build mm2 $@ 
     docker compose stop mm2

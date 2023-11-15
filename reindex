@@ -6,4 +6,4 @@ else
   coin="${1}"
 fi
 service_name=$(echo $coin | awk '{print tolower($0)}')
-docker compose run ${service_name} bash -c "/run.sh -reindex"
+docker compose run ${service_name} bash docker_files/launch_files/run_${coin}.sh -reindex

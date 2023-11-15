@@ -1,4 +1,4 @@
-FROM komodoofficial/atomicdexapi:dev-19c8218
+FROM komodoofficial/atomicdexapi:1.0.7-beta_79f6205
 LABEL maintainer="smk@komodoplatform.com"
 
 # Setup up user and working directory
