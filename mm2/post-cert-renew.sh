@@ -8,7 +8,7 @@ user="USER"
 domain="DOMAIN"
 
 sudo chown -R $user:$user /etc/letsencrypt/archive/$domain/
-sudo /usr/bin/setfacl "u:${user}:rx" /etc/letsencrypt/archive /etc/letsencrypt/live
+sudo /usr/bin/setfacl -m "u:${user}:rx" /etc/letsencrypt/archive /etc/letsencrypt/live
 sudo cp /etc/letsencrypt/live/$domain/privkey.pem /home/$user/notary_docker_3p/mm2/$domain/privkey.pem
 sudo cp /etc/letsencrypt/live/$domain/fullchain.pem /home/$user/notary_docker_3p/mm2/$domain/fullchain.pem
 cd /home/$user/notary_docker_3p/
