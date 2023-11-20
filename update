@@ -18,6 +18,7 @@ if [[ "$1" == "mm2" ]]; then
     echo "MM_COINS_PATH=/home/komodian/mm2/coins" >> mm2/.env
     echo "MM_LOG=/home/komodian/mm2/mm2.log" >> mm2/.env
     ./configure.py setup_mm2
+    sudo mkdir -p /etc/letsencrypt/renewal-hooks/post/
     sudo cp mm2/post-cert-renew-${USER}.sh /etc/letsencrypt/renewal-hooks/post/post-cert-renew-${USER}.sh
     # Updating docker-compose yaml
     echo "Updating docker-compose.yml..."
