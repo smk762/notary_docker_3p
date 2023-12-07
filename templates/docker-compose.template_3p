@@ -121,7 +121,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.MCL
       args:
-        - COMMIT_HASH=c675fcb
+        - COMMIT_HASH=4b73b24
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="mcl-cli -ac_name=MCL"
@@ -174,7 +174,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.TOKEL
       args:
-        - COMMIT_HASH=f1fc997
+        - COMMIT_HASH=28939c1
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="tokel-cli"
@@ -201,7 +201,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.VRSC
       args:
-        - COMMIT_HASH=81e7a80
+        - COMMIT_HASH=f9abd80
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="verus-cli"
