@@ -2,6 +2,7 @@
 import os
 import sys
 import json
+import getpass
 import string
 import shutil
 import secrets
@@ -343,31 +344,36 @@ def create_compose_yaml(server='3p'):
                 conf.write('\n')
 
 
+def get_mm2_domain():
+    if os.path.exists(f"{script_path}/mm2/MM2.json"):
+        with open(f"{script_path}/mm2/MM2.json", "r") as f:
+            certpath = json.load(f)["wss_certs"]["certificate"]
+            domain = certpath.split('/')[-2]
+            return domain
+    return ""
+
+
 def get_mm2_userpass():
     if os.path.exists(f"{script_path}/mm2/MM2.json"):
         with open(f"{script_path}/mm2/MM2.json", "r") as f:
             return json.load(f)["rpc_password"]
-    return generate_rpc_pass()
+    return generate_rpc_pass(16)
 
 def update_mm2():
     with open(f"{script_path}/mm2/MM2.json", "r") as f:
         config = json.load(f)
         config.update({
             "netid": 8762,
-            "seednodes": [
-                "streamseed1.komodo.earth",
-                "streamseed2.komodo.earth",
-                "streamseed3.komodo.earth",
-                "streamwatchtower1.komodo.earth"
-            ]
+            "seednodes": ["icefyre.dragon-seed.com", "kalessin.dragon-seed.com", "smaug.dragon-seed.com"],
         })
     with open(f"{script_path}/mm2/MM2.json", "w+") as f:
         json.dump(config, f, indent=4)
 
 
 def setup_mm2(domain):
+    rpc_password = get_mm2_userpass()
     if not os.path.exists(f"{script_path}/mm2/MM2.json"):
-        rpc_password = generate_rpc_pass(16)
+        print(f"{script_path}/mm2/MM2.json does not exist! Lets create one.")
         m = mnemonic.Mnemonic('english')
         mm2_seed = m.generate(strength=256)
 
@@ -380,7 +386,7 @@ def setup_mm2(domain):
             "rpcip": "0.0.0.0",
             "rpc_password": rpc_password,
             "passphrase": mm2_seed,
-            "seednodes": ["streamseed1.komodo.earth", "streamseed2.komodo.earth", "streamseed3.komodo.earth"],
+            "seednodes": ["icefyre.dragon-seed.com", "kalessin.dragon-seed.com", "smaug.dragon-seed.com"],
             "metrics": 120,
             "wss_certs": {
                 "server_priv_key": f"/home/komodian/mm2/{domain}/privkey.pem",
@@ -390,12 +396,26 @@ def setup_mm2(domain):
         with open(f"{script_path}/mm2/MM2.json", "w+") as f:
             json.dump(conf, f, indent=4)
         print("MM2.json file created.")
-    else:
-        with open(f"{script_path}/mm2/MM2.json", "r") as f:
-            rpc_password = json.load(f)["rpc_password"]
+
     with open(f"{script_path}/mm2/rpc", "w+") as f:
         f.write(f'rpc_password="{rpc_password}"\n')
     print("rpc file created.")
+
+    
+    user = getpass.getuser()
+    hook_script = f"{script_path}/mm2/post-cert-renew.sh"
+    user_hook_script = f"{script_path}/mm2/post-cert-renew-{user}.sh"
+    print(f"Updating post renew hook: {hook_script} for {user}@{domain}")
+    with open(hook_script, "r") as f:
+        lines = f.readlines()
+        new_lines = []
+        for line in lines:
+            line = line.replace("USER", user)
+            line = line.replace("DOMAIN", domain)
+            new_lines.append(line)
+    with open(f"{user_hook_script}", 'w') as f:
+        for line in new_lines:
+            f.write(line)
 
 
 # Tests to confirm pubeys set

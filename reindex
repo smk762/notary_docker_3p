@@ -7,4 +7,4 @@ if [ -z "$1" ]
     coin_lower=$(echo $coin | awk '{print tolower($0)}')
 
 fi
-docker compose run bash ${coin_lower} docker_files/launch_files/run_${coin}.sh -reindex
+docker compose run ${coin_lower} bash docker_files/launch_files/run_${coin}.sh -reindex

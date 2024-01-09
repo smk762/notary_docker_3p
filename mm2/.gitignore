@@ -6,3 +6,4 @@ coins
 .env
 rpc
 DB/
+post-cert-renew-*
