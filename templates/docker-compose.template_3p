@@ -201,7 +201,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.VRSC
       args:
-        - COMMIT_HASH=f9abd80
+        - COMMIT_HASH=8a060c6
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="verus-cli"
@@ -235,8 +235,8 @@ services:
       - ./:/mm2
     ports:
       - 127.0.0.1:7783:7783
-      - 0.0.0.0:38890:38890
-      - 0.0.0.0:38900:38900
+      - 0.0.0.0:42845:42845
+      - 0.0.0.0:42855:42855
     logging:
       driver: "json-file"
       options:
