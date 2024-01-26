@@ -61,11 +61,11 @@ coins_main = {
         "p2pport": 11340,
         "rpcport": 11341
     },
-    "THC": {
-        "daemon": "komodod",
-        "p2pport": 36789,
-        "rpcport": 36790
-    },
+    # "THC": {
+    #     "daemon": "komodod",
+    #     "p2pport": 36789,
+    #     "rpcport": 36790
+    # },
     "DOC": {
         "daemon": "komodod",
         "p2pport": 62415,
