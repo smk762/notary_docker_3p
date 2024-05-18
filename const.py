@@ -114,12 +114,7 @@ coins_3p = {
         "daemon": "tokeld",
         "p2pport": 29404,
         "rpcport": 29405
-    },
-    "VRSC": {
-        "daemon": "verusd",
-        "p2pport": 27485,
-        "rpcport": 27486
-    }    
+    }
 }
 
 # Only using 3P coins in this repo

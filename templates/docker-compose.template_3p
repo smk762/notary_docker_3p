@@ -194,33 +194,6 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-  vrsc:
-    env_file:
-      - .env
-    build:
-      context: ./docker_files
-      dockerfile: Dockerfile.VRSC
-      args:
-        - COMMIT_HASH=07ff18a
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-        - SERVICE_CLI="verus-cli"
-    ports:
-      - "127.0.0.1:27485:27485"
-      - "127.0.0.1:27486:27486"
-    container_name: vrsc
-    volumes:
-      - /home/USERNAME/.komodo_3p/VRSC:/home/komodian/.komodo/VRSC
-      - <<: *zcash-params
-    stop_grace_period: 10s
-    restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    command: ["/run.sh"]
-
   mm2:
     container_name: mm2
     env_file:
