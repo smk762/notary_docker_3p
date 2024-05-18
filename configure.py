@@ -93,8 +93,6 @@ def get_conf_file(coin, container=True):
         conf_file = f"{home}/{data_dir}/MCL/MCL.conf"
     elif coin == 'TOKEL':
         conf_file = f"{home}/{data_dir}/TOKEL/TOKEL.conf"
-    elif coin == 'VRSC':
-        conf_file = f"{home}/{data_dir}/VRSC/VRSC.conf"
     else:
         conf_file = f"{home}/.komodo/{coin}/{coin}.conf"
     return conf_file
@@ -128,8 +126,6 @@ def get_cli_command(coin, container=True) -> str:
         return f"mil-cli"
     if coin == 'TOKEL':
         return f"tokel-cli"
-    if coin == 'VRSC':
-        return f"verus-cli"
     return f"komodo-cli -ac_name={coin}"
   
 
@@ -198,7 +194,6 @@ def create_cli_wrappers():
         else:
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
-            # docker exec notary_docker_3p-vrsc-1 verus-cli  getinfo
             conf.write('#!/bin/bash\n')
             conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
             # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
@@ -278,7 +273,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('addnode=65.21.77.109 # Alright_EU\n')
             conf.write('addnode=89.19.26.211 # Marmara1\n')
             conf.write('addnode=89.19.26.212 # Marmara2\n')
-            if coin in ["MCL", "VRSC", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
+            if coin in ["MCL", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
                 conf.write('whitelistaddress=RDragoNHdwovvsDLSLMiAEzEArAD3kq6FN # s6_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')

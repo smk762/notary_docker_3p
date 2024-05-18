@@ -37,9 +37,3 @@ rm -f /home/$USER/.komodo_3p/TOKEL/tokel-cli-bin
 rm -f /home/$USER/.komodo_3p/TOKEL/tokel-cli
 ln -sf ${script_path}/cli_wrappers/tokel-cli /home/$USER/.local/bin/tokel-cli
 ln -sf ${script_path}/cli_wrappers/tokel-cli /home/$USER/.local/bin/tkl-cli
-
-# VRSC
-rm -f /home/$USER/.komodo_3p/VRSC/verus-cli-bin
-rm -f /home/$USER/.komodo_3p/VRSC/verus-cli
-ln -sf ${script_path}/cli_wrappers/verus-cli /home/$USER/.local/bin/verus-cli
-ln -sf ${script_path}/cli_wrappers/verus-cli /home/$USER/.local/bin/vrsc-cli
