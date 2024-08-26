@@ -1,4 +1,4 @@
-FROM komodoofficial/atomicdexapi:main-latest
+FROM komodoofficial/komodo-defi-framework:main-latest
 LABEL maintainer="smk@komodoplatform.com"
 
 # Setup up user and working directory
