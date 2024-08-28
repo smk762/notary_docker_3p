@@ -129,7 +129,10 @@ def get_cli_command(coin, container=True) -> str:
     if coin == 'TOKEL':
         return f"tokel-cli"
     if coin == 'GLEECOLD':
-        return "komodo-cli -ac_name=GLEEC -conf=${HOME}/.komodo/GLEEC_OLD/GLEEC.conf"
+        if not container:
+            return f"komodo-cli -ac_name=GLEEC -conf={home}/.komodo/GLEEC_OLD/GLEEC.conf"
+        else:
+            return "komodo-cli -ac_name=GLEEC -conf=/home/komodian/.komodo/GLEEC_OLD/GLEEC.conf"
     return f"komodo-cli -ac_name={coin}"
   
 
@@ -140,7 +143,7 @@ def get_launch_params(coin):
     elif coin == 'KMD_3P':
         launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary"
     elif coin == 'GLEECOLD':
-        launch += " -ac_name=GLEEC -ac_supply=210000000 -ac_public=1 -ac_staked=100 -addnode=95.217.161.126 -addnode=209.222.101.247 -addnode=103.195.100.32 -datadir=${HOME}/.komodo/GLEEC_OLD -notary"
+        launch += f" -ac_name=GLEEC -ac_supply=210000000 -ac_public=1 -ac_staked=100 -addnode=95.217.161.126 -addnode=209.222.101.247 -addnode=103.195.100.32 -datadir=/home/komodian/.komodo/GLEEC_OLD -notary"
     elif coin == 'MCL':
         launch += " -ac_name=MCL -ac_supply=2000000 -ac_cc=2 -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -ac_marmara=1 -ac_staked=75 -ac_reward=3000000000 -daemon"
 
