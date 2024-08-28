@@ -129,10 +129,7 @@ def get_cli_command(coin, container=True) -> str:
     if coin == 'TOKEL':
         return f"tokel-cli"
     if coin == 'GLEECOLD':
-        if not container:
-            return f"komodo-cli -ac_name=GLEEC -conf={home}/.komodo/GLEEC_OLD/GLEEC.conf"
-        else:
-            return "komodo-cli -ac_name=GLEEC -conf=/home/komodian/.komodo/GLEEC_OLD/GLEEC.conf"
+        return "komodo-cli -ac_name=GLEEC -datadir=/home/komodian/.komodo/GLEEC_OLD"
     return f"komodo-cli -ac_name={coin}"
   
 
@@ -208,7 +205,6 @@ def create_cli_wrappers():
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
             conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
-            # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 

@@ -124,7 +124,7 @@ services:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - COMMIT_HASH=0adeeab
-        - SERVICE_CLI="komodo-cli -ac_name=GLEEC -conf=/home/komodian/.komodo/GLEEC_OLD/GLEEC.conf"
+        - SERVICE_CLI="komodo-cli -ac_name=GLEEC -datadir=/home/komodian/.komodo/GLEEC_OLD"
     ports:
       - "127.0.0.1:23225:23225"
       - "127.0.0.1:23226:23226"
