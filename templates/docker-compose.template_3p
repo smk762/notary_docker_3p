@@ -114,7 +114,7 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-  gleec:
+  gleecold:
     env_file:
       - .env
     build:
@@ -128,7 +128,7 @@ services:
     ports:
       - "127.0.0.1:23225:23225"
       - "127.0.0.1:23226:23226"
-    container_name: gleec
+    container_name: gleecold
     volumes:
       - /home/USERNAME/.komodo/GLEEC_OLD:/home/komodian/.komodo/GLEEC_OLD
       - <<: *zcash-params
