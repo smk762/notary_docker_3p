@@ -87,7 +87,7 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-  kmd_3p:
+    kmd_3p:
     env_file:
       - .env
     build:
@@ -96,7 +96,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=156dba6
+        - COMMIT_HASH=0adeeab
         - SERVICE_CLI="komodo-cli"
     ports:
       - "127.0.0.1:8770:8770"
@@ -104,6 +104,33 @@ services:
     container_name: kmd_3p
     volumes:
       - /home/USERNAME/.komodo_3p:/home/komodian/.komodo
+      - <<: *zcash-params
+    stop_grace_period: 10s
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "20m"
+        max-file: "10"
+    command: ["/run.sh"]
+
+    gleec:
+    env_file:
+      - .env
+    build:
+      context: ./docker_files
+      dockerfile: Dockerfile.GLEECOLD
+      args:
+        - USER_ID=$USER_ID
+        - GROUP_ID=$GROUP_ID
+        - COMMIT_HASH=0adeeab
+        - SERVICE_CLI="komodo-cli -ac_name=GLEEC -conf=${HOME}/.komodo/GLEEC_OLD/GLEEC.conf"
+    ports:
+      - "127.0.0.1:23225:23225"
+      - "127.0.0.1:23226:23226"
+    container_name: gleec
+    volumes:
+      - /home/USERNAME/.komodo/GLEEC_OLD:/home/komodian/.komodo/GLEEC_OLD
       - <<: *zcash-params
     stop_grace_period: 10s
     restart: always

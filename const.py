@@ -33,8 +33,8 @@ coins_main = {
     },
     "GLEEC": {
         "daemon": "komodod",
-        "p2pport": 23225,
-        "rpcport": 23226
+        "p2pport": 23344,
+        "rpcport": 23345
     },
     "ILN": {
         "daemon": "komodod",
@@ -114,6 +114,11 @@ coins_3p = {
         "daemon": "tokeld",
         "p2pport": 29404,
         "rpcport": 29405
+    },
+    "GLEECOLD": {
+        "daemon": "komodod",
+        "p2pport": 23225,
+        "rpcport": 23226
     }
 }
 
