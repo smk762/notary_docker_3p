@@ -11,6 +11,10 @@ ln -sf ${script_path}/cli_wrappers/aryacoin-cli /home/$USER/.local/bin/aya-cli
 rm -f /home/$USER/.chips/chips-cli
 ln -sf ${script_path}/cli_wrappers/chips-cli /home/$USER/.local/bin/chips-cli
 
+# GLEEC (OLD)
+rm -f /home/$USER/.komodo/GLEEC_OLD/*-cli
+ln -sf ${script_path}/cli_wrappers/gleecold-cli /home/$USER/.local/bin/gleecold-cli
+
 # EMC2
 rm -f /home/$USER/.einsteinium/einsteinium-cli
 ln -sf ${script_path}/cli_wrappers/emc-cli /home/$USER/.local/bin/emc-cli

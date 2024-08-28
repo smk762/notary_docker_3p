@@ -9,7 +9,7 @@ import secrets
 import os.path
 import requests
 import mnemonic
-from const import home, script_path, dpow_path, assetchains, coins, coins_main, coins_3p
+from const import home, script_path, dpow_path, coins, coins_main, coins_3p
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -93,6 +93,8 @@ def get_conf_file(coin, container=True):
         conf_file = f"{home}/{data_dir}/MCL/MCL.conf"
     elif coin == 'TOKEL':
         conf_file = f"{home}/{data_dir}/TOKEL/TOKEL.conf"
+    elif coin == 'GLEECOLD':
+        conf_file = f"{home}/.komodo/GLEEC_OLD/GLEEC.conf"
     else:
         conf_file = f"{home}/.komodo/{coin}/{coin}.conf"
     return conf_file
@@ -126,6 +128,8 @@ def get_cli_command(coin, container=True) -> str:
         return f"mil-cli"
     if coin == 'TOKEL':
         return f"tokel-cli"
+    if coin == 'GLEECOLD':
+        return "komodo-cli -ac_name=GLEEC -datadir=/home/komodian/.komodo/GLEEC_OLD"
     return f"komodo-cli -ac_name={coin}"
   
 
@@ -135,20 +139,23 @@ def get_launch_params(coin):
         launch += " -gen -genproclimit=1 -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary=.litecoin/litecoin.conf"
     elif coin == 'KMD_3P':
         launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary"
+    elif coin == 'GLEECOLD':
+        launch += f" -ac_name=GLEEC -ac_supply=210000000 -ac_public=1 -ac_staked=100 -addnode=95.217.161.126 -addnode=209.222.101.247 -addnode=103.195.100.32 -datadir=/home/komodian/.komodo/GLEEC_OLD -notary"
     elif coin == 'MCL':
         launch += " -ac_name=MCL -ac_supply=2000000 -ac_cc=2 -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -ac_marmara=1 -ac_staked=75 -ac_reward=3000000000 -daemon"
 
-    for i in assetchains:
-        if i["ac_name"] == coin:
-            params = []
-            for param, value in i.items():
-                if isinstance(value, list):
-                    for dupe_value in value:
-                        params.append(format_param(param, dupe_value))
-                else:
-                    params.append(format_param(param, value))
-            launch_str = ' '.join(params)
-            launch += f" {launch_str}"
+    # Not required for 3P coins
+    # for i in assetchains:
+    #    if i["ac_name"] == coin:
+    #        params = []
+    #        for param, value in i.items():
+    #            if isinstance(value, list):
+    #                for dupe_value in value:
+    #                    params.append(format_param(param, dupe_value))
+    #            else:
+    #                params.append(format_param(param, value))
+    #        launch_str = ' '.join(params)
+    #        launch += f" {launch_str}"
     server = get_coin_server(coin)
     pubkey = get_user_pubkey(server)
     launch += f" -pubkey={pubkey}"
@@ -189,14 +196,15 @@ def get_user_pubkey(server='3p'):
 def create_cli_wrappers():
     for coin in coins:
         cli = get_cli_command(coin, False)
-        if "ac_name" in cli:
+        if coin == 'GLEECOLD':
+            wrapper = f"cli_wrappers/gleecold-cli"
+        elif "ac_name" in cli:
             wrapper = f"cli_wrappers/{coin.lower()}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
             conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
-            # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
@@ -273,7 +281,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('addnode=65.21.77.109 # Alright_EU\n')
             conf.write('addnode=89.19.26.211 # Marmara1\n')
             conf.write('addnode=89.19.26.212 # Marmara2\n')
-            if coin in ["MCL", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
+            if coin in ["MCL", "TOKEL", "KMD_3P", "GLEECOLD"] or (coin in coins_main and coin != "LTC"):
                 conf.write('whitelistaddress=RDragoNHdwovvsDLSLMiAEzEArAD3kq6FN # s6_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
@@ -315,7 +323,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('      args:\n')
                 conf.write('        - USER_ID=$USER_ID\n')
                 conf.write('        - GROUP_ID=$GROUP_ID\n')
-                conf.write('        - COMMIT_HASH=156dba6\n')
+                conf.write('        - COMMIT_HASH=0adeeab\n')
                 conf.write(f'        - SERVICE_CLI="{cli}"\n')
                 conf.write('    ports:\n')
                 conf.write(f'      - "127.0.0.1:{p2pport}:{p2pport}"\n')

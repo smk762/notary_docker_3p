@@ -5,10 +5,6 @@ echo "Updating repository..."
 git pull || sleep 5
 
 
-# Update assetchains.json
-rm assetchains.json
-wget https://raw.githubusercontent.com/KomodoPlatform/dPoW/master/iguana/assetchains.json
-
 # Creating launch files
 echo "Setting up launch files..."
 ./configure.py launch
