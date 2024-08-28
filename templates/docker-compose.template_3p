@@ -87,7 +87,7 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-    kmd_3p:
+  kmd_3p:
     env_file:
       - .env
     build:
@@ -114,7 +114,7 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-    gleec:
+  gleec:
     env_file:
       - .env
     build:
