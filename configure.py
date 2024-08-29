@@ -190,7 +190,7 @@ def get_user_pubkey(server='3p'):
 def create_cli_wrappers():
     for coin in coins:
         cli = get_cli_command(coin, False)
-        elif "ac_name" in cli:
+        if "ac_name" in cli:
             wrapper = f"cli_wrappers/{coin.lower()}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
