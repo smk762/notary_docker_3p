@@ -96,7 +96,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=156dba6
+        - COMMIT_HASH=0adeeab
         - SERVICE_CLI="komodo-cli"
     ports:
       - "127.0.0.1:8770:8770"
@@ -113,6 +113,7 @@ services:
         max-size: "20m"
         max-file: "10"
     command: ["/run.sh"]
+
 
   mcl:
     env_file:
