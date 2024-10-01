@@ -44,7 +44,7 @@ services:
         - COMMIT_HASH=7938b2c
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - SERVICE_CLI="mcl-cli -ac_name=MCL"
+        - SERVICE_CLI="mcl-cli"
     ports:
       - "127.0.0.1:33824:33824"
       - "127.0.0.1:33825:33825"
