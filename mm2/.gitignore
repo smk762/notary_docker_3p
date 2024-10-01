@@ -7,3 +7,4 @@ coins
 rpc
 DB/
 post-cert-renew-*
+*.pem
