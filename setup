@@ -2,13 +2,13 @@
 
 pip3 install -r requirements.txt
 
-mkdir -p /home/${USER}/.zcash-params
+mkdir -p ~/.zcash-params
 ./fetch-params.sh
 
-source /home/${USER}/dPoW/iguana/pubkey_3p.txt
+source ~/dPoW/iguana/pubkey_3p.txt
 pubkey_3p=$pubkey
 
-source /home/${USER}/dPoW/iguana/pubkey_3p.txt
+source ~/dPoW/iguana/pubkey_3p.txt
 pubkey_main=$pubkey
 
 echo "Setting up .env file..."
