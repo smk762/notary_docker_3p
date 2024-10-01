@@ -40,6 +40,25 @@ sudo systemctl restart docker
 As we will be running multiple instances of the KMD daemon on the server, we will be using a non-standard data folder and ports for the 3P KMD daemon. This is to avoid conflicts with the native KMD daemon running on the host machine for the "main" coins.
 There are also some other minor differences with paths and ports used for 3P daemons within the docker containers, so a [modified `m_notary_3rdparty`](https://github.com/KomodoPlatform/dPoW/blob/season-seven/iguana/m_notary_3rdparty_docker) file is used to launch Iguana.
 
+
+#### Season change update notes
+
+Make sure to return any notary funds to the faucet address or smk.
+
+As the coins list may change between seasons, its best to stop the docker containers before updating the repo, otherwise you'll need to stop the old containers manually.
+
+```
+cd ~/notary_docker_3p
+docker compose stop
+git pull
+./setup
+./start
+```
+
+Once all the containers have been updated and are running, you can use `docker system prune -a` to purge all the old containers. 
+Next to clear up space, you can delete the chain data for coins no longer being notarised.
+
+
 ---
 ### Some other commands that may come in handy later:
 - Run `./add_peers` to help add connections when doing initial sync.
@@ -112,6 +131,8 @@ mm2_libp2p::atomicdex_behaviour:653] INFO Local peer id: PeerId("12D3KooWNGGBfPW
 The simplest way to find this is via `docker compose logs mm2 | grep Local`
 
 DM the `PeerID` value to @smk on Discord, and it will be added to the notary seednode list for uptime and version monitoring to apply the bonus scoring for participating notaries.
+
+
 
 ---
 ## What might go wrong?

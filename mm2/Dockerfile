@@ -25,5 +25,3 @@ ENV PATH=/app:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 # Setup user and working directory
 RUN chown -R komodian:notarygroup /home/komodian
 USER komodian
-
-# https://sdk.devbuilds.komodo.earth/dev/mm2_1c8a9a8-linux-x86-64.zip

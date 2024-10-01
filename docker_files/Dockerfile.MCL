@@ -24,8 +24,8 @@ COPY build_files/build_MCL.sh /build.sh
 RUN /build.sh "${COMMIT_HASH}"
 
 # Move binaries
-RUN mv /home/komodian/marmara/src/komodo-cli /usr/local/bin/mcl-cli
-RUN mv /home/komodian/marmara/src/komodod /usr/local/bin/komodod
+RUN mv /home/komodian/marmara/src/marmara-cli /usr/local/bin/mcl-cli
+RUN mv /home/komodian/marmara/src/marmarad /usr/local/bin/marmarad
 RUN PATH=/usr/local/bin/:$PATH
 
 # Cleanup
