@@ -55,7 +55,7 @@ git pull
 ./start
 ```
 
-You can start iguana with `./iguana_3p`, then [split your UTXOs](https://komodoplatform.com/en/docs/notary/split-utxo-for-notarization/#splitting-with-iguana) to get ready for notarisations.
+Once all cahins are running, you can start iguana with `./iguana_3p`, then [split your UTXOs](https://komodoplatform.com/en/docs/notary/split-utxo-for-notarization/#splitting-with-iguana) to get ready for notarisations.
 
 - Run `./purge` to remove all docker containers, images, volumes and networks. **Local chain data will be preserved.**
     - To clear space from older builds, run `./purge` while your containers are running. It will delete all other containers.
