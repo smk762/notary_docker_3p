@@ -9,7 +9,7 @@ import secrets
 import os.path
 import requests
 import mnemonic
-from const import home, script_path, dpow_path, assetchains, coins, coins_main, coins_3p
+from const import home, script_path, dpow_path, coins, coins_main, coins_3p
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -138,17 +138,18 @@ def get_launch_params(coin):
     elif coin == 'MCL':
         launch += " -ac_name=MCL -ac_supply=2000000 -ac_cc=2 -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -ac_marmara=1 -ac_staked=75 -ac_reward=3000000000 -daemon"
 
-    for i in assetchains:
-        if i["ac_name"] == coin:
-            params = []
-            for param, value in i.items():
-                if isinstance(value, list):
-                    for dupe_value in value:
-                        params.append(format_param(param, dupe_value))
-                else:
-                    params.append(format_param(param, value))
-            launch_str = ' '.join(params)
-            launch += f" {launch_str}"
+    # Not required for 3P coins
+    # for i in assetchains:
+    #    if i["ac_name"] == coin:
+    #        params = []
+    #        for param, value in i.items():
+    #            if isinstance(value, list):
+    #                for dupe_value in value:
+    #                    params.append(format_param(param, dupe_value))
+    #            else:
+    #                params.append(format_param(param, value))
+    #        launch_str = ' '.join(params)
+    #        launch += f" {launch_str}"
     server = get_coin_server(coin)
     pubkey = get_user_pubkey(server)
     launch += f" -pubkey={pubkey}"
@@ -196,7 +197,6 @@ def create_cli_wrappers():
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
             conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
-            # conf.write(f'komodo-cli -conf={get_conf_file(coin, False)} "$@"\n')
             os.chmod(wrapper, 0o755)
 
 
@@ -315,7 +315,7 @@ def create_compose_yaml(server='3p'):
                 conf.write('      args:\n')
                 conf.write('        - USER_ID=$USER_ID\n')
                 conf.write('        - GROUP_ID=$GROUP_ID\n')
-                conf.write('        - COMMIT_HASH=156dba6\n')
+                conf.write('        - COMMIT_HASH=0adeeab\n')
                 conf.write(f'        - SERVICE_CLI="{cli}"\n')
                 conf.write('    ports:\n')
                 conf.write(f'      - "127.0.0.1:{p2pport}:{p2pport}"\n')
