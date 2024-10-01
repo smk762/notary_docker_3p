@@ -5,3 +5,4 @@ pubkey_3p.txt
 *.json
 letsencrypt
 rpc
+userpass
