@@ -55,8 +55,11 @@ git pull
 ./start
 ```
 
-Once all the containers have been updated and are running, you can use `docker system prune -a` to purge all the old containers. 
-Next to clear up space, you can delete the chain data for coins no longer being notarised.
+You can start iguana with `./iguana_3p`, then [split your UTXOs](https://komodoplatform.com/en/docs/notary/split-utxo-for-notarization/#splitting-with-iguana) to get ready for notarisations.
+
+- Run `./purge` to remove all docker containers, images, volumes and networks. **Local chain data will be preserved.**
+    - To clear space from older builds, run `./purge` while your containers are running. It will delete all other containers.
+    - If all else fails and you want to start fresh, run `./stop` first, then `./purge` to delete everything.
 
 
 ---
@@ -65,9 +68,6 @@ Next to clear up space, you can delete the chain data for coins no longer being 
 - Run `./start <ticker>` to launch a specific deamon within a docker container, and tail it's logs
 - Run `./stop <ticker>` to stop a specific deamon
 - Run `./logs <ticker>` to view logs of a specific deamon
-- Run `./purge` to remove all docker containers, images, volumes and networks. **Local chain data will be preserved.**
-    - To clear space from older builds, run `./purge` while your containers are running. It will delete all other containers.
-    - If all else fails and you want to start fresh, run `./stop` first, then `./purge` to delete everything.
 
 ---
 ### Updating daemon versions
