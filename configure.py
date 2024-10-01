@@ -75,19 +75,7 @@ def get_conf_file(coin, container=True):
         data_dir = ".komodo"
     else:
         data_dir = ".komodo_3p"
-    if coin == 'AYA':
-        conf_file = f"{home}/.aryacoin/aryacoin.conf"
-    elif coin == 'CHIPS':
-        conf_file = f"{home}/.chips/chips.conf"
-    elif coin == 'EMC2':
-        conf_file = f"{home}/.einsteinium/einsteinium.conf"
-    elif coin == 'KMD':
-        conf_file = f"{home}/.komodo/komodo.conf"
-    elif coin == 'LTC':
-        conf_file = f"{home}/.litecoin/litecoin.conf"
-    elif coin == 'MIL':
-        conf_file = f"{home}/.mil/mil.conf"
-    elif coin == 'KMD_3P':
+    if coin == 'KMD_3P':
         conf_file = f"{home}/{data_dir}/komodo.conf"
     elif coin == 'MCL':
         conf_file = f"{home}/{data_dir}/MCL/MCL.conf"
@@ -99,31 +87,16 @@ def get_conf_file(coin, container=True):
 
 
 def get_cli_command(coin, container=True) -> str:
-    if coin == 'AYA':
-        return f"aryacoin-cli"
-    if coin == 'CHIPS':
-        return f"chips-cli"
-    if coin == 'EMC2':
-        if not container:
-            return f"emc-cli"
-        else:
-            return f"einsteinium-cli"
-    if coin == 'KMD':
-        return f"komodo-cli"
     if coin == 'KMD_3P':
         if not container:
             return f"komodo_3p-cli"
         else:
             return f"komodo-cli"
-    if coin == 'LTC':
-        return f"litecoin-cli"
     if coin == 'MCL':
         if not container:
             return f"mcl-cli"
         else:
             return f"mcl-cli -ac_name=MCL"
-    if coin == 'MIL':
-        return f"mil-cli"
     if coin == 'TOKEL':
         return f"tokel-cli"
     return f"komodo-cli -ac_name={coin}"
@@ -204,9 +177,6 @@ def create_launch_files():
     for coin in coins:
         launch = get_launch_params(coin)
         launch_file = f"docker_files/launch_files/run_{coin}.sh"
-        # This is messy, but it works. Will make it cleaner later
-        # inside container, komodo-cli is just komodo-cli
-        coin = coin.split('_')[0]
         debug = get_debug_file(coin)
         cli = get_cli_command(coin)
         with open(launch_file, 'w') as f:
@@ -295,48 +265,6 @@ def create_confs(server="3p", coins_list=None):
 def create_compose_yaml(server='3p'):
     if server == '3p':
         shutil.copy('templates/docker-compose.template_3p', 'docker-compose.yml')
-    else:
-        # Not yet used in 3P repo
-        shutil.copy('templates/docker-compose.template_main', 'docker-compose.yml')
-        with open('docker-compose.yml', 'a+') as conf:
-            for coin in coins_main:
-                if coin == 'KMD':
-                    cli = "komodo-cli"
-                else:
-                    cli = f"komodo-cli -ac_name={coin}"
-                p2pport = coins_main[coin]["p2pport"]
-                rpcport = coins_main[coin]["rpcport"]
-                conf.write(f'  {coin.lower()}:\n')
-                conf.write('    env_file:\n')
-                conf.write('      - .env\n')
-                conf.write('    build:\n')
-                conf.write('      context: ./docker_files\n')
-                conf.write('      dockerfile: Dockerfile.KMD\n')
-                conf.write('      args:\n')
-                conf.write('        - USER_ID=$USER_ID\n')
-                conf.write('        - GROUP_ID=$GROUP_ID\n')
-                conf.write('        - COMMIT_HASH=0adeeab\n')
-                conf.write(f'        - SERVICE_CLI="{cli}"\n')
-                conf.write('    ports:\n')
-                conf.write(f'      - "127.0.0.1:{p2pport}:{p2pport}"\n')
-                conf.write(f'      - "127.0.0.1:{rpcport}:{rpcport}"\n')
-                conf.write('    volumes:\n')
-                conf.write('      - <<: *zcash-params\n')      
-                if coin == "KMD":
-                    conf.write('      - /home/USERNAME/.komodo:/home/komodian/.komodo\n')
-                else:
-                    conf.write(f'      - /home/USERNAME/.komodo/{coin}:/home/komodian/.komodo/{coin}\n')
-                conf.write(f"    container_name: {coin.lower()}\n")
-                conf.write("    shm_size: '2gb'\n")
-                conf.write('    restart: always\n')
-                conf.write('    stop_grace_period: 10s\n')
-                conf.write('    logging:\n')
-                conf.write('      driver: "json-file"\n')
-                conf.write('      options:\n')
-                conf.write('        max-size: "20m"\n')
-                conf.write('        max-file: "10"\n')
-                conf.write(f'    command: ["/run_{coin}.sh"]\n')
-                conf.write('\n')
 
 
 def get_mm2_domain():
