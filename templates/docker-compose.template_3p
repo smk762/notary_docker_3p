@@ -1,5 +1,3 @@
-version: '3.7'
-
 x-zcash-params-volume:
   &zcash-params
   type: bind
@@ -8,84 +6,6 @@ x-zcash-params-volume:
   target: /home/komodian/.zcash-params
 
 services:
-  aya:
-    env_file:
-      - .env
-    build:
-      context: ./docker_files
-      dockerfile: Dockerfile.AYA
-      args:
-        - COMMIT_HASH=d40b0d7
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-        - SERVICE_CLI="aryacoin-cli"
-    ports:
-      - "127.0.0.1:26001:26001"
-      - "127.0.0.1:9432:9432"
-    container_name: aya
-    volumes:
-      - /home/USERNAME/.aryacoin:/home/komodian/.aryacoin
-    restart: always
-    stop_grace_period: 10s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    command: ["/run.sh"]
-
-  chips:
-    env_file:
-      - .env
-    build:
-      context: ./docker_files
-      dockerfile: Dockerfile.CHIPS
-      args:
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=f0dfd82
-        - SERVICE_CLI="chips-cli"
-    ports:
-      - "127.0.0.1:57777:57777"
-      - "127.0.0.1:57776:57776"
-    container_name: chips
-    volumes:
-      - /home/USERNAME/.chips:/home/komodian/.chips
-      - <<: *zcash-params
-    stop_grace_period: 10s
-    restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    command: ["/run.sh"]
-
-  emc2:
-    env_file:
-      - .env
-    build:
-      context: ./docker_files
-      dockerfile: Dockerfile.EMC2
-      args:
-        - COMMIT_HASH=8d988f0
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-        - SERVICE_CLI="einsteinium-cli"
-    ports:
-      - "127.0.0.1:41878:41878"
-      - "127.0.0.1:41879:41879"
-    container_name: emc2
-    volumes:
-      - /home/USERNAME/.einsteinium:/home/komodian/.einsteinium
-    stop_grace_period: 10s
-    restart: always
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    command: ["/run.sh"]
 
   kmd_3p:
     env_file:
@@ -96,7 +16,7 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=0adeeab
+        - COMMIT_HASH=9eeace7
         - SERVICE_CLI="komodo-cli"
     ports:
       - "127.0.0.1:8770:8770"
@@ -114,7 +34,6 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-
   mcl:
     env_file:
       - .env
@@ -122,7 +41,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.MCL
       args:
-        - COMMIT_HASH=4b73b24
+        - COMMIT_HASH=69277d1
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="mcl-cli -ac_name=MCL"
@@ -142,32 +61,6 @@ services:
         max-file: "10"
     command: ["/run.sh"]
 
-  mil:
-    env_file:
-      - .env
-    build:
-      context: ./docker_files
-      dockerfile: Dockerfile.MIL
-      args:
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=5df2e4d
-        - SERVICE_CLI="mil-cli"
-    ports:
-      - "127.0.0.1:41888:41888"
-      - "127.0.0.1:41889:41889"
-    container_name: mil
-    volumes:
-      - /home/USERNAME/.mil:/home/komodian/.mil
-    restart: always
-    stop_grace_period: 10s
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    command: ["/run.sh"]
-
   tokel:
     env_file:
       - .env
@@ -175,7 +68,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.TOKEL
       args:
-        - COMMIT_HASH=28939c1
+        - COMMIT_HASH=b97260d
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="tokel-cli"
