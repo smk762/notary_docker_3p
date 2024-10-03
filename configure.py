@@ -246,6 +246,12 @@ def create_confs(server="3p", coins_list=None):
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RHound8PpyhVLfi56dC7MK3ZvvkAmB3bvQ # s7_dragonhound_DEV_3p\n')
+                conf.write('whitelistaddress=RGcG4Ei5mPCHaGYvHfmqXLg9wBk7PFb8Co # s7_gcharang_DEV_main\n')
+                conf.write('whitelistaddress=RGcG9DNHKWVbjXm2GPMKMU9hkYvJWwweFo # s7_gcharang_DEV_3p\n')
+                conf.write('whitelistaddress=RGcGxTnVbaVUBVoh5yxDqscLFWgfdeWALS # s7_gcharang_SH_main\n')
+                conf.write('whitelistaddress=RGcGe9dxpc4m6DqXge9wQr7sqVoyAs1Vho # s7_gcharang_SH_3p\n')
+                conf.write('whitelistaddress=RGcGyeSRf3pjE7Lf872TXPAdAjEkcoiGb7 # s7_gcharang_AR_main\n')
+                conf.write('whitelistaddress=RGcGW9C7kETbhaRr6jN8Nds2pk4FaQVr7L # s7_gcharang_AR_3p\n')
                 conf.write('whitelistaddress=RSzqu1ZmAbbM2WUNdqNtPLTcLB54kwLp6D # Notary Faucet\n')                
                 # Adds user main & 3p addresses for this node to whitelist
                 for server in ["3p", "main"]:
