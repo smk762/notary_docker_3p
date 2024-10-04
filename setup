@@ -8,13 +8,10 @@ mkdir -p /home/${USER}/.zcash-params
 source /home/${USER}/dPoW/iguana/pubkey_3p.txt
 pubkey_3p=$pubkey
 
-source /home/${USER}/dPoW/iguana/pubkey_3p.txt
-pubkey_main=$pubkey
 
 echo "Setting up .env file..."
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
-echo "PUBKEY=${pubkey_main}" > .env
 echo "PUBKEY_3P=${pubkey_3p}" >> .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env

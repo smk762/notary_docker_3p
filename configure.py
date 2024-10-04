@@ -9,7 +9,7 @@ import secrets
 import os.path
 import requests
 import mnemonic
-from const import home, script_path, dpow_path, coins, coins_main, coins_3p
+from const import home, script_path, dpow_path, coins, coins_3p
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -43,17 +43,7 @@ def get_pubkey_address(coin: str, pubkey: str) -> str:
     return ""
 
 
-def get_coin_server(coin: str) -> str:
-    if coin in coins_main:
-        return "main"
-    elif coin in coins_3p:
-        return "3p"
-    return f"no server for {coin}!"
-
-
 def get_coin_daemon(coin):
-    if coin in coins_main:
-        return coins_main[coin]["daemon"]
     elif coin in coins_3p:
         return coins_3p[coin]["daemon"]
     return f"no daemon for {coin}"
@@ -93,8 +83,7 @@ def get_cli_command(coin, container=True) -> str:
         else:
             return f"komodo-cli"
     if coin == 'MCL':
-        if not container:
-            return f"mcl-cli"
+        return f"marmara-cli"
     if coin == 'TOKEL':
         return f"tokel-cli"
     return f"komodo-cli -ac_name={coin}"
@@ -102,27 +91,12 @@ def get_cli_command(coin, container=True) -> str:
 
 def get_launch_params(coin):
     launch = get_coin_daemon(coin)
-    if coin == 'KMD':
-        launch += " -gen -genproclimit=1 -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary=.litecoin/litecoin.conf"
-    elif coin == 'KMD_3P':
+    if coin == 'KMD_3P':
         launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary"
     elif coin == 'MCL':
         launch += " -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -daemon"
 
-    # Not required for 3P coins
-    # for i in assetchains:
-    #    if i["ac_name"] == coin:
-    #        params = []
-    #        for param, value in i.items():
-    #            if isinstance(value, list):
-    #                for dupe_value in value:
-    #                    params.append(format_param(param, dupe_value))
-    #            else:
-    #                params.append(format_param(param, value))
-    #        launch_str = ' '.join(params)
-    #        launch += f" {launch_str}"
-    server = get_coin_server(coin)
-    pubkey = get_user_pubkey(server)
+    pubkey = get_user_pubkey()
     launch += f" -pubkey={pubkey}"
     return launch
 
@@ -137,11 +111,8 @@ def get_domain():
     return input("Enter your domain name: ")
 
 
-def get_user_pubkey(server='3p'):
-    if server == '3p':
-        file = f"{dpow_path}/iguana/pubkey_3p.txt"
-    else:
-        file = f"{dpow_path}/iguana/pubkey.txt"
+def get_user_pubkey():
+    file = f"{dpow_path}/iguana/pubkey_3p.txt"
     if not os.path.exists(file):
         print(f"{file} does not exist!")
         print(f"Please install dPoW, and make sure to create your pubkey.txt and pubkey_3p.txt files in {dpow_path}/iguana!")
@@ -160,6 +131,7 @@ def get_user_pubkey(server='3p'):
 
 def create_cli_wrappers():
     for coin in coins:
+        print(coin)
         cli = get_cli_command(coin, False)
         if "ac_name" in cli:
             wrapper = f"cli_wrappers/{coin.lower()}-cli"
@@ -188,17 +160,10 @@ def create_launch_files():
             os.chmod(launch_file, 0o755)
 
 
-def create_confs(server="3p", coins_list=None):
-    if server == "3p":
-        data = coins_3p
-        rpcip = "0.0.0.0"
-    else:
-        data = coins_main
-        rpcip = "127.0.0.1"
-    if coins_list:
-        coins = coins_list
-    else:
-        coins = list(data.keys())
+def create_confs():
+    data = coins_3p
+    rpcip = "0.0.0.0"
+    coins = list(data.keys())
     for coin in coins:
         rpcuser = generate_rpc_pass()
         rpcpass = generate_rpc_pass()
@@ -241,7 +206,7 @@ def create_confs(server="3p", coins_list=None):
             conf.write('addnode=65.21.77.109 # Alright_EU\n')
             conf.write('addnode=89.19.26.211 # Marmara1\n')
             conf.write('addnode=89.19.26.212 # Marmara2\n')
-            if coin in ["MCL", "TOKEL", "KMD_3P"] or (coin in coins_main and coin != "LTC"):
+            if coin in ["MCL", "TOKEL", "KMD_3P"]:
                 conf.write('whitelistaddress=RDragoNHdwovvsDLSLMiAEzEArAD3kq6FN # s6_dragonhound_DEV_main\n')
                 conf.write('whitelistaddress=RLdmqsXEor84FC8wqDAZbkmJLpgf2nUSkq # s6_dragonhound_DEV_3p\n')
                 conf.write('whitelistaddress=RHi882Amab35uXjqBZjVxgEgmkkMu454KK # s7_dragonhound_DEV_main\n')
@@ -253,11 +218,10 @@ def create_confs(server="3p", coins_list=None):
                 conf.write('whitelistaddress=RGcGyeSRf3pjE7Lf872TXPAdAjEkcoiGb7 # s7_gcharang_AR_main\n')
                 conf.write('whitelistaddress=RGcGW9C7kETbhaRr6jN8Nds2pk4FaQVr7L # s7_gcharang_AR_3p\n')
                 conf.write('whitelistaddress=RSzqu1ZmAbbM2WUNdqNtPLTcLB54kwLp6D # Notary Faucet\n')                
-                # Adds user main & 3p addresses for this node to whitelist
-                for server in ["3p", "main"]:
-                    address = get_pubkey_address("KMD", get_user_pubkey(server))
-                    if address != "":
-                        conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
+                # Adds user 3p addresses for this node to whitelist
+                address = get_pubkey_address("KMD", get_user_pubkey())
+                if address != "":
+                    conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
                 print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO {conf_file}!")
         # create debug.log files if not existing
         debug_file = get_debug_file(coin, False)
@@ -266,9 +230,8 @@ def create_confs(server="3p", coins_list=None):
                 f.write('')
 
 
-def create_compose_yaml(server='3p'):
-    if server == '3p':
-        shutil.copy('templates/docker-compose.template_3p', 'docker-compose.yml')
+def create_compose_yaml():
+    shutil.copy('templates/docker-compose.template_3p', 'docker-compose.yml')
 
 
 def get_mm2_domain():
@@ -346,8 +309,7 @@ def setup_mm2(domain):
 
 
 # Tests to confirm pubeys set
-get_user_pubkey('main')
-get_user_pubkey('3p')
+get_user_pubkey()
 
 
 
