@@ -133,13 +133,14 @@ def create_cli_wrappers():
     for coin in coins:
         print(coin)
         cli = get_cli_command(coin, False)
-        if "ac_name" in cli:
+        if "ac_name" in cli or coin == "MCL":
             wrapper = f"cli_wrappers/{coin.lower()}-cli"
         else:
             wrapper = f"cli_wrappers/{cli}"
         with open(wrapper, 'w') as conf:
             conf.write('#!/bin/bash\n')
-            conf.write(f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n')
+            command = f'docker exec {coin.lower()} {get_cli_command(coin, True)} "$@"\n'
+            conf.write(command)
             os.chmod(wrapper, 0o755)
 
 
