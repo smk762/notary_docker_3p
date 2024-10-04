@@ -123,7 +123,7 @@ def get_user_pubkey():
                 if line.startswith("pubkey="):
                     return line.split("=")[1].strip()
     print(f"No {file} found! Lets create it now...")
-    pubkey = input(f"Enter your {server} pubkey: ")
+    pubkey = input(f"Enter your 3P pubkey: ")
     with open(file, 'w') as f:
         f.write(f"pubkey={pubkey}")
     return pubkey
@@ -221,7 +221,7 @@ def create_confs():
                 # Adds user 3p addresses for this node to whitelist
                 address = get_pubkey_address("KMD", get_user_pubkey())
                 if address != "":
-                    conf.write(f'whitelistaddress={address} # User {server} KMD address\n')
+                    conf.write(f'whitelistaddress={address} # User 3P KMD address\n')
                 print(f"PLEASE MANUALLY ADD ANY ADDITIONAL WHITELIST ADDRESSES TO {conf_file}!")
         # create debug.log files if not existing
         debug_file = get_debug_file(coin, False)
