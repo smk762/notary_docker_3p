@@ -16,7 +16,6 @@ services:
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
-        - COMMIT_HASH=9eeace7
         - SERVICE_CLI="komodo-cli"
     ports:
       - "127.0.0.1:8770:8770"
