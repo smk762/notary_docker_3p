@@ -44,7 +44,7 @@ def get_pubkey_address(coin: str, pubkey: str) -> str:
 
 
 def get_coin_daemon(coin):
-    elif coin in coins_3p:
+    if coin in coins_3p:
         return coins_3p[coin]["daemon"]
     return f"no daemon for {coin}"
 
