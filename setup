@@ -6,13 +6,18 @@ mkdir -p /home/${USER}/.zcash-params
 ./fetch-params.sh
 
 source /home/${USER}/dPoW/iguana/pubkey_3p.txt
-pubkey_3p=$pubkey
-
+if test -z "$pubkey"; then
+  read -p "Enter your 3P pubkey: " pubkey
+  if [ ${#pubkey} -ne 66 ]; then
+    echo "Invalid pubkey length!"
+  fi
+  echo "pubkey=${pubkey}" > /home/${USER}/dPoW/iguana/pubkey_3p.txt
+fi
 
 echo "Setting up .env file..."
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
-echo "PUBKEY_3P=${pubkey_3p}" >> .env
+echo "PUBKEY_3P=${pubkey}" >> .env
 echo "USER_ID=${USER_ID}" >> .env
 echo "GROUP_ID=${GROUP_ID}" >> .env
 

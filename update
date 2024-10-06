@@ -4,6 +4,15 @@
 echo "Updating repository..."
 git pull || sleep 5
 
+source /home/${USER}/dPoW/iguana/pubkey_3p.txt
+if test -z "$pubkey"; then
+  read -p "Enter your 3P pubkey: " pubkey
+  if [ ${#pubkey} -ne 66 ]; then
+    echo "Invalid pubkey length!"
+  fi
+  echo "pubkey=${pubkey}" > /home/${USER}/dPoW/iguana/pubkey_3p.txt
+fi
+
 
 # Creating launch files
 echo "Setting up launch files..."
