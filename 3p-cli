@@ -1,0 +1,9 @@
+#!/bin/bash
+
+source ./service_cli
+
+for key in "${!service_cli[@]}"; do
+    echo ">>>  ${key}-cli $@  <<<"
+    ${service_cli[$key]} $@
+    echo
+done
