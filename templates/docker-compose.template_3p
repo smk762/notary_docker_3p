@@ -86,26 +86,3 @@ services:
         max-size: "20m"
         max-file: "10"
     command: ["/run.sh"]
-
-  mm2:
-    container_name: mm2
-    env_file:
-      - .env
-    build:
-      context: ./mm2
-      dockerfile: Dockerfile
-      args:
-        - USER_ID=$USER_ID
-        - GROUP_ID=$GROUP_ID
-    volumes:
-      - ./:/mm2
-    ports:
-      - 127.0.0.1:7783:7783
-      - 0.0.0.0:42845:42845
-      - 0.0.0.0:42855:42855
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "20m"
-        max-file: "10"
-    restart: always
