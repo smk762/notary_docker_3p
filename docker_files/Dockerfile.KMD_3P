@@ -1,4 +1,4 @@
-FROM komodoofficial/komodo:cd_release_2651eaf_dev
+FROM komodoofficial/komodo:cd_release_e0f463a_master
 LABEL maintainer="smk@komodoplatform.com"
 
 # Setup up user and working directory
