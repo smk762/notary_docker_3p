@@ -2,8 +2,8 @@
 
 if [ -z "$1" ]
   then
-    docker compose up --remove-orphans -d && docker compose logs -f --tail 20
+    docker compose up --remove-orphans -d --build && docker compose logs -f --tail 20
   else
-    docker compose up --remove-orphans -d $1 && docker compose logs -f --tail 20 $1
+    docker compose up --remove-orphans -d --build $1 && docker compose logs -f --tail 20 $1
 fi
 
