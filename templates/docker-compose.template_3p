@@ -67,7 +67,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.TOKEL
       args:
-        - COMMIT_HASH=b97260d
+        - COMMIT_HASH=96234b4
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="tokel-cli"
