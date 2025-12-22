@@ -94,7 +94,7 @@ def get_launch_params(coin):
     if coin == 'KMD_3P':
         launch += " -minrelaytxfee=0.000035 -opretmintxfee=0.004 -notary"
     elif coin == 'MCL':
-        launch += " -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -daemon"
+        launch += " -addnode=5.189.149.242 -addnode=161.97.146.150 -addnode=149.202.158.145 -addressindex=1 -spentindex=1 -ac_autosettle=0 -daemon"
 
     pubkey = get_user_pubkey()
     launch += f" -pubkey={pubkey}"
