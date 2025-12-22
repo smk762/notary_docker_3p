@@ -1,6 +1,5 @@
 #!/bin/bash
 ./stop
-./update
 if [ -z "$1" ]
   then
     docker compose up --remove-orphans -d --build && docker compose logs -f --tail 20
