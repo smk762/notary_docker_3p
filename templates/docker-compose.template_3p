@@ -40,7 +40,7 @@ services:
       context: ./docker_files
       dockerfile: Dockerfile.MCL
       args:
-        - COMMIT_HASH=7938b2c
+        - COMMIT_HASH=6991c03
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
         - SERVICE_CLI="mcl-cli"
